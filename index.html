@@ -466,6 +466,7 @@ function initThree(){
   renderer.setPixelRatio(Math.min(devicePixelRatio,2));
   renderer.setSize(innerWidth,innerHeight);
   renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.outputEncoding=THREE.sRGBEncoding; renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.05;
   holder.appendChild(renderer.domElement);
   scene.fog=new THREE.Fog(0xEFE7D6, 30, 185);
 
@@ -645,6 +646,22 @@ function initThree(){
   box(34,0.5,0.5,0,0.25,57,COL.stone,1); box(0.5,0.5,31,-16.5,0.25,41,COL.stone,1); box(0.5,0.5,31,16.5,0.25,41,COL.stone,1);
   // warm lanterns
   [[7.5,35],[7.5,47],[9.0,49],[-0.4,39.5]].forEach(c=>{ cyl(0.12,0.12,0.34,c[0],0.95,c[1],0xF2E2BC,1,12); const pl=new THREE.PointLight(0xFFE6B8,0,6,2); pl.position.set(c[0],1.2,c[1]); scene.add(pl); tickers.push((p,sOp)=>{ pl.intensity=sOp*0.45; }); });
+
+  /* ---- procedural material textures (canvas-generated; multiply over each object's color) ---- */
+  function ctex(size,draw){ const cv=document.createElement('canvas'); cv.width=cv.height=size; draw(cv.getContext('2d'),size); const t=new THREE.CanvasTexture(cv); t.wrapS=t.wrapT=THREE.RepeatWrapping; t.encoding=THREE.sRGBEncoding; t.anisotropy=4; return t; }
+  const TEX_WOOD=ctex(256,(g,s)=>{ g.fillStyle='#fff'; g.fillRect(0,0,s,s); for(let i=0;i<120;i++){ const x=(i*23)%s; g.strokeStyle='rgba(70,46,22,'+(0.05+0.06*((i*7)%5)/5)+')'; g.lineWidth=1+((i*3)%3); g.beginPath(); g.moveTo(x,0); g.bezierCurveTo(x+5,s*0.3,x-5,s*0.7,x+2,s); g.stroke(); } });
+  const TEX_PLASTER=ctex(256,(g,s)=>{ g.fillStyle='#fff'; g.fillRect(0,0,s,s); for(let i=0;i<1100;i++){ const a=0.02+0.03*((i*13)%5)/5; g.fillStyle=(i%2?'rgba(120,108,90,':'rgba(255,255,255,')+a+')'; g.beginPath(); g.arc((i*97)%s,(i*61)%s,1+((i*5)%4),0,6.28); g.fill(); } });
+  const TEX_FABRIC=ctex(64,(g,s)=>{ g.fillStyle='#fff'; g.fillRect(0,0,s,s); g.strokeStyle='rgba(90,78,60,0.12)'; g.lineWidth=1; for(let i=0;i<s;i+=3){ g.beginPath(); g.moveTo(i,0); g.lineTo(i,s); g.moveTo(0,i); g.lineTo(s,i); g.stroke(); } });
+  const TEX_JUTE=ctex(64,(g,s)=>{ g.fillStyle='#fff'; g.fillRect(0,0,s,s); g.strokeStyle='rgba(80,62,38,0.24)'; g.lineWidth=2; for(let i=0;i<s;i+=6){ g.beginPath(); g.moveTo(i,0); g.lineTo(i,s); g.moveTo(0,i); g.lineTo(s,i); g.stroke(); } });
+  const TEX_MARBLE=ctex(256,(g,s)=>{ g.fillStyle='#fff'; g.fillRect(0,0,s,s); g.strokeStyle='rgba(120,110,92,0.22)'; for(let i=0;i<8;i++){ g.lineWidth=1+((i*3)%2); let x=(i*48)%s,y=0; g.beginPath(); g.moveTo(x,y); for(let k=0;k<6;k++){ x+=(((i*9+k*17)%22)-11); y+=s/6; g.lineTo(x,y);} g.stroke(); } });
+  const TEXMAP=[
+    {tex:TEX_WOOD, cols:[COL.oak,COL.oakDk,COL.wood,COL.walnut,COL.rattan,0xDED2B8,0x8C7350,0x6a5638,0x5b4a30], scale:2.4},
+    {tex:TEX_FABRIC, cols:[COL.linen,COL.linen2,COL.oat,COL.taupe,COL.towel], scale:1.3},
+    {tex:TEX_JUTE, cols:[COL.jute], scale:0.7},
+    {tex:TEX_MARBLE, cols:[COL.marble], scale:1.7},
+    {tex:TEX_PLASTER, cols:[COL.plaster,COL.lime,COL.stone,COL.deck,COL.ceramic,COL.pot], scale:2.8}
+  ];
+  scene.traverse(function(o){ if(!o.isMesh||!o.material||o.material.map||!o.material.color) return; const hv=o.material.color.getHex(); let ent=null; for(const e of TEXMAP){ if(e.cols.indexOf(hv)>=0){ent=e;break;} } if(!ent) return; if(o.geometry&&!o.geometry.boundingBox) o.geometry.computeBoundingBox(); let su=2,sv=2; if(o.geometry&&o.geometry.boundingBox){ const bb=o.geometry.boundingBox,dx=bb.max.x-bb.min.x,dy=bb.max.y-bb.min.y,dz=bb.max.z-bb.min.z; su=Math.max(dx,dz)||2; sv=Math.max(dy,Math.min(dx,dz))||2; } const t=ent.tex.clone(); t.needsUpdate=true; t.wrapS=t.wrapT=THREE.RepeatWrapping; t.repeat.set(Math.max(1,su/(ent.scale*2)),Math.max(1,sv/(ent.scale*2))); o.material.map=t; o.material.needsUpdate=true; });
 
   /* ================= LIGHTING (bright airy daylight + shadows) ================= */
   scene.add(new THREE.HemisphereLight(0xFFFBF2, 0x9A8E76, 1.15));
