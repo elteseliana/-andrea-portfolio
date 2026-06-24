@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Andrea Pokroy — Architect</title>
+<meta name="description" content="Andrea Pokroy — architect based in Israel. Where blueprints become home." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+<!-- Local libraries (work offline). If a local file is missing, fall back to the CDN. -->
+<script src="three.min.js"></script>
+<script>window.THREE||document.write('<scr'+'ipt src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/scr'+'ipt>')</script>
+<script src="gsap.min.js"></script>
+<script>window.gsap||document.write('<scr'+'ipt src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"><\/scr'+'ipt>')</script>
+<script src="ScrollTrigger.min.js"></script>
+<script>window.ScrollTrigger||document.write('<scr'+'ipt src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"><\/scr'+'ipt>')</script>
+
+<style>
+:root{
+  --pale:#DCE4F0; --dusty:#AEBBD6; --mid:#6F8CB8; --deep:#22325A; --midnight:#0F1C38;
+  --line:#CFE0F5; --ink:#16243F;
+  --serif:'Cormorant Garamond', serif; --sans:'DM Sans', sans-serif; --he:'Heebo', sans-serif;
+  --ease:cubic-bezier(.6,.01,.05,1); --pad:clamp(22px,6vw,120px); --accent:#AEBBD6;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+body{background:var(--midnight); color:var(--pale); font-family:var(--sans); font-weight:300; line-height:1.6; overflow-x:hidden; -webkit-font-smoothing:antialiased; transition:background-color .7s linear, color .7s linear}
+html[lang="he"] body{font-family:var(--he)}
+html[lang="he"] .serif, html[lang="he"] h1, html[lang="he"] h2, html[lang="he"] h3{font-family:var(--he); font-weight:400}
+::selection{background:var(--dusty); color:#0a1226}
+h1,h2,h3{font-family:var(--serif); font-weight:400; line-height:1; letter-spacing:-.01em}
+a{color:inherit; text-decoration:none}
+img{display:block; max-width:100%}
+.eyebrow{font-family:var(--sans); font-weight:500; font-size:11px; letter-spacing:.42em; text-transform:uppercase; color:var(--accent)}
+html[lang="he"] .eyebrow{letter-spacing:.16em}
+
+.cursor{position:fixed; top:0; left:0; width:9px; height:9px; border-radius:50%; background:var(--dusty); pointer-events:none; z-index:9999; transform:translate(-50%,-50%); mix-blend-mode:difference; transition:width .3s var(--ease),height .3s var(--ease)}
+.cursor.big{width:54px; height:54px; background:transparent; border:1px solid var(--dusty)}
+@media (hover:none){.cursor{display:none}}
+
+.nav{position:fixed; inset:0 0 auto 0; z-index:1000; display:flex; align-items:center; justify-content:space-between; padding:22px var(--pad); mix-blend-mode:difference; color:#fff}
+.nav .logo{font-family:var(--serif); font-size:23px; display:flex; align-items:center; gap:10px}
+.nav .logo b{font-weight:500}
+.nav .logo span{font-size:10px; letter-spacing:.3em; font-family:var(--sans); opacity:.7; text-transform:uppercase}
+html[lang="he"] .nav .logo span{display:none}
+.nav-links{display:flex; gap:38px; font-family:var(--sans); font-size:12px; letter-spacing:.16em; text-transform:uppercase}
+.nav-links a{position:relative; padding:4px 0; opacity:.85}
+.nav-links a::after{content:''; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:#fff; transition:width .4s var(--ease)}
+.nav-links a:hover::after{width:100%}
+.lang{display:flex; align-items:center; gap:2px; font-family:var(--sans); font-size:12px; border:1px solid rgba(255,255,255,.4); border-radius:40px; padding:5px; cursor:pointer}
+.lang button{background:none; border:none; color:#fff; cursor:pointer; font:inherit; padding:3px 11px; border-radius:40px; opacity:.55; transition:.3s}
+.lang button.on{background:#fff; color:#0a1226; opacity:1}
+
+#webgl{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0; transition:opacity .6s ease; background:radial-gradient(125% 95% at 50% 16%, #2c4170 0%, #182a48 52%, #0d1830 100%)}
+body.hero-on #webgl{opacity:1}
+#webgl canvas{display:block; width:100%; height:100%}
+
+.hero-scroll{height:820vh; position:relative; z-index:1}
+
+.hero-ui{position:fixed; inset:0; z-index:2; pointer-events:none; opacity:1; transition:opacity .5s ease}
+body:not(.hero-on) .hero-ui{opacity:0}
+.hero-head{position:absolute; top:50%; left:0; right:0; transform:translateY(-50%); text-align:center; padding:0 24px; will-change:opacity,transform}
+.hero-head .eyebrow{margin-bottom:24px; display:block}
+.hero-head h1{font-size:clamp(46px,9vw,150px); color:#fff; line-height:.95; font-weight:300; letter-spacing:-.02em; text-shadow:0 8px 60px rgba(8,16,34,.6)}
+.hero-head h1 em{font-style:italic; color:var(--dusty)}
+.hero-head .sub{margin-top:26px; font-family:var(--sans); letter-spacing:.34em; text-transform:uppercase; font-size:11px; color:rgba(255,255,255,.65)}
+html[lang="he"] .hero-head .sub{letter-spacing:.12em}
+.phase-tag{position:absolute; top:96px; left:50%; transform:translateX(-50%); font-family:var(--sans); font-size:10px; letter-spacing:.4em; text-transform:uppercase; color:var(--line); opacity:.8}
+.enter-hint{position:absolute; bottom:12vh; left:0; right:0; text-align:center; opacity:0; font-family:var(--sans); font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:#fff}
+.enter-hint b{display:block; font-family:var(--serif); font-size:30px; letter-spacing:0; text-transform:none; margin-bottom:8px; color:var(--dusty)}
+.room-label{position:absolute; left:0; right:0; bottom:15vh; text-align:center; opacity:0; will-change:opacity}
+.room-label .rl-num{font-family:var(--sans); font-size:11px; letter-spacing:.4em; color:var(--dusty)}
+.room-label .rl-name{font-family:var(--serif); font-size:clamp(40px,7vw,90px); color:#fff; line-height:1; margin-top:8px; text-shadow:0 6px 40px rgba(8,16,34,.7)}
+.progress-rail{position:fixed; top:50%; right:26px; transform:translateY(-50%); height:120px; width:2px; background:rgba(255,255,255,.18); z-index:1001; overflow:hidden}
+html[lang="he"] .progress-rail{right:auto; left:26px}
+.progress-rail i{position:absolute; top:0; left:0; width:100%; height:0; background:var(--dusty)}
+body:not(.hero-on) .progress-rail{opacity:0; transition:opacity .4s}
+.scroll-cue{position:absolute; bottom:34px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; font-family:var(--sans); font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:rgba(255,255,255,.55)}
+.scroll-cue .bar{width:1px; height:46px; background:linear-gradient(var(--dusty),transparent)}
+
+main{position:relative; z-index:3}
+section.block{position:relative}
+
+.s1{background:#EEF2F8; color:var(--ink); --accent:#4F6AA0}
+.s1 .pin-wrap{display:grid; grid-template-columns:1fr 1fr; min-height:100vh}
+.s1 .sticky-col{position:sticky; top:0; height:100vh; display:flex; align-items:center; justify-content:center; padding:var(--pad); overflow:hidden}
+.s1 .stack{position:relative; width:100%; max-width:520px; aspect-ratio:4/5}
+.s1 .stack .ph{position:absolute; inset:0; border:1px solid rgba(79,106,160,.45); background:linear-gradient(135deg,#e3e9f3,#cdd8ea); display:flex; align-items:flex-end; padding:20px; box-shadow:0 30px 80px -40px rgba(20,36,63,.45)}
+.s1 .stack .ph span{font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(20,36,63,.55)}
+.s1 .text-col{padding:var(--pad)}
+.s1 .text-block{min-height:100vh; display:flex; flex-direction:column; justify-content:center; max-width:480px}
+.s1 h2{font-size:clamp(46px,6.5vw,96px); margin:18px 0 26px}
+.s1 .text-block p{font-size:17px; color:rgba(22,36,63,.74); margin-bottom:18px}
+.s1 .meta{margin-top:30px; display:flex; gap:40px}
+.s1 .meta b{display:block; font-family:var(--serif); font-size:38px; line-height:1}
+.s1 .meta small{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#4F6AA0}
+
+.s2{background:#6F8CB8; color:#fff; padding:14vh var(--pad) 16vh; overflow:hidden; --accent:#0F1C38}
+.s2 .head{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; margin-bottom:8vh}
+.s2 h2{font-size:clamp(50px,8vw,128px); color:#0F1C38}
+.s2 h2 em{font-style:italic; color:#fff}
+.s2 .head p{max-width:340px; font-size:16px; color:rgba(15,28,56,.8)}
+.s2-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+.s2-grid .ph{aspect-ratio:3/4; overflow:hidden; position:relative; background:linear-gradient(160deg,#9fb3d4,#3f5a8c); display:flex; align-items:flex-end; padding:18px; color:#eef3fb}
+.s2-grid .ph:nth-child(2){aspect-ratio:3/4.6; transform:translateY(6vh)}
+.s2-grid .ph span{font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; opacity:.9}
+.s2-grid .ph i{position:absolute; inset:0; background:radial-gradient(circle at 70% 20%,rgba(255,255,255,.28),transparent 60%)}
+
+.s3{background:#0F1C38; color:#fff; padding:16vh var(--pad); position:relative; overflow:hidden; --accent:#7FB0E6}
+.s3 .ov-svg{position:absolute; inset:0; width:100%; height:100%; pointer-events:none}
+.s3 .ov-svg path,.s3 .ov-svg line,.s3 .ov-svg rect{fill:none; stroke:rgba(127,176,230,.55); stroke-width:1; vector-effect:non-scaling-stroke; stroke-dasharray:1; stroke-dashoffset:1}
+.s3 .head{position:relative; z-index:2; margin-bottom:9vh}
+.s3 h2{font-size:clamp(56px,11vw,190px); line-height:.9}
+.s3 h2 em{font-style:italic; -webkit-text-stroke:1px #fff; color:transparent}
+.s3 .head p{max-width:360px; margin-top:24px; color:rgba(207,224,245,.7); font-size:16px}
+.s3-grid{position:relative; z-index:2; display:grid; grid-template-columns:repeat(3,1fr); gap:2px; border:1px solid rgba(127,176,230,.18)}
+.s3-grid .ph{aspect-ratio:4/5; background:#13203c; position:relative; overflow:hidden; display:flex; align-items:flex-end; padding:20px}
+.s3-grid .ph::before{content:''; position:absolute; inset:0; background:linear-gradient(180deg,#1a2a4d,#0c1730)}
+.s3-grid .ph span{position:relative; z-index:2; font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(207,224,245,.6)}
+.s3-grid .ph .ln{position:absolute; inset:0; z-index:1; opacity:.5}
+
+.projects{background:#0C1730; color:#fff; padding:16vh var(--pad); --accent:#7FB0E6}
+.projects .head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6vh; flex-wrap:wrap; gap:20px}
+.projects h2{font-size:clamp(42px,6vw,92px)}
+.projects .head p{color:rgba(207,224,245,.55); max-width:320px}
+.proj-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+.proj-card{aspect-ratio:1/1; position:relative; overflow:hidden; cursor:pointer; background:linear-gradient(145deg,#16264a,#0e1b38); border:1px solid rgba(127,176,230,.1)}
+.proj-card .inner{position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:24px; transition:transform .9s var(--ease)}
+.proj-card:hover .inner{transform:scale(1.06)}
+.proj-card .num{font-family:var(--serif); font-size:54px; opacity:.2; line-height:1}
+.proj-card .cs{font-family:var(--sans); font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--dusty); margin-top:auto}
+.proj-card .nm{font-family:var(--serif); font-size:26px; margin-top:6px}
+.proj-card::after{content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 120%,rgba(174,187,214,.2),transparent 60%); opacity:0; transition:.6s}
+.proj-card:hover::after{opacity:1}
+
+.about{background:#EEF2F8; color:var(--ink); padding:18vh var(--pad); --accent:#4F6AA0}
+.about .wrap{display:grid; grid-template-columns:1.3fr .9fr; gap:8vw; align-items:center}
+.about h2{font-size:clamp(34px,4.4vw,68px); line-height:1.1; font-weight:300; max-width:18ch}
+.about h2 em{font-style:italic; color:#4F6AA0}
+.about .lead{margin-top:30px; font-size:18px; color:rgba(22,36,63,.76); max-width:46ch}
+.about .sig{margin-top:34px; font-family:var(--serif); font-style:italic; font-size:30px}
+.about .portrait{aspect-ratio:3/4; background:linear-gradient(160deg,#dde5f1,#c2cfe4); border:1px solid rgba(79,106,160,.45); position:relative; display:flex; align-items:flex-end; padding:22px; box-shadow:0 40px 90px -50px rgba(20,36,63,.5)}
+.about .portrait span{font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(20,36,63,.5)}
+
+.contact{background:#0A1226; color:#fff; padding:16vh var(--pad) 6vh; --accent:#AEBBD6}
+.contact .top{display:grid; grid-template-columns:1fr 1fr; gap:7vw}
+.contact h2{font-size:clamp(44px,6.5vw,104px); line-height:.95}
+.contact h2 em{font-style:italic; color:var(--dusty)}
+.contact .channels{margin-top:40px; display:flex; flex-direction:column}
+.contact .ch{display:flex; align-items:center; justify-content:space-between; gap:20px; padding:22px 4px; border-top:1px solid rgba(255,255,255,.12); transition:.4s}
+.contact .ch:last-child{border-bottom:1px solid rgba(255,255,255,.12)}
+.contact .ch:hover{padding-inline-start:14px; color:var(--dusty)}
+.contact .ch small{display:block; font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:rgba(255,255,255,.45); margin-bottom:6px}
+.contact .ch b{font-family:var(--serif); font-size:24px; font-weight:400}
+.contact .ch .arr{font-size:20px; opacity:.5}
+form{display:flex; flex-direction:column; gap:26px; margin-top:10px}
+.field{position:relative}
+.field input,.field textarea{width:100%; background:none; border:none; border-bottom:1px solid rgba(255,255,255,.22); color:#fff; font-family:var(--sans); font-size:16px; padding:10px 0; resize:none}
+.field textarea{min-height:90px}
+.field label{position:absolute; left:0; top:10px; color:rgba(255,255,255,.45); pointer-events:none; transition:.3s var(--ease); font-size:16px}
+html[lang="he"] .field label{left:auto; right:0}
+.field input:focus,.field textarea:focus{outline:none; border-color:var(--dusty)}
+.field input:focus+label,.field textarea:focus+label,
+.field input:not(:placeholder-shown)+label,.field textarea:not(:placeholder-shown)+label{top:-14px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--dusty)}
+.btn-send{align-self:flex-start; background:var(--dusty); color:#0a1226; border:none; cursor:pointer; font-family:var(--sans); font-size:12px; letter-spacing:.24em; text-transform:uppercase; padding:18px 42px; border-radius:40px; transition:.4s var(--ease); margin-top:6px}
+.btn-send:hover{transform:translateY(-3px); box-shadow:0 18px 40px -16px var(--dusty)}
+footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,.1); display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; font-family:var(--sans); font-size:12px; letter-spacing:.1em; color:rgba(255,255,255,.45)}
+
+.reveal{opacity:0; transform:translateY(38px)}
+.no3d .hero-scroll{height:170vh}
+.no3d .hero-ui{position:fixed}
+.no-anim .reveal{opacity:1 !important; transform:none !important}
+.no-anim .s1 .sticky-col{position:relative; height:auto}
+
+@media (max-width:880px){
+  .nav-links{display:none}
+  .s1 .pin-wrap{grid-template-columns:1fr}
+  .s1 .sticky-col{position:relative; top:auto; height:auto; padding:12vh var(--pad) 4vh}
+  .s1 .stack{max-width:none; aspect-ratio:4/3}
+  .s1 .text-block{min-height:auto; padding:4vh 0 14vh}
+  .s2-grid,.s3-grid,.proj-grid{grid-template-columns:1fr 1fr}
+  .s2-grid .ph:nth-child(2){transform:none}
+  .about .wrap,.contact .top{grid-template-columns:1fr; gap:8vh}
+  .progress-rail{display:none}
+}
+@media (max-width:560px){
+  .s2-grid,.s3-grid,.proj-grid{grid-template-columns:1fr}
+  .hero-scroll{height:600vh}
+}
+</style>
+</head>
+<body class="hero-on">
+
+<div class="cursor" id="cursor"></div>
+
+<nav class="nav">
+  <a class="logo" href="#top"><b>Andrea&nbsp;Pokroy</b><span data-i18n="role">Architect · Israel</span></a>
+  <div class="nav-links">
+    <a href="#about" data-i18n="nav_about">About</a>
+    <a href="#projects" data-i18n="nav_projects">Projects</a>
+    <a href="#contact" data-i18n="nav_contact">Contact</a>
+  </div>
+  <div class="lang" id="lang">
+    <button data-lang="en" class="on">EN</button>
+    <button data-lang="he">HE</button>
+  </div>
+</nav>
+
+<div id="top"></div>
+<div id="webgl"></div>
+<div class="hero-scroll" id="heroScroll"></div>
+
+<div class="hero-ui" id="heroUI">
+  <div class="phase-tag" id="phaseTag" data-i18n="ph_blueprint">Blueprint</div>
+  <div class="hero-head" id="heroHead">
+    <span class="eyebrow" data-i18n="hero_eyebrow">Andrea Pokroy — Architecture</span>
+    <h1 data-i18n="hero_h1">Where Blueprints<br>Become <em>Home</em></h1>
+    <div class="sub" data-i18n="hero_sub">Keep scrolling — the drawing becomes a house you walk through</div>
+  </div>
+  <div class="enter-hint" id="enterHint">
+    <b data-i18n="enter_b">Step inside</b>
+    <span data-i18n="enter_s">Keep scrolling ↓</span>
+  </div>
+  <div class="room-label" id="roomLabel">
+    <div class="rl-num" id="rlNum">01</div>
+    <div class="rl-name" id="rlName"></div>
+  </div>
+  <div class="scroll-cue" id="scrollCue">
+    <span data-i18n="scroll">Scroll</span>
+    <div class="bar"></div>
+  </div>
+</div>
+<div class="progress-rail"><i id="railFill"></i></div>
+
+<main>
+  <section class="block s1" id="s1" data-bg="#EEF2F8" data-fg="#16243F">
+    <div class="pin-wrap">
+      <div class="sticky-col">
+        <div class="stack" id="s1stack">
+          <div class="ph"><span data-i18n="ph_c1">Heritage Villa · Slot 01</span></div>
+          <div class="ph"><span data-i18n="ph_c2">Stone Residence · Slot 02</span></div>
+          <div class="ph"><span data-i18n="ph_c3">Garden House · Slot 03</span></div>
+        </div>
+      </div>
+      <div class="text-col">
+        <div class="text-block">
+          <div class="eyebrow" data-i18n="s1_eyebrow">01 — Classic Architecture</div>
+          <h2 data-i18n="s1_h2">Built<br>to Last.</h2>
+          <p data-i18n="s1_p1">Proportion, symmetry, and material honesty. Heritage homes that hold their dignity for generations — stone that ages with grace, light that knows how to enter a room.</p>
+          <p data-i18n="s1_p2">Every threshold is a decision. Classic does not mean old; it means resolved.</p>
+          <div class="meta">
+            <div><b>24</b><small data-i18n="s1_m1">Years Crafting</small></div>
+            <div><b>40+</b><small data-i18n="s1_m2">Homes Delivered</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block s2" id="s2" data-bg="#6F8CB8" data-fg="#0F1C38">
+    <div class="head">
+      <div>
+        <div class="eyebrow reveal" data-i18n="s2_eyebrow">02 — Light & Air</div>
+        <h2 class="reveal" data-i18n="s2_h2">Where <em>Light</em><br>Lives.</h2>
+      </div>
+      <p class="reveal" data-i18n="s2_p">Glass, water, sky. Homes that pull the daylight deep inside — soft geometry, calm surfaces, rooms that breathe with the hours.</p>
+    </div>
+    <div class="s2-grid" id="s2grid">
+      <div class="ph"><i></i><span data-i18n="ph_w1">Courtyard House · Slot 01</span></div>
+      <div class="ph"><i></i><span data-i18n="ph_w2">Sunlit Loft · Slot 02</span></div>
+      <div class="ph"><i></i><span data-i18n="ph_w3">Water Terrace · Slot 03</span></div>
+    </div>
+  </section>
+
+  <section class="block s3" id="s3" data-bg="#0F1C38" data-fg="#ffffff">
+    <svg class="ov-svg" id="s3ov" viewBox="0 0 1000 700" preserveAspectRatio="none">
+      <rect x="120" y="90" width="760" height="520"/>
+      <line x1="120" y1="300" x2="880" y2="300"/>
+      <line x1="500" y1="90" x2="500" y2="610"/>
+      <line x1="120" y1="450" x2="880" y2="450"/>
+      <path d="M120,90 L500,300 L880,90"/>
+      <path d="M120,610 L500,450 L880,610"/>
+      <line x1="300" y1="90" x2="300" y2="610"/>
+      <line x1="700" y1="90" x2="700" y2="610"/>
+    </svg>
+    <div class="head">
+      <div class="eyebrow reveal" data-i18n="s3_eyebrow">03 — Modern Minimalist</div>
+      <h2 class="reveal" data-i18n="s3_h2">The Future,<br><em>Built.</em></h2>
+      <p class="reveal" data-i18n="s3_p">Reduction as luxury. Concrete, glass, and shadow arranged with surgical restraint. The blueprint never really leaves — it lives in the lines of the wall.</p>
+    </div>
+    <div class="s3-grid" id="s3grid">
+      <div class="ph"><span data-i18n="ph_m1">Monolith · Slot 01</span></div>
+      <div class="ph"><span data-i18n="ph_m2">Glass Pavilion · Slot 02</span></div>
+      <div class="ph"><span data-i18n="ph_m3">Floating Slab · Slot 03</span></div>
+    </div>
+  </section>
+
+  <section class="block projects" id="projects" data-bg="#0C1730" data-fg="#ffffff">
+    <div class="head">
+      <div>
+        <div class="eyebrow" data-i18n="proj_eyebrow">Selected Works</div>
+        <h2 data-i18n="proj_h2">The Portfolio</h2>
+      </div>
+      <p data-i18n="proj_p">A new collection of residences across Israel — currently in documentation. Real imagery arrives soon.</p>
+    </div>
+    <div class="proj-grid" id="projGrid"></div>
+  </section>
+
+  <section class="block about" id="about" data-bg="#EEF2F8" data-fg="#16243F">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow reveal" data-i18n="about_eyebrow">About</div>
+        <h2 class="reveal" data-i18n="about_h2">Andrea Pokroy — architect with a passion for spaces that <em>tell stories.</em></h2>
+        <p class="lead reveal" data-i18n="about_p">From classic heritage homes to bold modern structures, every project begins the same way — with a blueprint, and a dream.</p>
+        <div class="sig reveal" data-i18n="about_sig">— Andrea</div>
+      </div>
+      <div class="portrait reveal"><span data-i18n="about_portrait">Portrait · Placeholder</span></div>
+    </div>
+  </section>
+
+  <section class="block contact" id="contact" data-bg="#0A1226" data-fg="#ffffff">
+    <div class="top">
+      <div>
+        <div class="eyebrow" data-i18n="contact_eyebrow">Contact</div>
+        <h2 data-i18n="contact_h2">Let's draw<br>your <em>home.</em></h2>
+        <div class="channels">
+          <a class="ch" href="https://wa.me/972500000000" target="_blank" rel="noopener"><div><small data-i18n="ch_wa">WhatsApp</small><b>+972 50 000 0000</b></div><span class="arr">↗</span></a>
+          <a class="ch" href="mailto:hello@andreapokroy.com"><div><small data-i18n="ch_em">Email</small><b>hello@andreapokroy.com</b></div><span class="arr">↗</span></a>
+          <a class="ch" href="tel:+97230000000"><div><small data-i18n="ch_ph">Phone</small><b>+972 3 000 0000</b></div><span class="arr">↗</span></a>
+        </div>
+      </div>
+      <div>
+        <form id="contactForm" onsubmit="return false;">
+          <div class="field"><input type="text" id="cfName" placeholder=" " required /><label for="cfName" data-i18n="f_name">Your name</label></div>
+          <div class="field"><input type="email" id="cfEmail" placeholder=" " required /><label for="cfEmail" data-i18n="f_email">Email address</label></div>
+          <div class="field"><textarea id="cfMsg" placeholder=" " required></textarea><label for="cfMsg" data-i18n="f_msg">Tell me about your project</label></div>
+          <button class="btn-send" type="submit" data-i18n="f_send">Send Message</button>
+        </form>
+      </div>
+    </div>
+    <footer>
+      <span>© <span id="year"></span> Andrea Pokroy</span>
+      <span data-i18n="footer_made">Architecture · Interiors · Israel</span>
+    </footer>
+  </section>
+</main>
+
+<script>
+/* ============================================================ I18N */
+const I18N={
+ en:{ role:"Architect · Israel", nav_about:"About", nav_projects:"Projects", nav_contact:"Contact",
+  hero_eyebrow:"Andrea Pokroy — Architecture", hero_h1:"Where Blueprints<br>Become <em>Home</em>",
+  hero_sub:"Keep scrolling — the drawing becomes a house you walk through", scroll:"Scroll",
+  enter_b:"Step inside", enter_s:"Keep scrolling ↓",
+  ph_blueprint:"Blueprint", ph_drawing:"Drawing", ph_construction:"Construction", ph_walk:"Walkthrough",
+  r_entrance:"Entrance", r_living:"Living Room", r_kitchen:"Kitchen", r_bedroom:"Bedroom",
+  s1_eyebrow:"01 — Classic Architecture", s1_h2:"Built<br>to Last.",
+  s1_p1:"Proportion, symmetry, and material honesty. Heritage homes that hold their dignity for generations — stone that ages with grace, light that knows how to enter a room.",
+  s1_p2:"Every threshold is a decision. Classic does not mean old; it means resolved.",
+  s1_m1:"Years Crafting", s1_m2:"Homes Delivered",
+  ph_c1:"Heritage Villa · Slot 01", ph_c2:"Stone Residence · Slot 02", ph_c3:"Garden House · Slot 03",
+  s2_eyebrow:"02 — Light & Air", s2_h2:"Where <em>Light</em><br>Lives.",
+  s2_p:"Glass, water, sky. Homes that pull the daylight deep inside — soft geometry, calm surfaces, rooms that breathe with the hours.",
+  ph_w1:"Courtyard House · Slot 01", ph_w2:"Sunlit Loft · Slot 02", ph_w3:"Water Terrace · Slot 03",
+  s3_eyebrow:"03 — Modern Minimalist", s3_h2:"The Future,<br><em>Built.</em>",
+  s3_p:"Reduction as luxury. Concrete, glass, and shadow arranged with surgical restraint. The blueprint never really leaves — it lives in the lines of the wall.",
+  ph_m1:"Monolith · Slot 01", ph_m2:"Glass Pavilion · Slot 02", ph_m3:"Floating Slab · Slot 03",
+  proj_eyebrow:"Selected Works", proj_h2:"The Portfolio",
+  proj_p:"A new collection of residences across Israel — currently in documentation. Real imagery arrives soon.",
+  proj_card:"Project Coming Soon",
+  about_eyebrow:"About", about_h2:"Andrea Pokroy — architect with a passion for spaces that <em>tell stories.</em>",
+  about_p:"From classic heritage homes to bold modern structures, every project begins the same way — with a blueprint, and a dream.",
+  about_sig:"— Andrea", about_portrait:"Portrait · Placeholder",
+  contact_eyebrow:"Contact", contact_h2:"Let's draw<br>your <em>home.</em>",
+  ch_wa:"WhatsApp", ch_em:"Email", ch_ph:"Phone",
+  f_name:"Your name", f_email:"Email address", f_msg:"Tell me about your project", f_send:"Send Message",
+  footer_made:"Architecture · Interiors · Israel", sent:"Thank you — I'll be in touch soon." },
+ he:{ role:"אדריכלית · ישראל", nav_about:"אודות", nav_projects:"פרויקטים", nav_contact:"צור קשר",
+  hero_eyebrow:"אנדריאה פוקרוי — אדריכלות", hero_h1:"כאן תוכניות<br>הופכות ל<em>בית</em>",
+  hero_sub:"המשיכו לגלול — השרטוט הופך לבית שאפשר לטייל בו", scroll:"גלילה",
+  enter_b:"היכנסו פנימה", enter_s:"המשיכו לגלול ↓",
+  ph_blueprint:"שרטוט", ph_drawing:"מתכננים", ph_construction:"בנייה", ph_walk:"סיור",
+  r_entrance:"כניסה", r_living:"סלון", r_kitchen:"מטבח", r_bedroom:"חדר שינה",
+  s1_eyebrow:"01 — אדריכלות קלאסית", s1_h2:"בנוי<br>לנצח.",
+  s1_p1:"פרופורציה, סימטריה וכנות חומרית. בתי מורשת ששומרים על כבודם לאורך דורות — אבן שמתיישנת בחן, אור שיודע להיכנס לחדר.",
+  s1_p2:"כל מפתן הוא החלטה. קלאסי אינו ישן; קלאסי הוא מוגמר.",
+  s1_m1:"שנות יצירה", s1_m2:"בתים שנמסרו",
+  ph_c1:"וילת מורשת · מקום 01", ph_c2:"בית אבן · מקום 02", ph_c3:"בית גן · מקום 03",
+  s2_eyebrow:"02 — אור ואוויר", s2_h2:"כאן ה<em>אור</em><br>שוכן.",
+  s2_p:"זכוכית, מים, שמיים. בתים שמושכים את אור היום פנימה — גאומטריה רכה, משטחים שלווים, חדרים שנושמים עם השעות.",
+  ph_w1:"בית חצר · מקום 01", ph_w2:"לופט שטוף שמש · מקום 02", ph_w3:"מרפסת מים · מקום 03",
+  s3_eyebrow:"03 — מודרני מינימליסטי", s3_h2:"העתיד,<br><em>בנוי.</em>",
+  s3_p:"צמצום כיוקרה. בטון, זכוכית וצל מסודרים באיפוק כירורגי. התוכנית לעולם אינה עוזבת — היא חיה בקווי הקיר.",
+  ph_m1:"מונוליט · מקום 01", ph_m2:"ביתן זכוכית · מקום 02", ph_m3:"לוח מרחף · מקום 03",
+  proj_eyebrow:"עבודות נבחרות", proj_h2:"התיק",
+  proj_p:"אוסף חדש של בתי מגורים ברחבי ישראל — כעת בתיעוד. תמונות אמיתיות בקרוב.",
+  proj_card:"פרויקט בקרוב",
+  about_eyebrow:"אודות", about_h2:"אנדריאה פוקרוי — אדריכלית עם תשוקה למרחבים ש<em>מספרים סיפור.</em>",
+  about_p:"מבתי מורשת קלאסיים ועד מבנים מודרניים נועזים, כל פרויקט מתחיל באותו אופן — עם תוכנית, ועם חלום.",
+  about_sig:"— אנדריאה", about_portrait:"דיוקן · ממלא מקום",
+  contact_eyebrow:"צור קשר", contact_h2:"בואו נשרטט<br>את ה<em>בית</em> שלכם.",
+  ch_wa:"וואטסאפ", ch_em:"אימייל", ch_ph:"טלפון",
+  f_name:"השם שלך", f_email:"כתובת אימייל", f_msg:"ספרו לי על הפרויקט שלכם", f_send:"שליחת הודעה",
+  footer_made:"אדריכלות · עיצוב פנים · ישראל", sent:"תודה — אחזור אליכם בקרוב." }
+};
+let LANG="en";
+function applyLang(lang){
+  LANG=lang; const d=I18N[lang];
+  document.documentElement.lang=lang;
+  document.documentElement.dir=(lang==="he")?"rtl":"ltr";
+  document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.getAttribute("data-i18n"); if(d[k]!==undefined) el.innerHTML=d[k];});
+  document.querySelectorAll(".proj-card .cs").forEach(el=>el.textContent=d.proj_card);
+  document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.lang===lang));
+  // force room/phase labels to refresh language
+  const pt=document.getElementById("phaseTag"); if(pt) pt.dataset.k="";
+  const rn=document.getElementById("rlName"); if(rn) rn.dataset.k="";
+  if(window.ScrollTrigger) ScrollTrigger.refresh();
+}
+document.getElementById("lang").addEventListener("click",e=>{const b=e.target.closest("button"); if(b) applyLang(b.dataset.lang);});
+
+const projNames=["Tel Aviv House","Carmel Retreat","Jaffa Court","Negev Pavilion","Herzliya Villa","Galilee Studio"];
+const pg=document.getElementById("projGrid");
+projNames.forEach((n,i)=>{const c=document.createElement("div"); c.className="proj-card";
+  c.innerHTML=`<div class="inner"><div class="num">0${i+1}</div><div class="cs">Project Coming Soon</div><div class="nm">${n}</div></div>`; pg.appendChild(c);});
+document.getElementById("year").textContent="2026";
+
+const cursor=document.getElementById("cursor");
+let cx=innerWidth/2,cy=innerHeight/2,tx=cx,ty=cy;
+addEventListener("mousemove",e=>{tx=e.clientX;ty=e.clientY});
+(function l(){cx+=(tx-cx)*.18;cy+=(ty-cy)*.18;cursor.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;requestAnimationFrame(l);})();
+document.querySelectorAll("a,button,.proj-card,.ch").forEach(el=>{el.addEventListener("mouseenter",()=>cursor.classList.add("big"));el.addEventListener("mouseleave",()=>cursor.classList.remove("big"));});
+
+/* ============================================================ 3D HERO */
+const HAS3D=(typeof THREE!=="undefined");
+const HASGSAP=(typeof gsap!=="undefined" && typeof ScrollTrigger!=="undefined");
+let heroProgress=0, targetP=0, heroActive=true;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const inv=(a,b,v)=>b===a?0:clamp((v-a)/(b-a),0,1);
+const ss=(a,b,v)=>{const t=inv(a,b,v);return t*t*(3-2*t);};
+
+if(HAS3D){ initThree(); } else { document.documentElement.classList.add("no3d"); }
+
+/* Universal hero scroll manager — runs with OR without THREE/GSAP, so the
+   headline + backdrop are ALWAYS visible at the top, and the 3D (if present)
+   gets its scroll progress. This is the single source of truth for hero-on. */
+(function setupHeroScroll(){
+  const hs=document.getElementById("heroScroll");
+  function upd(){
+    const total=Math.max(1, hs.offsetHeight - window.innerHeight);
+    const y=window.scrollY||document.documentElement.scrollTop||0;
+    targetP=clamp(y/total,0,1);
+    const inHero = y < total + window.innerHeight*0.4;
+    heroActive=inHero;
+    document.body.classList.toggle("hero-on", inHero);
+  }
+  addEventListener("scroll",upd,{passive:true});
+  addEventListener("resize",upd);
+  upd();
+})();
+
+function initThree(){
+  const holder=document.getElementById("webgl");
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(62, innerWidth/innerHeight, 0.1, 260);
+  const renderer=new THREE.WebGLRenderer({antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(innerWidth,innerHeight);
+  holder.appendChild(renderer.domElement);
+  scene.fog=new THREE.Fog(0x0f1c38, 14, 95);
+
+  /* blue gradient stops */
+  const STOPS=[
+    {p:0.00,c:new THREE.Color(0xDCE4F0)},
+    {p:0.14,c:new THREE.Color(0xAEBBD6)},
+    {p:0.27,c:new THREE.Color(0x6F8CB8)},
+    {p:0.40,c:new THREE.Color(0x2B3F69)},
+    {p:0.55,c:new THREE.Color(0x1A2C4E)},
+    {p:1.00,c:new THREE.Color(0x16273F)}
+  ];
+  const _c=new THREE.Color();
+  function bgAt(p){ for(let i=0;i<STOPS.length-1;i++){ if(p<=STOPS[i+1].p){const t=ss(STOPS[i].p,STOPS[i+1].p,p);return _c.copy(STOPS[i].c).lerp(STOPS[i+1].c,t);} } return _c.copy(STOPS[STOPS.length-1].c); }
+
+  /* registries */
+  const walls=[], solids=[], wires=[], ipoints=[], tickers=[];
+  const COL={ wall:0xEDEFF3, floor:0xB8A382, oak:0x9C8463, rug1:0x3F5070, rug2:0x7C5B43,
+              fabric:0x5D7196, fabricLt:0x8B97B0, slate:0x44587E, wood:0x6F5A40, white:0xE9ECF1, roof:0x2A3447 };
+  const H=3.0;
+
+  function mkWall(w,h,d,x,z,startP){
+    const g=new THREE.BoxGeometry(w,h,d);
+    const mat=new THREE.MeshStandardMaterial({color:COL.wall,roughness:.96,metalness:0,transparent:true,opacity:0}); mat.userData={maxOp:1};
+    const mesh=new THREE.Mesh(g,mat); mesh.position.y=h/2;
+    const em=new THREE.LineBasicMaterial({color:0xBFD7F5,transparent:true,opacity:1});
+    const wf=new THREE.LineSegments(new THREE.EdgesGeometry(g),em); wf.position.y=h/2;
+    const grp=new THREE.Group(); grp.add(mesh); grp.add(wf); grp.position.set(x,0,z); grp.scale.y=0.001;
+    scene.add(grp); walls.push({grp,startP}); solids.push(mat); wires.push(em);
+  }
+  function box(w,h,d,x,y,z,col,maxOp){
+    const mat=new THREE.MeshStandardMaterial({color:col,roughness:.82,metalness:.04,transparent:true,opacity:0});
+    mat.userData={maxOp:(maxOp===undefined?1:maxOp)};
+    const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat); m.position.set(x,y,z); scene.add(m); solids.push(mat); return m;
+  }
+  function plane(w,d,x,y,z,col,rotX,maxOp){
+    const mat=new THREE.MeshStandardMaterial({color:col,roughness:.95,transparent:true,opacity:0,side:THREE.DoubleSide});
+    mat.userData={maxOp:(maxOp===undefined?1:maxOp)};
+    const m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),mat); m.rotation.x=rotX; m.position.set(x,y,z); scene.add(m); solids.push(mat); return m;
+  }
+  function glass(w,h,x,y,z,rotY){
+    const mat=new THREE.MeshBasicMaterial({color:0xCFE7FF,transparent:true,opacity:0,side:THREE.DoubleSide}); mat.userData={maxOp:.62};
+    const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),mat); m.position.set(x,y,z); m.rotation.y=rotY||0; scene.add(m); solids.push(mat); return m;
+  }
+
+  /* ---- SHELL ---- footprint x[-6,6], z[-20,20] ---- */
+  mkWall(0.2,H,40, -6,0, 0.03);                 // left
+  mkWall(0.2,H,40,  6,0, 0.03);                 // right
+  mkWall(12,H,0.2,  0,20, 0.10);                // back
+  mkWall(4.9,H,0.2,-3.55,-20,0.02);             // front-left of door
+  mkWall(4.9,H,0.2, 3.55,-20,0.02);             // front-right of door
+  [[-12,0.06],[-1,0.13],[9,0.20]].forEach(([z,sp])=>{   // partitions w/ central doorway
+    mkWall(4.9,H,0.2,-3.55,z,sp);
+    mkWall(4.9,H,0.2, 3.55,z,sp);
+  });
+
+  /* floor / ceiling / site */
+  plane(12,40, 0,0.0,0, COL.floor, -Math.PI/2, 1);
+  plane(12,40, 0,H,0, COL.white, Math.PI/2, .8);
+  plane(160,160, 0,-0.05,0, 0x2C3A55, -Math.PI/2, 1);
+
+  /* roof slab (drops into place + draws its outline) */
+  const roofGeo=new THREE.BoxGeometry(12.8,0.3,40.8);
+  const roofMat=new THREE.MeshStandardMaterial({color:COL.roof,roughness:.9,transparent:true,opacity:0});
+  const roof=new THREE.Mesh(roofGeo,roofMat); roof.position.set(0,H+0.15,0); scene.add(roof);
+  const roofEm=new THREE.LineBasicMaterial({color:0x9FC4EA,transparent:true,opacity:0});
+  const roofWire=new THREE.LineSegments(new THREE.EdgesGeometry(roofGeo),roofEm); roofWire.position.copy(roof.position); scene.add(roofWire);
+  tickers.push((p,sOp)=>{ roofEm.opacity=ss(0.18,0.30,p)*(1-ss(0.42,0.54,p)); roofMat.opacity=sOp; const y=(H+0.15)+(1-sOp)*5; roof.position.y=y; roofWire.position.y=y; });
+
+  /* windows + daylight glow */
+  glass(3,1.7, -5.9,1.7,-6, Math.PI/2);   // living, left
+  glass(3,1.7, -5.9,1.7,14, Math.PI/2);   // bedroom, left
+  glass(3,1.7,  5.9,1.7, 3, -Math.PI/2);  // kitchen, right
+  glass(4.6,1.9, 0,1.85,19.88, 0);        // bedroom, back
+  [[-5,1.7,-6],[-5,1.7,14],[5,1.7,3],[0,1.85,19]].forEach(pp=>{
+    const pl=new THREE.PointLight(0xCFE7FF,0,14,2); pl.position.set(pp[0],pp[1],pp[2]); scene.add(pl);
+    tickers.push((p,sOp)=>{ pl.intensity=sOp*0.55; });
+  });
+
+  /* ---- FURNITURE ---- */
+  // Entrance  (z -20..-12)
+  box(2.0,0.85,0.45, 3.6,0.42,-15, COL.wood);
+  box(2.4,0.04,1.6, 0,0.02,-16, COL.rug2, .9);
+  box(0.5,1.6,0.5, 4.6,0.8,-13, 0x223047, .8);   // tall plant pot mass
+  // Living  (z -12..-1)
+  box(3.6,0.45,1.2, -3.3,0.4,-7, COL.fabric);     // sofa seat
+  box(3.6,0.6,0.3, -3.3,0.7,-7.6, COL.fabricLt);  // sofa back
+  box(0.3,0.55,1.2,-5.0,0.5,-7, COL.fabricLt);    // arm
+  box(0.3,0.55,1.2,-1.6,0.5,-7, COL.fabricLt);    // arm
+  box(1.5,0.4,0.8, -3.2,0.2,-5.2, COL.wood);      // coffee table
+  box(4.2,0.04,3.0,-3.2,0.02,-6.4, COL.rug1, .92);// rug
+  box(2.6,0.5,0.4, 3.7,0.3,-6.5, COL.slate);      // media console
+  box(0.12,1.7,0.12,-5.2,0.85,-3.8, COL.wood);    // lamp pole
+  box(0.5,0.2,0.5, -5.2,1.75,-3.8, 0xF1D9A8, .9); // lamp shade (warm)
+  // Kitchen  (z -1..9)
+  box(1.5,0.92,2.6, 1.9,0.46,4, COL.white);       // island base
+  box(1.7,0.08,2.8, 1.9,0.96,4, COL.slate);       // island top
+  box(0.7,0.9,5.2,  5.3,0.45,4, COL.white);       // counter run (right)
+  box(0.55,0.7,5.0, 5.4,2.25,4, COL.white, .95);  // upper cabinets
+  box(0.42,0.5,0.42,0.7,0.25,3.2, COL.wood);      // stool
+  box(0.42,0.5,0.42,0.7,0.25,4.8, COL.wood);      // stool
+  box(0.28,0.24,0.28,1.9,2.35,4, 0xF1D9A8, .95);  // pendant (warm)
+  // Bedroom  (z 9..20)
+  box(3.0,0.4,2.2, -2.4,0.2,14, COL.wood);        // bed base
+  box(2.8,0.32,2.1,-2.4,0.5,14, COL.fabricLt);    // mattress
+  box(3.0,1.0,0.2, -2.4,0.6,12.95, COL.slate);    // headboard
+  box(0.6,0.5,0.5, -4.4,0.25,13, COL.wood);       // nightstand
+  box(0.6,0.5,0.5, -0.4,0.25,13, COL.wood);       // nightstand
+  box(0.6,2.2,3.0,  5.4,1.1,14, COL.white, .95);  // wardrobe
+  box(3.6,0.04,2.6,-2.0,0.02,15, COL.rug1, .92);  // rug
+  box(2.4,0.45,0.5,-2.4,0.22,15.7, COL.fabric);   // bench
+
+  /* lighting */
+  scene.add(new THREE.HemisphereLight(0xE2ECFB,0x33425C,0.95));
+  const sun=new THREE.DirectionalLight(0xFFF3E0,0.75); sun.position.set(20,28,-12); scene.add(sun);
+  [-16,-6,4,14].forEach(z=>{ const pl=new THREE.PointLight(0xFFE2B4,0,16,2); pl.position.set(0,2.6,z); scene.add(pl); ipoints.push(pl); });
+
+  /* ---- camera path ---- */
+  const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+  const KF=[
+    {p:0.00, pos:V(21,27,0),    look:V(0,0,0)},      // floor plan, top
+    {p:0.12, pos:V(24,15,-32),  look:V(0,3,-6)},     // walls rising, iso
+    {p:0.26, pos:V(21,9,-37),   look:V(0,3,-10)},    // house formed, exterior 3/4
+    {p:0.38, pos:V(0,2.0,-31),  look:V(0,2.0,-20)},  // approach front door
+    {p:0.46, pos:V(0,1.6,-17),  look:V(0,1.6,-12)},  // entrance
+    {p:0.56, pos:V(0,1.6,-10),  look:V(-1.6,1.5,-6)},// step into living, glance to sofa
+    {p:0.65, pos:V(0.2,1.6,-6), look:V(0,1.5,-1)},   // living forward
+    {p:0.74, pos:V(0,1.6,1),    look:V(1.6,1.5,4)},  // kitchen, glance to island
+    {p:0.83, pos:V(0,1.6,6),    look:V(0,1.5,11)},   // toward bedroom
+    {p:0.92, pos:V(0,1.6,12),   look:V(-1.5,1.5,17)},// bedroom, glance to bed
+    {p:1.00, pos:V(0.5,1.58,15),look:V(2.4,1.5,20)}  // settle, look to window
+  ];
+  const _p=new THREE.Vector3(), _l=new THREE.Vector3();
+  function camAt(p){
+    let i=0; while(i<KF.length-2 && p>KF[i+1].p) i++;
+    const a=KF[i], b=KF[i+1], t=ss(a.p,b.p,p);
+    _p.copy(a.pos).lerp(b.pos,t); _l.copy(a.look).lerp(b.look,t);
+    if(p>0.44){ _p.y += Math.sin(p*52)*0.022; }   // subtle walking sway
+    camera.position.copy(_p); camera.lookAt(_l);
+  }
+
+  /* overlay refs */
+  const heroHead=document.getElementById("heroHead"), scrollCue=document.getElementById("scrollCue");
+  const phaseTag=document.getElementById("phaseTag"), roomLabel=document.getElementById("roomLabel");
+  const rlNum=document.getElementById("rlNum"), rlName=document.getElementById("rlName");
+  const railFill=document.getElementById("railFill"), enterHint=document.getElementById("enterHint");
+  const ROOMS=[[0.44,0.56,"r_entrance","01"],[0.56,0.72,"r_living","02"],[0.72,0.85,"r_kitchen","03"],[0.85,1.001,"r_bedroom","04"]];
+
+  function updateScene(p){
+    const bg=bgAt(p); scene.background=bg.clone(); scene.fog.color.copy(bg);
+    for(const w of walls){ w.grp.scale.y=Math.max(0.02, ss(w.startP,w.startP+0.20,p)); }
+    const sOp=ss(0.24,0.40,p);
+    for(const m of solids){ m.opacity=sOp*m.userData.maxOp; }
+    const wOp=1-ss(0.38,0.54,p)*0.85;
+    for(const m of wires){ m.opacity=wOp; }
+    const li=ss(0.42,0.58,p)*1.5;
+    for(const pl of ipoints){ pl.intensity=li; }
+    for(const f of tickers){ f(p,sOp); }
+    camAt(p);
+
+    heroHead.style.opacity=1-ss(0.05,0.14,p);
+    heroHead.style.transform=`translateY(${-50 - p*36}%)`;
+    scrollCue.style.opacity=1-ss(0.02,0.10,p);
+    railFill.style.height=(p*100)+"%";
+    enterHint.style.opacity=ss(0.24,0.32,p)*(1-ss(0.40,0.46,p));
+    const pk=p<0.10?"ph_blueprint":p<0.26?"ph_drawing":p<0.42?"ph_construction":"ph_walk";
+    if(phaseTag.dataset.k!==pk){phaseTag.dataset.k=pk; phaseTag.textContent=I18N[LANG][pk];}
+    let ro=0, active=null;
+    for(const r of ROOMS){ if(p>=r[0]&&p<r[1]){active=r; const lt=inv(r[0],r[1],p); ro=Math.min(ss(0,0.2,lt),1-ss(0.82,1,lt)); break;} }
+    if(active){ if(rlName.dataset.k!==active[2]){rlName.dataset.k=active[2]; rlName.textContent=I18N[LANG][active[2]]; rlNum.textContent=active[3];} roomLabel.style.opacity=ro; }
+    else roomLabel.style.opacity=0;
+  }
+
+  function animate(){ requestAnimationFrame(animate); heroProgress+=(targetP-heroProgress)*0.09; updateScene(heroProgress); if(heroActive) renderer.render(scene,camera); }
+  updateScene(0); animate();
+
+  function resize(){ const w=holder.clientWidth||window.innerWidth||1, h=holder.clientHeight||window.innerHeight||1; camera.aspect=w/h; camera.updateProjectionMatrix(); renderer.setSize(w,h); }
+  addEventListener("resize",resize); resize();
+  if(window.ResizeObserver){ new ResizeObserver(resize).observe(holder); }
+
+  /* hero scroll progress is supplied by the universal setupHeroScroll() manager below */
+}
+
+/* ============================================================ PAGE ANIMATIONS */
+if(HASGSAP){
+  gsap.registerPlugin(ScrollTrigger);
+  document.querySelectorAll("section.block[data-bg]").forEach(sec=>{
+    ScrollTrigger.create({trigger:sec,start:"top 60%",end:"bottom 40%",
+      onToggle:self=>{ if(self.isActive){ gsap.to(document.body,{backgroundColor:sec.dataset.bg,color:sec.dataset.fg,duration:.7,ease:"none",overwrite:"auto"}); } }});
+  });
+  const slides=gsap.utils.toArray("#s1stack .ph");
+  if(slides.length){
+    gsap.set(slides,{clipPath:"inset(100% 0 0 0)",opacity:0});
+    gsap.set(slides[0],{clipPath:"inset(0% 0 0 0)",opacity:1});
+    ScrollTrigger.create({trigger:"#s1 .pin-wrap",start:"top top",end:"bottom bottom",
+      onUpdate:self=>{const idx=Math.min(slides.length-1,Math.floor(self.progress*slides.length));
+        slides.forEach((s,i)=>gsap.to(s,{clipPath:i<=idx?"inset(0% 0 0 0)":"inset(100% 0 0 0)",opacity:i<=idx?1:0,duration:.6,ease:"power2.out",overwrite:"auto"}));}});
+  }
+  gsap.from("#s1 .text-block > *",{y:50,opacity:0,duration:1,stagger:.12,ease:"power3.out",scrollTrigger:{trigger:"#s1 .text-block",start:"top 75%"}});
+  gsap.utils.toArray("#s2grid .ph").forEach((ph,i)=>{ gsap.fromTo(ph,{scale:1.4,opacity:0,y:60},{scale:1,opacity:1,y:i===1?60:0,duration:1.3,ease:"power3.out",scrollTrigger:{trigger:"#s2grid",start:"top 80%"}}); });
+  revealOnScroll("#s2 .reveal");
+  const ov=document.querySelectorAll("#s3ov rect, #s3ov line, #s3ov path");
+  ov.forEach(p=>{const len=p.getTotalLength();p.style.strokeDasharray=len;p.style.strokeDashoffset=len;});
+  gsap.to(ov,{strokeDashoffset:0,duration:1.6,stagger:.12,ease:"power2.inOut",scrollTrigger:{trigger:"#s3",start:"top 60%"}});
+  revealOnScroll("#s3 .reveal");
+  document.querySelectorAll("#s3grid .ph").forEach(ph=>{
+    const ln=document.createElement("div"); ln.className="ln";
+    ln.innerHTML=`<svg viewBox="0 0 100 125" preserveAspectRatio="none" style="width:100%;height:100%"><g fill="none" stroke="rgba(127,176,230,.5)" stroke-width="1" vector-effect="non-scaling-stroke"><rect x="14" y="20" width="72" height="85"/><line x1="14" y1="62" x2="86" y2="62"/><line x1="50" y1="20" x2="50" y2="105"/><path d="M14,20 L50,62 L86,20"/></g></svg>`;
+    ph.appendChild(ln);
+    gsap.fromTo(ln,{opacity:0,scale:1.1},{opacity:.5,scale:1,duration:1.1,ease:"power2.out",scrollTrigger:{trigger:ph,start:"top 85%"}});
+  });
+  gsap.from("#projGrid .proj-card",{y:60,opacity:0,duration:.9,stagger:.08,ease:"power3.out",scrollTrigger:{trigger:"#projGrid",start:"top 80%"}});
+  revealOnScroll("#about .reveal");
+  gsap.from("#contact .ch",{x:30,opacity:0,duration:.8,stagger:.1,ease:"power3.out",scrollTrigger:{trigger:"#contact .channels",start:"top 80%"}});
+  ScrollTrigger.refresh();
+} else { document.documentElement.classList.add("no-anim"); }
+function revealOnScroll(sel){gsap.utils.toArray(sel).forEach(el=>gsap.to(el,{opacity:1,y:0,duration:1,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 85%"}}));}
+
+document.getElementById("contactForm").addEventListener("submit",function(){
+  const btn=this.querySelector(".btn-send");
+  btn.textContent=I18N[LANG].sent; btn.style.background="#16243f"; btn.style.color="#fff";
+  this.reset(); setTimeout(()=>{btn.textContent=I18N[LANG].f_send; btn.style.background=""; btn.style.color="";},3500);
+});
+
+applyLang("en");
+</script>
+</body>
+</html>
