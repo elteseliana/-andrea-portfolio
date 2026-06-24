@@ -20,25 +20,25 @@
 
 <style>
 :root{
-  --pale:#DCE4F0; --dusty:#AEBBD6; --mid:#6F8CB8; --deep:#22325A; --midnight:#0F1C38;
-  --line:#CFE0F5; --ink:#16243F;
+  --cream:#F2EBDD; --sand:#E3D6BE; --oak:#C9AE86; --plaster:#ECE3D2; --stone:#D8CFBE;
+  --char:#2A2622; --ink:#211D18; --oxblood:#7E2B2B; --oxbloodlt:#A2413B;
   --serif:'Cormorant Garamond', serif; --sans:'DM Sans', sans-serif; --he:'Heebo', sans-serif;
-  --ease:cubic-bezier(.6,.01,.05,1); --pad:clamp(22px,6vw,120px); --accent:#AEBBD6;
+  --ease:cubic-bezier(.6,.01,.05,1); --pad:clamp(22px,6vw,120px); --accent:#7E2B2B;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:auto}
-body{background:var(--midnight); color:var(--pale); font-family:var(--sans); font-weight:300; line-height:1.6; overflow-x:hidden; -webkit-font-smoothing:antialiased; transition:background-color .7s linear, color .7s linear}
+body{background:#1A1611; color:var(--cream); font-family:var(--sans); font-weight:300; line-height:1.6; overflow-x:hidden; -webkit-font-smoothing:antialiased; transition:background-color .7s linear, color .7s linear}
 html[lang="he"] body{font-family:var(--he)}
-html[lang="he"] .serif, html[lang="he"] h1, html[lang="he"] h2, html[lang="he"] h3{font-family:var(--he); font-weight:400}
-::selection{background:var(--dusty); color:#0a1226}
+html[lang="he"] h1, html[lang="he"] h2, html[lang="he"] h3{font-family:var(--he); font-weight:400}
+::selection{background:var(--oxblood); color:#fff}
 h1,h2,h3{font-family:var(--serif); font-weight:400; line-height:1; letter-spacing:-.01em}
 a{color:inherit; text-decoration:none}
 img{display:block; max-width:100%}
 .eyebrow{font-family:var(--sans); font-weight:500; font-size:11px; letter-spacing:.42em; text-transform:uppercase; color:var(--accent)}
 html[lang="he"] .eyebrow{letter-spacing:.16em}
 
-.cursor{position:fixed; top:0; left:0; width:9px; height:9px; border-radius:50%; background:var(--dusty); pointer-events:none; z-index:9999; transform:translate(-50%,-50%); mix-blend-mode:difference; transition:width .3s var(--ease),height .3s var(--ease)}
-.cursor.big{width:54px; height:54px; background:transparent; border:1px solid var(--dusty)}
+.cursor{position:fixed; top:0; left:0; width:9px; height:9px; border-radius:50%; background:var(--oxblood); pointer-events:none; z-index:9999; transform:translate(-50%,-50%); mix-blend-mode:difference; transition:width .3s var(--ease),height .3s var(--ease)}
+.cursor.big{width:54px; height:54px; background:transparent; border:1px solid var(--oxblood)}
 @media (hover:none){.cursor{display:none}}
 
 .nav{position:fixed; inset:0 0 auto 0; z-index:1000; display:flex; align-items:center; justify-content:space-between; padding:22px var(--pad); mix-blend-mode:difference; color:#fff}
@@ -52,107 +52,113 @@ html[lang="he"] .nav .logo span{display:none}
 .nav-links a:hover::after{width:100%}
 .lang{display:flex; align-items:center; gap:2px; font-family:var(--sans); font-size:12px; border:1px solid rgba(255,255,255,.4); border-radius:40px; padding:5px; cursor:pointer}
 .lang button{background:none; border:none; color:#fff; cursor:pointer; font:inherit; padding:3px 11px; border-radius:40px; opacity:.55; transition:.3s}
-.lang button.on{background:#fff; color:#0a1226; opacity:1}
+.lang button.on{background:#fff; color:var(--ink); opacity:1}
 
-#webgl{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0; transition:opacity .6s ease; background:radial-gradient(125% 95% at 50% 16%, #2c4170 0%, #182a48 52%, #0d1830 100%)}
+#webgl{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0; transition:opacity .6s ease; background:radial-gradient(125% 95% at 50% 20%, #2a2218 0%, #1d1812 55%, #14100b 100%)}
 body.hero-on #webgl{opacity:1}
 #webgl canvas{display:block; width:100%; height:100%}
 
-.hero-scroll{height:820vh; position:relative; z-index:1}
+.hero-scroll{height:1000vh; position:relative; z-index:1}
 
 .hero-ui{position:fixed; inset:0; z-index:2; pointer-events:none; opacity:1; transition:opacity .5s ease}
 body:not(.hero-on) .hero-ui{opacity:0}
 .hero-head{position:absolute; top:50%; left:0; right:0; transform:translateY(-50%); text-align:center; padding:0 24px; will-change:opacity,transform}
-.hero-head .eyebrow{margin-bottom:24px; display:block}
-.hero-head h1{font-size:clamp(46px,9vw,150px); color:#fff; line-height:.95; font-weight:300; letter-spacing:-.02em; text-shadow:0 8px 60px rgba(8,16,34,.6)}
-.hero-head h1 em{font-style:italic; color:var(--dusty)}
-.hero-head .sub{margin-top:26px; font-family:var(--sans); letter-spacing:.34em; text-transform:uppercase; font-size:11px; color:rgba(255,255,255,.65)}
+.hero-head .eyebrow{margin-bottom:24px; display:block; color:var(--oxbloodlt)}
+.hero-head h1{font-size:clamp(46px,9vw,150px); color:#fff; line-height:.95; font-weight:300; letter-spacing:-.02em; text-shadow:0 8px 60px rgba(10,7,4,.6)}
+.hero-head h1 em{font-style:italic; color:var(--oxbloodlt)}
+.hero-head .sub{margin-top:26px; font-family:var(--sans); letter-spacing:.34em; text-transform:uppercase; font-size:11px; color:rgba(255,255,255,.7)}
 html[lang="he"] .hero-head .sub{letter-spacing:.12em}
-.phase-tag{position:absolute; top:96px; left:50%; transform:translateX(-50%); font-family:var(--sans); font-size:10px; letter-spacing:.4em; text-transform:uppercase; color:var(--line); opacity:.8}
+.phase-tag{position:absolute; top:96px; left:50%; transform:translateX(-50%); font-family:var(--sans); font-size:10px; letter-spacing:.4em; text-transform:uppercase; color:var(--oxbloodlt); opacity:.85}
 .enter-hint{position:absolute; bottom:12vh; left:0; right:0; text-align:center; opacity:0; font-family:var(--sans); font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:#fff}
-.enter-hint b{display:block; font-family:var(--serif); font-size:30px; letter-spacing:0; text-transform:none; margin-bottom:8px; color:var(--dusty)}
+.enter-hint b{display:block; font-family:var(--serif); font-size:30px; letter-spacing:0; text-transform:none; margin-bottom:8px; color:var(--oxbloodlt)}
 .room-label{position:absolute; left:0; right:0; bottom:15vh; text-align:center; opacity:0; will-change:opacity}
-.room-label .rl-num{font-family:var(--sans); font-size:11px; letter-spacing:.4em; color:var(--dusty)}
-.room-label .rl-name{font-family:var(--serif); font-size:clamp(40px,7vw,90px); color:#fff; line-height:1; margin-top:8px; text-shadow:0 6px 40px rgba(8,16,34,.7)}
-.progress-rail{position:fixed; top:50%; right:26px; transform:translateY(-50%); height:120px; width:2px; background:rgba(255,255,255,.18); z-index:1001; overflow:hidden}
+.room-label .rl-num{font-family:var(--sans); font-size:11px; letter-spacing:.4em; color:var(--oxblood)}
+.room-label .rl-name{font-family:var(--serif); font-size:clamp(40px,7vw,90px); color:#3a2e22; line-height:1; margin-top:8px; text-shadow:0 4px 30px rgba(255,250,240,.5)}
+.progress-rail{position:fixed; top:50%; right:26px; transform:translateY(-50%); height:120px; width:2px; background:rgba(140,120,100,.35); z-index:1001; overflow:hidden}
 html[lang="he"] .progress-rail{right:auto; left:26px}
-.progress-rail i{position:absolute; top:0; left:0; width:100%; height:0; background:var(--dusty)}
+.progress-rail i{position:absolute; top:0; left:0; width:100%; height:0; background:var(--oxblood)}
 body:not(.hero-on) .progress-rail{opacity:0; transition:opacity .4s}
-.scroll-cue{position:absolute; bottom:34px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; font-family:var(--sans); font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:rgba(255,255,255,.55)}
-.scroll-cue .bar{width:1px; height:46px; background:linear-gradient(var(--dusty),transparent)}
+.scroll-cue{position:absolute; bottom:34px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; font-family:var(--sans); font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:rgba(255,255,255,.6)}
+.scroll-cue .bar{width:1px; height:46px; background:linear-gradient(var(--oxbloodlt),transparent)}
 
 main{position:relative; z-index:3}
 section.block{position:relative}
 
-.s1{background:#EEF2F8; color:var(--ink); --accent:#4F6AA0}
+/* S1 */
+.s1{background:#F4EEE2; color:var(--char); --accent:#7E2B2B}
 .s1 .pin-wrap{display:grid; grid-template-columns:1fr 1fr; min-height:100vh}
 .s1 .sticky-col{position:sticky; top:0; height:100vh; display:flex; align-items:center; justify-content:center; padding:var(--pad); overflow:hidden}
 .s1 .stack{position:relative; width:100%; max-width:520px; aspect-ratio:4/5}
-.s1 .stack .ph{position:absolute; inset:0; border:1px solid rgba(79,106,160,.45); background:linear-gradient(135deg,#e3e9f3,#cdd8ea); display:flex; align-items:flex-end; padding:20px; box-shadow:0 30px 80px -40px rgba(20,36,63,.45)}
-.s1 .stack .ph span{font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(20,36,63,.55)}
+.s1 .stack .ph{position:absolute; inset:0; border:1px solid rgba(126,43,43,.4); background:linear-gradient(135deg,#ece3d2,#dccdb2); display:flex; align-items:flex-end; padding:20px; box-shadow:0 30px 80px -40px rgba(60,40,30,.4)}
+.s1 .stack .ph span{font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(60,40,30,.6)}
 .s1 .text-col{padding:var(--pad)}
 .s1 .text-block{min-height:100vh; display:flex; flex-direction:column; justify-content:center; max-width:480px}
 .s1 h2{font-size:clamp(46px,6.5vw,96px); margin:18px 0 26px}
-.s1 .text-block p{font-size:17px; color:rgba(22,36,63,.74); margin-bottom:18px}
+.s1 .text-block p{font-size:17px; color:rgba(42,38,34,.78); margin-bottom:18px}
 .s1 .meta{margin-top:30px; display:flex; gap:40px}
 .s1 .meta b{display:block; font-family:var(--serif); font-size:38px; line-height:1}
-.s1 .meta small{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#4F6AA0}
+.s1 .meta small{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--oxblood)}
 
-.s2{background:#6F8CB8; color:#fff; padding:14vh var(--pad) 16vh; overflow:hidden; --accent:#0F1C38}
+/* S2 */
+.s2{background:#C9AE86; color:#332a1f; padding:14vh var(--pad) 16vh; overflow:hidden; --accent:#7E2B2B}
 .s2 .head{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; margin-bottom:8vh}
-.s2 h2{font-size:clamp(50px,8vw,128px); color:#0F1C38}
-.s2 h2 em{font-style:italic; color:#fff}
-.s2 .head p{max-width:340px; font-size:16px; color:rgba(15,28,56,.8)}
+.s2 h2{font-size:clamp(50px,8vw,128px); color:#3a2e20}
+.s2 h2 em{font-style:italic; color:var(--oxblood)}
+.s2 .head p{max-width:340px; font-size:16px; color:rgba(51,42,31,.82)}
 .s2-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
-.s2-grid .ph{aspect-ratio:3/4; overflow:hidden; position:relative; background:linear-gradient(160deg,#9fb3d4,#3f5a8c); display:flex; align-items:flex-end; padding:18px; color:#eef3fb}
+.s2-grid .ph{aspect-ratio:3/4; overflow:hidden; position:relative; background:linear-gradient(160deg,#ddc8a2,#9c7c52); display:flex; align-items:flex-end; padding:18px; color:#fbf6ec}
 .s2-grid .ph:nth-child(2){aspect-ratio:3/4.6; transform:translateY(6vh)}
-.s2-grid .ph span{font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; opacity:.9}
-.s2-grid .ph i{position:absolute; inset:0; background:radial-gradient(circle at 70% 20%,rgba(255,255,255,.28),transparent 60%)}
+.s2-grid .ph span{font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; opacity:.95}
+.s2-grid .ph i{position:absolute; inset:0; background:radial-gradient(circle at 70% 20%,rgba(255,255,255,.3),transparent 60%)}
 
-.s3{background:#0F1C38; color:#fff; padding:16vh var(--pad); position:relative; overflow:hidden; --accent:#7FB0E6}
+/* S3 */
+.s3{background:#221E1A; color:#fff; padding:16vh var(--pad); position:relative; overflow:hidden; --accent:#A2413B}
 .s3 .ov-svg{position:absolute; inset:0; width:100%; height:100%; pointer-events:none}
-.s3 .ov-svg path,.s3 .ov-svg line,.s3 .ov-svg rect{fill:none; stroke:rgba(127,176,230,.55); stroke-width:1; vector-effect:non-scaling-stroke; stroke-dasharray:1; stroke-dashoffset:1}
+.s3 .ov-svg path,.s3 .ov-svg line,.s3 .ov-svg rect{fill:none; stroke:rgba(162,65,59,.6); stroke-width:1; vector-effect:non-scaling-stroke; stroke-dasharray:1; stroke-dashoffset:1}
 .s3 .head{position:relative; z-index:2; margin-bottom:9vh}
 .s3 h2{font-size:clamp(56px,11vw,190px); line-height:.9}
 .s3 h2 em{font-style:italic; -webkit-text-stroke:1px #fff; color:transparent}
-.s3 .head p{max-width:360px; margin-top:24px; color:rgba(207,224,245,.7); font-size:16px}
-.s3-grid{position:relative; z-index:2; display:grid; grid-template-columns:repeat(3,1fr); gap:2px; border:1px solid rgba(127,176,230,.18)}
-.s3-grid .ph{aspect-ratio:4/5; background:#13203c; position:relative; overflow:hidden; display:flex; align-items:flex-end; padding:20px}
-.s3-grid .ph::before{content:''; position:absolute; inset:0; background:linear-gradient(180deg,#1a2a4d,#0c1730)}
-.s3-grid .ph span{position:relative; z-index:2; font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(207,224,245,.6)}
+.s3 .head p{max-width:360px; margin-top:24px; color:rgba(240,230,216,.7); font-size:16px}
+.s3-grid{position:relative; z-index:2; display:grid; grid-template-columns:repeat(3,1fr); gap:2px; border:1px solid rgba(162,65,59,.22)}
+.s3-grid .ph{aspect-ratio:4/5; background:#2a241f; position:relative; overflow:hidden; display:flex; align-items:flex-end; padding:20px}
+.s3-grid .ph::before{content:''; position:absolute; inset:0; background:linear-gradient(180deg,#322b24,#1d1813)}
+.s3-grid .ph span{position:relative; z-index:2; font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(240,230,216,.6)}
 .s3-grid .ph .ln{position:absolute; inset:0; z-index:1; opacity:.5}
 
-.projects{background:#0C1730; color:#fff; padding:16vh var(--pad); --accent:#7FB0E6}
+/* projects */
+.projects{background:#1C1813; color:#fff; padding:16vh var(--pad); --accent:#A2413B}
 .projects .head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6vh; flex-wrap:wrap; gap:20px}
 .projects h2{font-size:clamp(42px,6vw,92px)}
-.projects .head p{color:rgba(207,224,245,.55); max-width:320px}
+.projects .head p{color:rgba(240,230,216,.55); max-width:320px}
 .proj-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
-.proj-card{aspect-ratio:1/1; position:relative; overflow:hidden; cursor:pointer; background:linear-gradient(145deg,#16264a,#0e1b38); border:1px solid rgba(127,176,230,.1)}
+.proj-card{aspect-ratio:1/1; position:relative; overflow:hidden; cursor:pointer; background:linear-gradient(145deg,#2c241c,#1a1510); border:1px solid rgba(201,174,134,.12)}
 .proj-card .inner{position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:24px; transition:transform .9s var(--ease)}
 .proj-card:hover .inner{transform:scale(1.06)}
-.proj-card .num{font-family:var(--serif); font-size:54px; opacity:.2; line-height:1}
-.proj-card .cs{font-family:var(--sans); font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--dusty); margin-top:auto}
+.proj-card .num{font-family:var(--serif); font-size:54px; opacity:.22; line-height:1}
+.proj-card .cs{font-family:var(--sans); font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--oxbloodlt); margin-top:auto}
 .proj-card .nm{font-family:var(--serif); font-size:26px; margin-top:6px}
-.proj-card::after{content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 120%,rgba(174,187,214,.2),transparent 60%); opacity:0; transition:.6s}
+.proj-card::after{content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 120%,rgba(126,43,43,.28),transparent 60%); opacity:0; transition:.6s}
 .proj-card:hover::after{opacity:1}
 
-.about{background:#EEF2F8; color:var(--ink); padding:18vh var(--pad); --accent:#4F6AA0}
+/* about */
+.about{background:#F4EEE2; color:var(--char); padding:18vh var(--pad); --accent:#7E2B2B}
 .about .wrap{display:grid; grid-template-columns:1.3fr .9fr; gap:8vw; align-items:center}
 .about h2{font-size:clamp(34px,4.4vw,68px); line-height:1.1; font-weight:300; max-width:18ch}
-.about h2 em{font-style:italic; color:#4F6AA0}
-.about .lead{margin-top:30px; font-size:18px; color:rgba(22,36,63,.76); max-width:46ch}
+.about h2 em{font-style:italic; color:var(--oxblood)}
+.about .lead{margin-top:30px; font-size:18px; color:rgba(42,38,34,.8); max-width:46ch}
 .about .sig{margin-top:34px; font-family:var(--serif); font-style:italic; font-size:30px}
-.about .portrait{aspect-ratio:3/4; background:linear-gradient(160deg,#dde5f1,#c2cfe4); border:1px solid rgba(79,106,160,.45); position:relative; display:flex; align-items:flex-end; padding:22px; box-shadow:0 40px 90px -50px rgba(20,36,63,.5)}
-.about .portrait span{font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(20,36,63,.5)}
+.about .portrait{aspect-ratio:3/4; background:linear-gradient(160deg,#e7ddc9,#cdbb9c); border:1px solid rgba(126,43,43,.35); position:relative; display:flex; align-items:flex-end; padding:22px; box-shadow:0 40px 90px -50px rgba(60,40,30,.5)}
+.about .portrait span{font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(60,40,30,.55)}
 
-.contact{background:#0A1226; color:#fff; padding:16vh var(--pad) 6vh; --accent:#AEBBD6}
+/* contact */
+.contact{background:#171310; color:#fff; padding:16vh var(--pad) 6vh; --accent:#A2413B}
 .contact .top{display:grid; grid-template-columns:1fr 1fr; gap:7vw}
 .contact h2{font-size:clamp(44px,6.5vw,104px); line-height:.95}
-.contact h2 em{font-style:italic; color:var(--dusty)}
+.contact h2 em{font-style:italic; color:var(--oxbloodlt)}
 .contact .channels{margin-top:40px; display:flex; flex-direction:column}
 .contact .ch{display:flex; align-items:center; justify-content:space-between; gap:20px; padding:22px 4px; border-top:1px solid rgba(255,255,255,.12); transition:.4s}
 .contact .ch:last-child{border-bottom:1px solid rgba(255,255,255,.12)}
-.contact .ch:hover{padding-inline-start:14px; color:var(--dusty)}
+.contact .ch:hover{padding-inline-start:14px; color:var(--oxbloodlt)}
 .contact .ch small{display:block; font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:rgba(255,255,255,.45); margin-bottom:6px}
 .contact .ch b{font-family:var(--serif); font-size:24px; font-weight:400}
 .contact .ch .arr{font-size:20px; opacity:.5}
@@ -162,11 +168,11 @@ form{display:flex; flex-direction:column; gap:26px; margin-top:10px}
 .field textarea{min-height:90px}
 .field label{position:absolute; left:0; top:10px; color:rgba(255,255,255,.45); pointer-events:none; transition:.3s var(--ease); font-size:16px}
 html[lang="he"] .field label{left:auto; right:0}
-.field input:focus,.field textarea:focus{outline:none; border-color:var(--dusty)}
+.field input:focus,.field textarea:focus{outline:none; border-color:var(--oxbloodlt)}
 .field input:focus+label,.field textarea:focus+label,
-.field input:not(:placeholder-shown)+label,.field textarea:not(:placeholder-shown)+label{top:-14px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--dusty)}
-.btn-send{align-self:flex-start; background:var(--dusty); color:#0a1226; border:none; cursor:pointer; font-family:var(--sans); font-size:12px; letter-spacing:.24em; text-transform:uppercase; padding:18px 42px; border-radius:40px; transition:.4s var(--ease); margin-top:6px}
-.btn-send:hover{transform:translateY(-3px); box-shadow:0 18px 40px -16px var(--dusty)}
+.field input:not(:placeholder-shown)+label,.field textarea:not(:placeholder-shown)+label{top:-14px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--oxbloodlt)}
+.btn-send{align-self:flex-start; background:var(--oxblood); color:#fff; border:none; cursor:pointer; font-family:var(--sans); font-size:12px; letter-spacing:.24em; text-transform:uppercase; padding:18px 42px; border-radius:40px; transition:.4s var(--ease); margin-top:6px}
+.btn-send:hover{transform:translateY(-3px); box-shadow:0 18px 40px -16px rgba(126,43,43,.6)}
 footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,.1); display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; font-family:var(--sans); font-size:12px; letter-spacing:.1em; color:rgba(255,255,255,.45)}
 
 .reveal{opacity:0; transform:translateY(38px)}
@@ -188,7 +194,7 @@ footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,
 }
 @media (max-width:560px){
   .s2-grid,.s3-grid,.proj-grid{grid-template-columns:1fr}
-  .hero-scroll{height:600vh}
+  .hero-scroll{height:720vh}
 }
 </style>
 </head>
@@ -218,7 +224,7 @@ footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,
   <div class="hero-head" id="heroHead">
     <span class="eyebrow" data-i18n="hero_eyebrow">Andrea Pokroy — Architecture</span>
     <h1 data-i18n="hero_h1">Where Blueprints<br>Become <em>Home</em></h1>
-    <div class="sub" data-i18n="hero_sub">Keep scrolling — the drawing becomes a house you walk through</div>
+    <div class="sub" data-i18n="hero_sub">Keep scrolling — the drawing becomes a home you walk through</div>
   </div>
   <div class="enter-hint" id="enterHint">
     <b data-i18n="enter_b">Step inside</b>
@@ -236,7 +242,7 @@ footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,
 <div class="progress-rail"><i id="railFill"></i></div>
 
 <main>
-  <section class="block s1" id="s1" data-bg="#EEF2F8" data-fg="#16243F">
+  <section class="block s1" id="s1" data-bg="#F4EEE2" data-fg="#2A2622">
     <div class="pin-wrap">
       <div class="sticky-col">
         <div class="stack" id="s1stack">
@@ -260,22 +266,22 @@ footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,
     </div>
   </section>
 
-  <section class="block s2" id="s2" data-bg="#6F8CB8" data-fg="#0F1C38">
+  <section class="block s2" id="s2" data-bg="#C9AE86" data-fg="#332A1F">
     <div class="head">
       <div>
-        <div class="eyebrow reveal" data-i18n="s2_eyebrow">02 — Light & Air</div>
-        <h2 class="reveal" data-i18n="s2_h2">Where <em>Light</em><br>Lives.</h2>
+        <div class="eyebrow reveal" data-i18n="s2_eyebrow">02 — Warmth & Texture</div>
+        <h2 class="reveal" data-i18n="s2_h2">Where <em>Warmth</em><br>Lives.</h2>
       </div>
-      <p class="reveal" data-i18n="s2_p">Glass, water, sky. Homes that pull the daylight deep inside — soft geometry, calm surfaces, rooms that breathe with the hours.</p>
+      <p class="reveal" data-i18n="s2_p">Oak, plaster, sunlight. Homes that wrap around you — tactile surfaces, arched thresholds, rooms that hold the afternoon light.</p>
     </div>
     <div class="s2-grid" id="s2grid">
       <div class="ph"><i></i><span data-i18n="ph_w1">Courtyard House · Slot 01</span></div>
       <div class="ph"><i></i><span data-i18n="ph_w2">Sunlit Loft · Slot 02</span></div>
-      <div class="ph"><i></i><span data-i18n="ph_w3">Water Terrace · Slot 03</span></div>
+      <div class="ph"><i></i><span data-i18n="ph_w3">Olive Terrace · Slot 03</span></div>
     </div>
   </section>
 
-  <section class="block s3" id="s3" data-bg="#0F1C38" data-fg="#ffffff">
+  <section class="block s3" id="s3" data-bg="#221E1A" data-fg="#ffffff">
     <svg class="ov-svg" id="s3ov" viewBox="0 0 1000 700" preserveAspectRatio="none">
       <rect x="120" y="90" width="760" height="520"/>
       <line x1="120" y1="300" x2="880" y2="300"/>
@@ -298,7 +304,7 @@ footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,
     </div>
   </section>
 
-  <section class="block projects" id="projects" data-bg="#0C1730" data-fg="#ffffff">
+  <section class="block projects" id="projects" data-bg="#1C1813" data-fg="#ffffff">
     <div class="head">
       <div>
         <div class="eyebrow" data-i18n="proj_eyebrow">Selected Works</div>
@@ -309,7 +315,7 @@ footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,
     <div class="proj-grid" id="projGrid"></div>
   </section>
 
-  <section class="block about" id="about" data-bg="#EEF2F8" data-fg="#16243F">
+  <section class="block about" id="about" data-bg="#F4EEE2" data-fg="#2A2622">
     <div class="wrap">
       <div>
         <div class="eyebrow reveal" data-i18n="about_eyebrow">About</div>
@@ -321,7 +327,7 @@ footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,
     </div>
   </section>
 
-  <section class="block contact" id="contact" data-bg="#0A1226" data-fg="#ffffff">
+  <section class="block contact" id="contact" data-bg="#171310" data-fg="#ffffff">
     <div class="top">
       <div>
         <div class="eyebrow" data-i18n="contact_eyebrow">Contact</div>
@@ -353,7 +359,7 @@ footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,
 const I18N={
  en:{ role:"Architect · Israel", nav_about:"About", nav_projects:"Projects", nav_contact:"Contact",
   hero_eyebrow:"Andrea Pokroy — Architecture", hero_h1:"Where Blueprints<br>Become <em>Home</em>",
-  hero_sub:"Keep scrolling — the drawing becomes a house you walk through", scroll:"Scroll",
+  hero_sub:"Keep scrolling — the drawing becomes a home you walk through", scroll:"Scroll",
   enter_b:"Step inside", enter_s:"Keep scrolling ↓",
   ph_blueprint:"Blueprint", ph_drawing:"Drawing", ph_construction:"Construction", ph_walk:"Walkthrough",
   r_entrance:"Entrance", r_living:"Living Room", r_kitchen:"Kitchen", r_bedroom:"Bedroom",
@@ -362,9 +368,9 @@ const I18N={
   s1_p2:"Every threshold is a decision. Classic does not mean old; it means resolved.",
   s1_m1:"Years Crafting", s1_m2:"Homes Delivered",
   ph_c1:"Heritage Villa · Slot 01", ph_c2:"Stone Residence · Slot 02", ph_c3:"Garden House · Slot 03",
-  s2_eyebrow:"02 — Light & Air", s2_h2:"Where <em>Light</em><br>Lives.",
-  s2_p:"Glass, water, sky. Homes that pull the daylight deep inside — soft geometry, calm surfaces, rooms that breathe with the hours.",
-  ph_w1:"Courtyard House · Slot 01", ph_w2:"Sunlit Loft · Slot 02", ph_w3:"Water Terrace · Slot 03",
+  s2_eyebrow:"02 — Warmth & Texture", s2_h2:"Where <em>Warmth</em><br>Lives.",
+  s2_p:"Oak, plaster, sunlight. Homes that wrap around you — tactile surfaces, arched thresholds, rooms that hold the afternoon light.",
+  ph_w1:"Courtyard House · Slot 01", ph_w2:"Sunlit Loft · Slot 02", ph_w3:"Olive Terrace · Slot 03",
   s3_eyebrow:"03 — Modern Minimalist", s3_h2:"The Future,<br><em>Built.</em>",
   s3_p:"Reduction as luxury. Concrete, glass, and shadow arranged with surgical restraint. The blueprint never really leaves — it lives in the lines of the wall.",
   ph_m1:"Monolith · Slot 01", ph_m2:"Glass Pavilion · Slot 02", ph_m3:"Floating Slab · Slot 03",
@@ -389,9 +395,9 @@ const I18N={
   s1_p2:"כל מפתן הוא החלטה. קלאסי אינו ישן; קלאסי הוא מוגמר.",
   s1_m1:"שנות יצירה", s1_m2:"בתים שנמסרו",
   ph_c1:"וילת מורשת · מקום 01", ph_c2:"בית אבן · מקום 02", ph_c3:"בית גן · מקום 03",
-  s2_eyebrow:"02 — אור ואוויר", s2_h2:"כאן ה<em>אור</em><br>שוכן.",
-  s2_p:"זכוכית, מים, שמיים. בתים שמושכים את אור היום פנימה — גאומטריה רכה, משטחים שלווים, חדרים שנושמים עם השעות.",
-  ph_w1:"בית חצר · מקום 01", ph_w2:"לופט שטוף שמש · מקום 02", ph_w3:"מרפסת מים · מקום 03",
+  s2_eyebrow:"02 — חום ומרקם", s2_h2:"כאן ה<em>חום</em><br>שוכן.",
+  s2_p:"עץ אלון, טיח, אור שמש. בתים שעוטפים אותך — משטחים מוחשיים, מפתנים מקושתים, חדרים ששומרים את אור אחר הצהריים.",
+  ph_w1:"בית חצר · מקום 01", ph_w2:"לופט שטוף שמש · מקום 02", ph_w3:"מרפסת זיתים · מקום 03",
   s3_eyebrow:"03 — מודרני מינימליסטי", s3_h2:"העתיד,<br><em>בנוי.</em>",
   s3_p:"צמצום כיוקרה. בטון, זכוכית וצל מסודרים באיפוק כירורגי. התוכנית לעולם אינה עוזבת — היא חיה בקווי הקיר.",
   ph_m1:"מונוליט · מקום 01", ph_m2:"ביתן זכוכית · מקום 02", ph_m3:"לוח מרחף · מקום 03",
@@ -414,7 +420,6 @@ function applyLang(lang){
   document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.getAttribute("data-i18n"); if(d[k]!==undefined) el.innerHTML=d[k];});
   document.querySelectorAll(".proj-card .cs").forEach(el=>el.textContent=d.proj_card);
   document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.lang===lang));
-  // force room/phase labels to refresh language
   const pt=document.getElementById("phaseTag"); if(pt) pt.dataset.k="";
   const rn=document.getElementById("rlName"); if(rn) rn.dataset.k="";
   if(window.ScrollTrigger) ScrollTrigger.refresh();
@@ -441,11 +446,10 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const inv=(a,b,v)=>b===a?0:clamp((v-a)/(b-a),0,1);
 const ss=(a,b,v)=>{const t=inv(a,b,v);return t*t*(3-2*t);};
 
-if(HAS3D){ initThree(); } else { document.documentElement.classList.add("no3d"); }
+if(HAS3D){ try{ initThree(); }catch(e){ console.error("3D init failed:",e); document.documentElement.classList.add("no3d"); } }
+else { document.documentElement.classList.add("no3d"); }
 
-/* Universal hero scroll manager — runs with OR without THREE/GSAP, so the
-   headline + backdrop are ALWAYS visible at the top, and the 3D (if present)
-   gets its scroll progress. This is the single source of truth for hero-on. */
+/* Universal hero scroll manager — works with OR without THREE/GSAP */
 (function setupHeroScroll(){
   const hs=document.getElementById("heroScroll");
   function upd(){
@@ -464,176 +468,207 @@ if(HAS3D){ initThree(); } else { document.documentElement.classList.add("no3d");
 function initThree(){
   const holder=document.getElementById("webgl");
   const scene=new THREE.Scene();
-  const camera=new THREE.PerspectiveCamera(62, innerWidth/innerHeight, 0.1, 260);
+  const camera=new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 320);
   const renderer=new THREE.WebGLRenderer({antialias:true});
   renderer.setPixelRatio(Math.min(devicePixelRatio,2));
   renderer.setSize(innerWidth,innerHeight);
   holder.appendChild(renderer.domElement);
-  scene.fog=new THREE.Fog(0x0f1c38, 14, 95);
+  scene.fog=new THREE.Fog(0x1a1611, 18, 120);
 
-  /* blue gradient stops */
+  /* warm color journey: dark blueprint -> bright daylight home */
   const STOPS=[
-    {p:0.00,c:new THREE.Color(0xDCE4F0)},
-    {p:0.14,c:new THREE.Color(0xAEBBD6)},
-    {p:0.27,c:new THREE.Color(0x6F8CB8)},
-    {p:0.40,c:new THREE.Color(0x2B3F69)},
-    {p:0.55,c:new THREE.Color(0x1A2C4E)},
-    {p:1.00,c:new THREE.Color(0x16273F)}
+    {p:0.00,c:new THREE.Color(0x19150F)},
+    {p:0.12,c:new THREE.Color(0x2A2218)},
+    {p:0.26,c:new THREE.Color(0x6B5B45)},
+    {p:0.40,c:new THREE.Color(0xB6A283)},
+    {p:0.55,c:new THREE.Color(0xD9CCB0)},
+    {p:0.72,c:new THREE.Color(0xECE2CC)},
+    {p:1.00,c:new THREE.Color(0xF3EAD6)}
   ];
   const _c=new THREE.Color();
   function bgAt(p){ for(let i=0;i<STOPS.length-1;i++){ if(p<=STOPS[i+1].p){const t=ss(STOPS[i].p,STOPS[i+1].p,p);return _c.copy(STOPS[i].c).lerp(STOPS[i+1].c,t);} } return _c.copy(STOPS[STOPS.length-1].c); }
 
-  /* registries */
-  const walls=[], solids=[], wires=[], ipoints=[], tickers=[];
-  const COL={ wall:0xEDEFF3, floor:0xB8A382, oak:0x9C8463, rug1:0x3F5070, rug2:0x7C5B43,
-              fabric:0x5D7196, fabricLt:0x8B97B0, slate:0x44587E, wood:0x6F5A40, white:0xE9ECF1, roof:0x2A3447 };
-  const H=3.0;
+  const walls=[], solids=[], wires=[], tickers=[];
+  const COL={ plaster:0xECE3D2, stone:0xD8CFBE, oak:0xC9AE86, oakDk:0x9A7B50, wood:0x7A5E3A,
+              linen:0xE8DECB, linen2:0xDED2BB, jute:0xC9B58C, rattan:0xC49A5E, black:0x201E1B,
+              olive:0x6E7A4E, pot:0xD3C7AE, oxblood:0x7E2B2B };
+  const WIRE=0xA2413B; // oxblood blueprint lines
+  const H=4.4, HW=8, ZB=-26, ZF=26;
 
-  function mkWall(w,h,d,x,z,startP){
-    const g=new THREE.BoxGeometry(w,h,d);
-    const mat=new THREE.MeshStandardMaterial({color:COL.wall,roughness:.96,metalness:0,transparent:true,opacity:0}); mat.userData={maxOp:1};
-    const mesh=new THREE.Mesh(g,mat); mesh.position.y=h/2;
-    const em=new THREE.LineBasicMaterial({color:0xBFD7F5,transparent:true,opacity:1});
-    const wf=new THREE.LineSegments(new THREE.EdgesGeometry(g),em); wf.position.y=h/2;
-    const grp=new THREE.Group(); grp.add(mesh); grp.add(wf); grp.position.set(x,0,z); grp.scale.y=0.001;
+  /* ---- arched opening path (manual points = predictable) ---- */
+  function archHole(cx,bottom,ow,spring){
+    const p=new THREE.Path();
+    p.moveTo(cx-ow,bottom); p.lineTo(cx-ow,spring);
+    const seg=18; for(let i=0;i<=seg;i++){ const a=Math.PI-(Math.PI*i/seg); p.lineTo(cx+Math.cos(a)*ow, spring+Math.sin(a)*ow); }
+    p.lineTo(cx+ow,bottom); p.lineTo(cx-ow,bottom); return p;
+  }
+  /* extruded wall (in local XY, thickness in Z), optional arched holes; rises on scroll */
+  function archWall(W,th,holes,x,z,rotY,startP){
+    const shape=new THREE.Shape();
+    shape.moveTo(-W/2,0); shape.lineTo(W/2,0); shape.lineTo(W/2,H); shape.lineTo(-W/2,H); shape.lineTo(-W/2,0);
+    (holes||[]).forEach(o=>shape.holes.push(archHole(o.cx,o.bottom,o.ow,o.spring)));
+    const geo=new THREE.ExtrudeGeometry(shape,{depth:th,bevelEnabled:false,curveSegments:18}); geo.translate(0,0,-th/2);
+    const mat=new THREE.MeshStandardMaterial({color:COL.plaster,roughness:.97,metalness:0,transparent:true,opacity:0}); mat.userData={maxOp:1};
+    const mesh=new THREE.Mesh(geo,mat);
+    const em=new THREE.LineBasicMaterial({color:WIRE,transparent:true,opacity:1});
+    const wf=new THREE.LineSegments(new THREE.EdgesGeometry(geo),em);
+    const grp=new THREE.Group(); grp.add(mesh); grp.add(wf); grp.position.set(x,0,z); grp.rotation.y=rotY||0; grp.scale.y=0.001;
     scene.add(grp); walls.push({grp,startP}); solids.push(mat); wires.push(em);
   }
   function box(w,h,d,x,y,z,col,maxOp){
-    const mat=new THREE.MeshStandardMaterial({color:col,roughness:.82,metalness:.04,transparent:true,opacity:0});
-    mat.userData={maxOp:(maxOp===undefined?1:maxOp)};
+    const mat=new THREE.MeshStandardMaterial({color:(col===undefined?0xCCC2B0:col),roughness:.8,metalness:.03,transparent:true,opacity:0}); mat.userData={maxOp:(maxOp===undefined?1:maxOp)};
     const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat); m.position.set(x,y,z); scene.add(m); solids.push(mat); return m;
   }
   function plane(w,d,x,y,z,col,rotX,maxOp){
-    const mat=new THREE.MeshStandardMaterial({color:col,roughness:.95,transparent:true,opacity:0,side:THREE.DoubleSide});
-    mat.userData={maxOp:(maxOp===undefined?1:maxOp)};
+    const mat=new THREE.MeshStandardMaterial({color:(col===undefined?0xCCC2B0:col),roughness:.95,transparent:true,opacity:0,side:THREE.DoubleSide}); mat.userData={maxOp:(maxOp===undefined?1:maxOp)};
     const m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),mat); m.rotation.x=rotX; m.position.set(x,y,z); scene.add(m); solids.push(mat); return m;
   }
+  /* bright daylight glass */
   function glass(w,h,x,y,z,rotY){
-    const mat=new THREE.MeshBasicMaterial({color:0xCFE7FF,transparent:true,opacity:0,side:THREE.DoubleSide}); mat.userData={maxOp:.62};
+    const mat=new THREE.MeshBasicMaterial({color:0xF6F4EC,transparent:true,opacity:0,side:THREE.DoubleSide}); mat.userData={maxOp:.95};
     const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),mat); m.position.set(x,y,z); m.rotation.y=rotY||0; scene.add(m); solids.push(mat); return m;
   }
+  /* black steel arched window: glass + slim black mullions, set into a wall opening */
+  function steelWindow(x,z,axis,zc,ow,bottom,top){
+    // axis 'x' => window in side wall (faces along x), spans along z; 'z' => back wall faces -z, spans along x
+    const h=top-bottom, gy=bottom+h/2, gw=ow*2-0.2;
+    const rotY = axis==='x' ? Math.PI/2 : 0;
+    glass(gw,h-0.1, x, gy, z, rotY);
+    const barC=COL.black;
+    const place=(bw,bh,bd,ox,oy,oz)=>box(bw,bh,bd, x+ox, gy+oy, z+oz, barC, 1);
+    if(axis==='x'){
+      // verticals run in Y, spaced along z; horizontal runs along z
+      [-gw/2, -gw/6, gw/6, gw/2].forEach(o=> place(0.06,h,0.06, 0,0, o));
+      place(0.06,0.06,gw, 0,0,0);
+      place(0.06,0.06,gw, 0,h/2-0.1,0);
+    } else {
+      [-gw/2,-gw/6,gw/6,gw/2].forEach(o=> place(0.06,h,0.06, o,0,0));
+      place(gw,0.06,0.06, 0,0,0);
+      place(gw,0.06,0.06, 0,h/2-0.1,0);
+    }
+  }
 
-  /* ---- SHELL ---- footprint x[-6,6], z[-20,20] ---- */
-  mkWall(0.2,H,40, -6,0, 0.03);                 // left
-  mkWall(0.2,H,40,  6,0, 0.03);                 // right
-  mkWall(12,H,0.2,  0,20, 0.10);                // back
-  mkWall(4.9,H,0.2,-3.55,-20,0.02);             // front-left of door
-  mkWall(4.9,H,0.2, 3.55,-20,0.02);             // front-right of door
-  [[-12,0.06],[-1,0.13],[9,0.20]].forEach(([z,sp])=>{   // partitions w/ central doorway
-    mkWall(4.9,H,0.2,-3.55,z,sp);
-    mkWall(4.9,H,0.2, 3.55,z,sp);
+  /* ===== SHELL ===== */
+  // side walls with arched windows (windows at z = -10 living, 3 kitchen, 16 bedroom)
+  const sideWin=[{cx:-10,bottom:1.2,ow:1.5,spring:2.7},{cx:3,bottom:1.2,ow:1.5,spring:2.7},{cx:16,bottom:1.2,ow:1.5,spring:2.7}];
+  archWall(52,0.3, sideWin, -HW,0, Math.PI/2, 0.03);
+  archWall(52,0.3, sideWin,  HW,0,-Math.PI/2, 0.03);
+  // back wall with big arched window
+  archWall(16,0.3, [{cx:0,bottom:0.7,ow:2.4,spring:1.9}], 0,ZF, 0, 0.10);
+  // front wall with arched entrance door
+  archWall(16,0.3, [{cx:0,bottom:0,ow:1.7,spring:2.0}], 0,ZB, 0, 0.02);
+  // partitions with arched doorways
+  archWall(16,0.25, [{cx:0,bottom:0,ow:2.0,spring:1.9}], 0,-17, 0, 0.06);
+  archWall(16,0.25, [{cx:0,bottom:0,ow:2.0,spring:1.9}], 0,-4, 0, 0.12);
+  archWall(16,0.25, [{cx:0,bottom:0,ow:2.0,spring:1.9}], 0,10, 0, 0.18);
+
+  // floor, ceiling, roof, site
+  plane(16,52, 0,0.0,0, COL.oak, -Math.PI/2, 1);
+  plane(16,52, 0,H,0, COL.plaster, Math.PI/2, .92);
+  box(17.4,0.3,53.4, 0,H+0.18,0, 0x6E5E48, 1);              // roof slab
+  plane(220,220, 0,-0.06,0, 0xCBBE9E, -Math.PI/2, 1);       // site ground (warm stone)
+
+  // exposed wood beams across the ceiling
+  for(let z=-23; z<=24; z+=3.4){ box(16.4,0.34,0.5, 0, H-0.28, z, COL.oakDk, 1); }
+  box(0.5,0.4,52, -3.5,H-0.5,0, COL.wood,1); box(0.5,0.4,52, 3.5,H-0.5,0, COL.wood,1); // ridge runners
+
+  // glass + steel for the windows
+  steelWindow(-HW,0,'x',-10,1.5,1.2,3.9); steelWindow(HW,0,'x',-10,1.5,1.2,3.9);
+  steelWindow(-HW,3,'x', 3,1.5,1.2,3.9);  steelWindow(HW,3,'x', 3,1.5,1.2,3.9);
+  steelWindow(-HW,16,'x',16,1.5,1.2,3.9); steelWindow(HW,16,'x',16,1.5,1.2,3.9);
+  steelWindow(0,ZF,'z',0,2.4,0.7,4.0);
+
+  /* ===== FURNITURE ===== */
+  // Entrance (z -26..-17)
+  box(2.4,0.85,0.5, 5.6,0.42,-22, COL.wood);
+  box(3,0.05,2, 0,0.03,-21, COL.jute, .92);
+  box(0.2,1.7,0.2, -6.0,0.85,-21, 0x5b4a30); box(1.5,1.5,1.5, -6.0,2.1,-21, COL.olive,.95); box(0.85,0.7,0.85,-6.0,0.35,-21, COL.pot);
+  // Living (z -17..-4)
+  box(4.4,0.45,1.5, -4.4,0.45,-9, COL.linen);
+  box(4.4,0.65,0.35,-4.4,0.78,-9.75, COL.linen);
+  box(0.35,0.6,1.5,-6.6,0.55,-9, COL.linen2); box(0.35,0.6,1.5,-2.2,0.55,-9, COL.linen2);
+  box(0.7,0.45,0.55,-5.6,0.9,-9, COL.oxblood,1); box(0.7,0.45,0.55,-3.4,0.9,-9, COL.oxblood,1); // oxblood cushions
+  box(2.6,0.12,1.3,-5.0,0.86,-9.2, COL.oxblood,1); // oxblood throw
+  box(2.0,0.4,1.0, -3.8,0.2,-6.4, COL.wood);       // coffee table
+  box(5.2,0.05,3.4,-4.0,0.03,-9, COL.jute, .92);   // rug
+  box(3.2,0.5,0.5, 6.4,0.3,-9, COL.oak);           // media console
+  box(0.12,2.0,0.12,-6.8,1.0,-5.5, COL.wood); box(0.55,0.45,0.55,-6.8,2.1,-5.5, 0xF0E4C8,.92); // floor lamp
+  // Kitchen (z -4..10)
+  box(2.0,0.95,3.6, 2.2,0.475,3, COL.stone);       // island base
+  box(2.3,0.1,3.9, 2.2,1.0,3, COL.oak);            // island top
+  box(0.85,0.95,6.4, 6.9,0.475,3, COL.plaster);    // counter run (right)
+  box(0.5,0.85,5.6, 7.0,2.7,3, COL.oak,.97);       // upper cabinets
+  [1.0,3.0,5.0].forEach(zz=> box(0.45,0.55,0.45, 0.7,0.27,zz, COL.wood));   // stools
+  [1.4,3.0,4.6].forEach(zz=>{ box(0.04,1.0,0.04, 2.2,3.4,zz, 0x3a2f20); box(0.4,0.4,0.4, 2.2,2.75,zz, COL.rattan,1); }); // rattan pendants
+  box(0.5,0.5,0.5, 2.2,1.25,1.2, COL.olive,.95);   // herb on island
+  // Bedroom (z 10..26)
+  box(3.6,0.4,2.6, -2.8,0.2,18, COL.wood);         // bed base
+  box(3.4,0.35,2.5,-2.8,0.52,18, COL.linen);       // mattress
+  box(3.4,0.2,2.5, -2.8,0.7,18.3, COL.linen2,.96); // duvet
+  box(3.2,0.14,0.9,-2.8,0.66,19.7, COL.oxblood,1); // oxblood throw
+  box(3.6,1.2,0.2, -2.8,0.7,16.75, COL.linen);     // headboard
+  box(0.7,0.5,0.65,-4.9,0.27,17, COL.oak); box(0.7,0.5,0.65,-0.7,0.27,17, COL.oak);
+  box(0.6,2.6,3.4, 6.9,1.3,18, COL.oak,.97);       // wardrobe
+  box(4.2,0.05,2.8,-2.4,0.03,19, COL.jute, .92);   // rug
+  box(2.8,0.5,0.6, -2.8,0.27,20.4, COL.linen);     // bench
+  box(0.2,1.6,0.2, 6.0,0.8,23, 0x5b4a30); box(1.4,1.4,1.4, 6.0,2.0,23, COL.olive,.95); box(0.8,0.7,0.8,6.0,0.35,23, COL.pot); // bedroom olive
+
+  /* ===== LIGHTING (bright daylight) ===== */
+  scene.add(new THREE.HemisphereLight(0xFBF6EC, 0x6A5E4C, 1.15));
+  const sun=new THREE.DirectionalLight(0xFFF6E6, 1.25); sun.position.set(26,34,-14); scene.add(sun);
+  const sun2=new THREE.DirectionalLight(0xF3ECDC, 0.5); sun2.position.set(-20,24,20); scene.add(sun2);
+  // soft window light fills (ramp in with materials)
+  [[-7,2,-10],[7,2,-10],[-7,2,3],[7,2,3],[-7,2,16],[7,2,16],[0,2.4,24]].forEach(pp=>{
+    const pl=new THREE.PointLight(0xFFF3DD,0,20,2); pl.position.set(pp[0],pp[1],pp[2]); scene.add(pl);
+    tickers.push((p,sOp)=>{ pl.intensity=sOp*0.5; });
   });
 
-  /* floor / ceiling / site */
-  plane(12,40, 0,0.0,0, COL.floor, -Math.PI/2, 1);
-  plane(12,40, 0,H,0, COL.white, Math.PI/2, .8);
-  plane(160,160, 0,-0.05,0, 0x2C3A55, -Math.PI/2, 1);
-
-  /* roof slab (drops into place + draws its outline) */
-  const roofGeo=new THREE.BoxGeometry(12.8,0.3,40.8);
-  const roofMat=new THREE.MeshStandardMaterial({color:COL.roof,roughness:.9,transparent:true,opacity:0});
-  const roof=new THREE.Mesh(roofGeo,roofMat); roof.position.set(0,H+0.15,0); scene.add(roof);
-  const roofEm=new THREE.LineBasicMaterial({color:0x9FC4EA,transparent:true,opacity:0});
-  const roofWire=new THREE.LineSegments(new THREE.EdgesGeometry(roofGeo),roofEm); roofWire.position.copy(roof.position); scene.add(roofWire);
-  tickers.push((p,sOp)=>{ roofEm.opacity=ss(0.18,0.30,p)*(1-ss(0.42,0.54,p)); roofMat.opacity=sOp; const y=(H+0.15)+(1-sOp)*5; roof.position.y=y; roofWire.position.y=y; });
-
-  /* windows + daylight glow */
-  glass(3,1.7, -5.9,1.7,-6, Math.PI/2);   // living, left
-  glass(3,1.7, -5.9,1.7,14, Math.PI/2);   // bedroom, left
-  glass(3,1.7,  5.9,1.7, 3, -Math.PI/2);  // kitchen, right
-  glass(4.6,1.9, 0,1.85,19.88, 0);        // bedroom, back
-  [[-5,1.7,-6],[-5,1.7,14],[5,1.7,3],[0,1.85,19]].forEach(pp=>{
-    const pl=new THREE.PointLight(0xCFE7FF,0,14,2); pl.position.set(pp[0],pp[1],pp[2]); scene.add(pl);
-    tickers.push((p,sOp)=>{ pl.intensity=sOp*0.55; });
-  });
-
-  /* ---- FURNITURE ---- */
-  // Entrance  (z -20..-12)
-  box(2.0,0.85,0.45, 3.6,0.42,-15, COL.wood);
-  box(2.4,0.04,1.6, 0,0.02,-16, COL.rug2, .9);
-  box(0.5,1.6,0.5, 4.6,0.8,-13, 0x223047, .8);   // tall plant pot mass
-  // Living  (z -12..-1)
-  box(3.6,0.45,1.2, -3.3,0.4,-7, COL.fabric);     // sofa seat
-  box(3.6,0.6,0.3, -3.3,0.7,-7.6, COL.fabricLt);  // sofa back
-  box(0.3,0.55,1.2,-5.0,0.5,-7, COL.fabricLt);    // arm
-  box(0.3,0.55,1.2,-1.6,0.5,-7, COL.fabricLt);    // arm
-  box(1.5,0.4,0.8, -3.2,0.2,-5.2, COL.wood);      // coffee table
-  box(4.2,0.04,3.0,-3.2,0.02,-6.4, COL.rug1, .92);// rug
-  box(2.6,0.5,0.4, 3.7,0.3,-6.5, COL.slate);      // media console
-  box(0.12,1.7,0.12,-5.2,0.85,-3.8, COL.wood);    // lamp pole
-  box(0.5,0.2,0.5, -5.2,1.75,-3.8, 0xF1D9A8, .9); // lamp shade (warm)
-  // Kitchen  (z -1..9)
-  box(1.5,0.92,2.6, 1.9,0.46,4, COL.white);       // island base
-  box(1.7,0.08,2.8, 1.9,0.96,4, COL.slate);       // island top
-  box(0.7,0.9,5.2,  5.3,0.45,4, COL.white);       // counter run (right)
-  box(0.55,0.7,5.0, 5.4,2.25,4, COL.white, .95);  // upper cabinets
-  box(0.42,0.5,0.42,0.7,0.25,3.2, COL.wood);      // stool
-  box(0.42,0.5,0.42,0.7,0.25,4.8, COL.wood);      // stool
-  box(0.28,0.24,0.28,1.9,2.35,4, 0xF1D9A8, .95);  // pendant (warm)
-  // Bedroom  (z 9..20)
-  box(3.0,0.4,2.2, -2.4,0.2,14, COL.wood);        // bed base
-  box(2.8,0.32,2.1,-2.4,0.5,14, COL.fabricLt);    // mattress
-  box(3.0,1.0,0.2, -2.4,0.6,12.95, COL.slate);    // headboard
-  box(0.6,0.5,0.5, -4.4,0.25,13, COL.wood);       // nightstand
-  box(0.6,0.5,0.5, -0.4,0.25,13, COL.wood);       // nightstand
-  box(0.6,2.2,3.0,  5.4,1.1,14, COL.white, .95);  // wardrobe
-  box(3.6,0.04,2.6,-2.0,0.02,15, COL.rug1, .92);  // rug
-  box(2.4,0.45,0.5,-2.4,0.22,15.7, COL.fabric);   // bench
-
-  /* lighting */
-  scene.add(new THREE.HemisphereLight(0xE2ECFB,0x33425C,0.95));
-  const sun=new THREE.DirectionalLight(0xFFF3E0,0.75); sun.position.set(20,28,-12); scene.add(sun);
-  [-16,-6,4,14].forEach(z=>{ const pl=new THREE.PointLight(0xFFE2B4,0,16,2); pl.position.set(0,2.6,z); scene.add(pl); ipoints.push(pl); });
-
-  /* ---- camera path ---- */
+  /* ===== CAMERA PATH ===== */
   const V=(x,y,z)=>new THREE.Vector3(x,y,z);
   const KF=[
-    {p:0.00, pos:V(21,27,0),    look:V(0,0,0)},      // floor plan, top
-    {p:0.12, pos:V(24,15,-32),  look:V(0,3,-6)},     // walls rising, iso
-    {p:0.26, pos:V(21,9,-37),   look:V(0,3,-10)},    // house formed, exterior 3/4
-    {p:0.38, pos:V(0,2.0,-31),  look:V(0,2.0,-20)},  // approach front door
-    {p:0.46, pos:V(0,1.6,-17),  look:V(0,1.6,-12)},  // entrance
-    {p:0.56, pos:V(0,1.6,-10),  look:V(-1.6,1.5,-6)},// step into living, glance to sofa
-    {p:0.65, pos:V(0.2,1.6,-6), look:V(0,1.5,-1)},   // living forward
-    {p:0.74, pos:V(0,1.6,1),    look:V(1.6,1.5,4)},  // kitchen, glance to island
-    {p:0.83, pos:V(0,1.6,6),    look:V(0,1.5,11)},   // toward bedroom
-    {p:0.92, pos:V(0,1.6,12),   look:V(-1.5,1.5,17)},// bedroom, glance to bed
-    {p:1.00, pos:V(0.5,1.58,15),look:V(2.4,1.5,20)}  // settle, look to window
+    {p:0.00, pos:V(26,34,2),    look:V(0,0,0)},
+    {p:0.10, pos:V(32,19,-42),  look:V(0,4,-8)},
+    {p:0.22, pos:V(27,11,-48),  look:V(0,4,-12)},
+    {p:0.34, pos:V(0,2.3,-40),  look:V(0,2.5,-26)},
+    {p:0.44, pos:V(0,1.7,-22),  look:V(0,1.8,-17)},
+    {p:0.54, pos:V(0,1.7,-13),  look:V(-2.2,1.6,-9)},
+    {p:0.63, pos:V(0.3,1.7,-8), look:V(0,1.6,-4)},
+    {p:0.72, pos:V(0,1.7,-1),   look:V(2.2,1.6,3)},
+    {p:0.80, pos:V(0,1.7,5),    look:V(0,1.6,10)},
+    {p:0.89, pos:V(0,1.7,13),   look:V(-2.2,1.6,18)},
+    {p:1.00, pos:V(0.7,1.65,18),look:V(2.6,1.55,26)}
   ];
   const _p=new THREE.Vector3(), _l=new THREE.Vector3();
   function camAt(p){
     let i=0; while(i<KF.length-2 && p>KF[i+1].p) i++;
     const a=KF[i], b=KF[i+1], t=ss(a.p,b.p,p);
     _p.copy(a.pos).lerp(b.pos,t); _l.copy(a.look).lerp(b.look,t);
-    if(p>0.44){ _p.y += Math.sin(p*52)*0.022; }   // subtle walking sway
+    if(p>0.42){ _p.y += Math.sin(p*48)*0.02; }
     camera.position.copy(_p); camera.lookAt(_l);
   }
 
-  /* overlay refs */
   const heroHead=document.getElementById("heroHead"), scrollCue=document.getElementById("scrollCue");
   const phaseTag=document.getElementById("phaseTag"), roomLabel=document.getElementById("roomLabel");
   const rlNum=document.getElementById("rlNum"), rlName=document.getElementById("rlName");
   const railFill=document.getElementById("railFill"), enterHint=document.getElementById("enterHint");
-  const ROOMS=[[0.44,0.56,"r_entrance","01"],[0.56,0.72,"r_living","02"],[0.72,0.85,"r_kitchen","03"],[0.85,1.001,"r_bedroom","04"]];
+  const ROOMS=[[0.42,0.54,"r_entrance","01"],[0.54,0.70,"r_living","02"],[0.70,0.84,"r_kitchen","03"],[0.84,1.001,"r_bedroom","04"]];
 
   function updateScene(p){
     const bg=bgAt(p); scene.background=bg.clone(); scene.fog.color.copy(bg);
-    for(const w of walls){ w.grp.scale.y=Math.max(0.02, ss(w.startP,w.startP+0.20,p)); }
-    const sOp=ss(0.24,0.40,p);
+    for(const w of walls){ w.grp.scale.y=Math.max(0.02, ss(w.startP,w.startP+0.18,p)); }
+    const sOp=ss(0.22,0.40,p);
     for(const m of solids){ m.opacity=sOp*m.userData.maxOp; }
-    const wOp=1-ss(0.38,0.54,p)*0.85;
+    const wOp=1-ss(0.36,0.52,p)*0.88;
     for(const m of wires){ m.opacity=wOp; }
-    const li=ss(0.42,0.58,p)*1.5;
-    for(const pl of ipoints){ pl.intensity=li; }
     for(const f of tickers){ f(p,sOp); }
     camAt(p);
 
     heroHead.style.opacity=1-ss(0.05,0.14,p);
-    heroHead.style.transform=`translateY(${-50 - p*36}%)`;
+    heroHead.style.transform=`translateY(${-50 - p*34}%)`;
     scrollCue.style.opacity=1-ss(0.02,0.10,p);
     railFill.style.height=(p*100)+"%";
-    enterHint.style.opacity=ss(0.24,0.32,p)*(1-ss(0.40,0.46,p));
-    const pk=p<0.10?"ph_blueprint":p<0.26?"ph_drawing":p<0.42?"ph_construction":"ph_walk";
+    enterHint.style.opacity=ss(0.22,0.30,p)*(1-ss(0.38,0.44,p));
+    const pk=p<0.10?"ph_blueprint":p<0.24?"ph_drawing":p<0.40?"ph_construction":"ph_walk";
     if(phaseTag.dataset.k!==pk){phaseTag.dataset.k=pk; phaseTag.textContent=I18N[LANG][pk];}
     let ro=0, active=null;
     for(const r of ROOMS){ if(p>=r[0]&&p<r[1]){active=r; const lt=inv(r[0],r[1],p); ro=Math.min(ss(0,0.2,lt),1-ss(0.82,1,lt)); break;} }
@@ -641,14 +676,12 @@ function initThree(){
     else roomLabel.style.opacity=0;
   }
 
-  function animate(){ requestAnimationFrame(animate); heroProgress+=(targetP-heroProgress)*0.09; updateScene(heroProgress); if(heroActive) renderer.render(scene,camera); }
+  function animate(){ requestAnimationFrame(animate); heroProgress+=(targetP-heroProgress)*0.085; updateScene(heroProgress); if(heroActive) renderer.render(scene,camera); }
   updateScene(0); animate();
 
   function resize(){ const w=holder.clientWidth||window.innerWidth||1, h=holder.clientHeight||window.innerHeight||1; camera.aspect=w/h; camera.updateProjectionMatrix(); renderer.setSize(w,h); }
   addEventListener("resize",resize); resize();
   if(window.ResizeObserver){ new ResizeObserver(resize).observe(holder); }
-
-  /* hero scroll progress is supplied by the universal setupHeroScroll() manager below */
 }
 
 /* ============================================================ PAGE ANIMATIONS */
@@ -675,7 +708,7 @@ if(HASGSAP){
   revealOnScroll("#s3 .reveal");
   document.querySelectorAll("#s3grid .ph").forEach(ph=>{
     const ln=document.createElement("div"); ln.className="ln";
-    ln.innerHTML=`<svg viewBox="0 0 100 125" preserveAspectRatio="none" style="width:100%;height:100%"><g fill="none" stroke="rgba(127,176,230,.5)" stroke-width="1" vector-effect="non-scaling-stroke"><rect x="14" y="20" width="72" height="85"/><line x1="14" y1="62" x2="86" y2="62"/><line x1="50" y1="20" x2="50" y2="105"/><path d="M14,20 L50,62 L86,20"/></g></svg>`;
+    ln.innerHTML=`<svg viewBox="0 0 100 125" preserveAspectRatio="none" style="width:100%;height:100%"><g fill="none" stroke="rgba(162,65,59,.5)" stroke-width="1" vector-effect="non-scaling-stroke"><rect x="14" y="20" width="72" height="85"/><line x1="14" y1="62" x2="86" y2="62"/><line x1="50" y1="20" x2="50" y2="105"/><path d="M14,20 L50,62 L86,20"/></g></svg>`;
     ph.appendChild(ln);
     gsap.fromTo(ln,{opacity:0,scale:1.1},{opacity:.5,scale:1,duration:1.1,ease:"power2.out",scrollTrigger:{trigger:ph,start:"top 85%"}});
   });
@@ -688,7 +721,7 @@ function revealOnScroll(sel){gsap.utils.toArray(sel).forEach(el=>gsap.to(el,{opa
 
 document.getElementById("contactForm").addEventListener("submit",function(){
   const btn=this.querySelector(".btn-send");
-  btn.textContent=I18N[LANG].sent; btn.style.background="#16243f"; btn.style.color="#fff";
+  btn.textContent=I18N[LANG].sent; btn.style.background="#2a2622"; btn.style.color="#fff";
   this.reset(); setTimeout(()=>{btn.textContent=I18N[LANG].f_send; btn.style.background=""; btn.style.color="";},3500);
 });
 
