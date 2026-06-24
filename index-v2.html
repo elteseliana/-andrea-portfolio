@@ -146,6 +146,14 @@ footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(58,58,56,.12
   .about .grid,.contact .top{grid-template-columns:1fr; gap:6vh}
   .proj-card{grid-column:span 6 !important; min-height:190px !important}
 }
+/* phones: blueprint goes portrait + large so it fills the screen and the animation reads */
+@media (max-width:760px){
+  .stage-pin{perspective:1150px; perspective-origin:50% 48%}
+  .bp-world{width:94vw; aspect-ratio:3/4; max-height:84vh}
+  .bp-finale h2{font-size:clamp(38px,11vw,80px)}
+  .lbl{font-size:16px}
+  .anno{font-size:14px}
+}
 </style>
 </head>
 <body>
@@ -390,52 +398,86 @@ function applyCam(){ svg.setAttribute("viewBox", cam.x+" "+cam.y+" "+cam.w+" "+c
 /* prime drawable strokes */
 document.querySelectorAll("#bpSvg [data-draw]").forEach(p=>{ const len=p.getTotalLength(); p.style.strokeDasharray=len; p.style.strokeDashoffset=len; });
 
-if(HASGSAP && !REDUCE){
+const animateOn = HASGSAP && (!REDUCE || MOBILE);  /* phones always animate the signature */
+if(animateOn){
   gsap.registerPlugin(ScrollTrigger);
   if(typeof Lenis!=="undefined"){
-    const lenis=new Lenis({lerp:0.09, smoothWheel:true});
+    const lenis=new Lenis({lerp:0.09, smoothWheel:true, smoothTouch:false});
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add((t)=>lenis.raf(t*1000)); gsap.ticker.lagSmoothing(0);
   }
 
-  const tilt0 = MOBILE?44:55;
-  gsap.set("#bpWorld",{rotateX:tilt0, transformOrigin:"50% 50%"});
   gsap.set("[data-snap]",{opacity:0});
+  gsap.set("#fragA [data-snap],#fragB [data-snap],#fragC [data-snap]",{scale:0.6, y:-8});
   gsap.set("#bpFinale",{y:30});
-
   const get=s=>document.querySelectorAll(s);
   const settle=(els,col,pos,tl)=>tl.to(els,{stroke:col, stagger:0.1, duration:0.35, ease:"none"},pos);
-  const snapIn=(sel,pos,tl)=>tl.to(sel,{opacity:1, scale:1, y:0, stagger:0.06, duration:0.5, ease:"back.out(1.7)", transformOrigin:"50% 50%"},pos);
-  gsap.set("#fragA [data-snap],#fragB [data-snap],#fragC [data-snap]",{scale:0.6, y:-8});
+  const snapIn=(sel,pos,tl)=>tl.to(sel,{opacity:1, scale:1, y:0, stagger:0.06, duration:0.5, ease: MOBILE?"back.out(1.3)":"back.out(1.7)", transformOrigin:"50% 50%"},pos);
 
-  const tl=gsap.timeline({scrollTrigger:{trigger:"#stage", start:"top top", end: MOBILE?"+=520%":"+=640%", scrub:1, pin:"#stagePin", anticipatePin:1}});
+  if(MOBILE){
+    /* ===== MOBILE — dedicated portrait timeline: still draws, tilts, snaps; large & centered ===== */
+    gsap.set("#bpWorld",{rotateX:50, transformOrigin:"50% 50%"});
+    cam.x=115; cam.y=120; cam.w=470; cam.h=627; applyCam();         /* portrait frame on the plan */
+    const tl=gsap.timeline({scrollTrigger:{trigger:"#stage", start:"top top", end:"+=480%", scrub:1, pin:"#stagePin", anticipatePin:1}});
 
-  /* PLAN — slow & deliberate */
-  tl.to(cam,{x:170,y:230,w:380,h:285, duration:2, ease:"none", onUpdate:applyCam},0);
-  tl.to(get("#fragA [data-draw]"),{strokeDashoffset:0, stagger:0.1, duration:0.6, ease:"none"},0.2);
-  settle(get("#fragA .ln[data-draw]"), "#3A3A38", 0.9, tl);
-  settle(get("#fragA .ln2[data-draw]"), "#A89F8E", 0.9, tl);
-  snapIn("#fragA [data-snap]", 1.7, tl);
+    /* PLAN — gentle zoom, full draw */
+    tl.to(cam,{x:128,y:140,w:448,h:597, duration:1.2, ease:"none", onUpdate:applyCam},0);
+    tl.to(get("#fragA [data-draw]"),{strokeDashoffset:0, stagger:0.08, duration:0.6, ease:"none"},0.1);
+    settle(get("#fragA .ln[data-draw]"), "#3A3A38", 0.8, tl);
+    settle(get("#fragA .ln2[data-draw]"), "#A89F8E", 0.8, tl);
+    snapIn("#fragA [data-snap]", 1.45, tl);
 
-  /* pan to ELEVATION */
-  tl.to(cam,{x:990,y:200,w:520,h:390, duration:1.4, ease:"power1.inOut", onUpdate:applyCam},2.5);
-  tl.to(get("#fragB [data-draw]"),{strokeDashoffset:0, stagger:0.08, duration:0.55, ease:"none"},2.9);
-  settle(get("#fragB .ln[data-draw]"), "#3A3A38", 3.5, tl);
-  settle(get("#fragB .ln2[data-draw]"), "#A89F8E", 3.5, tl);
-  snapIn("#fragB [data-snap]", 3.9, tl);
+    /* ELEVATION */
+    tl.to(cam,{x:1000,y:172,w:440,h:587, duration:1.1, ease:"power1.inOut", onUpdate:applyCam},2.0);
+    tl.to(get("#fragB [data-draw]"),{strokeDashoffset:0, stagger:0.07, duration:0.55, ease:"none"},2.3);
+    settle(get("#fragB .ln[data-draw]"), "#3A3A38", 2.9, tl);
+    settle(get("#fragB .ln2[data-draw]"), "#A89F8E", 2.9, tl);
+    snapIn("#fragB [data-snap]", 3.2, tl);
 
-  /* pan down to SECTION */
-  tl.to(cam,{x:560,y:760,w:560,h:420, duration:1.4, ease:"power1.inOut", onUpdate:applyCam},4.4);
-  tl.to(get("#fragC [data-draw]"),{strokeDashoffset:0, stagger:0.08, duration:0.55, ease:"none"},4.8);
-  settle(get("#fragC .ln[data-draw]"), "#3A3A38", 5.4, tl);
-  settle(get("#fragC .ln2[data-draw]"), "#A89F8E", 5.4, tl);
-  snapIn("#fragC [data-snap]", 5.8, tl);
+    /* SECTION */
+    tl.to(cam,{x:550,y:599,w:560,h:747, duration:1.1, ease:"power1.inOut", onUpdate:applyCam},3.7);
+    tl.to(get("#fragC [data-draw]"),{strokeDashoffset:0, stagger:0.07, duration:0.55, ease:"none"},4.0);
+    settle(get("#fragC .ln[data-draw]"), "#3A3A38", 4.6, tl);
+    settle(get("#fragC .ln2[data-draw]"), "#A89F8E", 4.6, tl);
+    snapIn("#fragC [data-snap]", 4.9, tl);
 
-  /* FINISH — pull back, tilt up, headline resolves */
-  tl.to(cam,{x:40,y:70,w:1520,h:1140, duration:2, ease:"power2.inOut", onUpdate:applyCam},6.2);
-  tl.to("#bpWorld",{rotateX:0, duration:2, ease:"power2.inOut"},6.2);
-  tl.to(".scrollnote",{opacity:0, duration:0.4},6.2);
-  tl.to("#bpFinale",{opacity:1, y:0, duration:1, ease:"power2.out"},7.4);
+    /* FINISH — pull back, tilt up, headline resolves */
+    tl.to(cam,{x:115,y:-268,w:1385,h:1847, duration:1.6, ease:"power2.inOut", onUpdate:applyCam},5.4);
+    tl.to("#bpWorld",{rotateX:0, duration:1.6, ease:"power2.inOut"},5.4);
+    tl.to(".scrollnote",{opacity:0, duration:0.4},5.4);
+    tl.to("#bpFinale",{opacity:1, y:0, duration:1, ease:"power2.out"},6.4);
+  } else {
+    /* ===== DESKTOP — unchanged ===== */
+    gsap.set("#bpWorld",{rotateX:55, transformOrigin:"50% 50%"});
+    const tl=gsap.timeline({scrollTrigger:{trigger:"#stage", start:"top top", end:"+=640%", scrub:1, pin:"#stagePin", anticipatePin:1}});
+
+    /* PLAN — slow & deliberate */
+    tl.to(cam,{x:170,y:230,w:380,h:285, duration:2, ease:"none", onUpdate:applyCam},0);
+    tl.to(get("#fragA [data-draw]"),{strokeDashoffset:0, stagger:0.1, duration:0.6, ease:"none"},0.2);
+    settle(get("#fragA .ln[data-draw]"), "#3A3A38", 0.9, tl);
+    settle(get("#fragA .ln2[data-draw]"), "#A89F8E", 0.9, tl);
+    snapIn("#fragA [data-snap]", 1.7, tl);
+
+    /* pan to ELEVATION */
+    tl.to(cam,{x:990,y:200,w:520,h:390, duration:1.4, ease:"power1.inOut", onUpdate:applyCam},2.5);
+    tl.to(get("#fragB [data-draw]"),{strokeDashoffset:0, stagger:0.08, duration:0.55, ease:"none"},2.9);
+    settle(get("#fragB .ln[data-draw]"), "#3A3A38", 3.5, tl);
+    settle(get("#fragB .ln2[data-draw]"), "#A89F8E", 3.5, tl);
+    snapIn("#fragB [data-snap]", 3.9, tl);
+
+    /* pan down to SECTION */
+    tl.to(cam,{x:560,y:760,w:560,h:420, duration:1.4, ease:"power1.inOut", onUpdate:applyCam},4.4);
+    tl.to(get("#fragC [data-draw]"),{strokeDashoffset:0, stagger:0.08, duration:0.55, ease:"none"},4.8);
+    settle(get("#fragC .ln[data-draw]"), "#3A3A38", 5.4, tl);
+    settle(get("#fragC .ln2[data-draw]"), "#A89F8E", 5.4, tl);
+    snapIn("#fragC [data-snap]", 5.8, tl);
+
+    /* FINISH — pull back, tilt up, headline resolves */
+    tl.to(cam,{x:40,y:70,w:1520,h:1140, duration:2, ease:"power2.inOut", onUpdate:applyCam},6.2);
+    tl.to("#bpWorld",{rotateX:0, duration:2, ease:"power2.inOut"},6.2);
+    tl.to(".scrollnote",{opacity:0, duration:0.4},6.2);
+    tl.to("#bpFinale",{opacity:1, y:0, duration:1, ease:"power2.out"},7.4);
+  }
 
   /* quiet section reveals */
   gsap.utils.toArray(".reveal").forEach(el=>gsap.to(el,{opacity:1,y:0,duration:1,ease:"power3.out",scrollTrigger:{trigger:el,start:"top 86%"}}));
