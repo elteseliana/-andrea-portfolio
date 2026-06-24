@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="images/01-hero.jpg" />
+<link rel="preload" as="image" href="images/02-architecture.jpg" />
 
-<!-- Local libraries (work offline). If a local file is missing, fall back to the CDN. -->
-<script src="three.min.js"></script>
-<script>window.THREE||document.write('<scr'+'ipt src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/scr'+'ipt>')</script>
+<!-- GSAP (local, CDN fallback) -->
 <script src="gsap.min.js"></script>
 <script>window.gsap||document.write('<scr'+'ipt src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"><\/scr'+'ipt>')</script>
 <script src="ScrollTrigger.min.js"></script>
@@ -21,13 +21,13 @@
 <style>
 :root{
   --cream:#F2EBDD; --sand:#E3D6BE; --oak:#C9AE86; --plaster:#ECE3D2; --stone:#D8CFBE;
-  --char:#2A2622; --ink:#211D18; --oxblood:#7E2B2B; --oxbloodlt:#9E3F39;
+  --char:#2A2622; --ink:#211D18; --oxblood:#7E2B2B; --oxbloodlt:#B85C50; --gold:#D8B782;
   --serif:'Cormorant Garamond', serif; --sans:'DM Sans', sans-serif; --he:'Heebo', sans-serif;
   --ease:cubic-bezier(.6,.01,.05,1); --pad:clamp(22px,6vw,120px); --accent:#7E2B2B;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:auto}
-body{background:#EFE7D6; color:var(--char); font-family:var(--sans); font-weight:300; line-height:1.6; overflow-x:hidden; -webkit-font-smoothing:antialiased; transition:background-color .7s linear, color .7s linear}
+body{background:#171310; color:var(--char); font-family:var(--sans); font-weight:300; line-height:1.6; overflow-x:hidden; -webkit-font-smoothing:antialiased; transition:background-color .7s linear, color .7s linear}
 html[lang="he"] body{font-family:var(--he)}
 html[lang="he"] h1, html[lang="he"] h2, html[lang="he"] h3{font-family:var(--he); font-weight:400}
 ::selection{background:var(--oxblood); color:#fff}
@@ -37,122 +37,108 @@ img{display:block; max-width:100%}
 .eyebrow{font-family:var(--sans); font-weight:500; font-size:11px; letter-spacing:.42em; text-transform:uppercase; color:var(--accent)}
 html[lang="he"] .eyebrow{letter-spacing:.16em}
 
-.cursor{position:fixed; top:0; left:0; width:9px; height:9px; border-radius:50%; background:var(--oxblood); pointer-events:none; z-index:9999; transform:translate(-50%,-50%); mix-blend-mode:difference; transition:width .3s var(--ease),height .3s var(--ease)}
-.cursor.big{width:54px; height:54px; background:transparent; border:1px solid var(--oxblood)}
+.cursor{position:fixed; top:0; left:0; width:9px; height:9px; border-radius:50%; background:var(--gold); pointer-events:none; z-index:9999; transform:translate(-50%,-50%); mix-blend-mode:difference; transition:width .3s var(--ease),height .3s var(--ease)}
+.cursor.big{width:54px; height:54px; background:transparent; border:1px solid var(--gold)}
 @media (hover:none){.cursor{display:none}}
 
-.nav{position:fixed; inset:0 0 auto 0; z-index:1000; display:flex; align-items:center; justify-content:space-between; padding:22px var(--pad); mix-blend-mode:difference; color:#fff}
+.nav{position:fixed; inset:0 0 auto 0; z-index:1000; display:flex; align-items:center; justify-content:space-between; padding:22px var(--pad); color:#fff; transition:color .4s}
 .nav .logo{font-family:var(--serif); font-size:23px; display:flex; align-items:center; gap:10px}
 .nav .logo b{font-weight:500}
 .nav .logo span{font-size:10px; letter-spacing:.3em; font-family:var(--sans); opacity:.7; text-transform:uppercase}
 html[lang="he"] .nav .logo span{display:none}
 .nav-links{display:flex; gap:38px; font-family:var(--sans); font-size:12px; letter-spacing:.16em; text-transform:uppercase}
-.nav-links a{position:relative; padding:4px 0; opacity:.85}
-.nav-links a::after{content:''; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:#fff; transition:width .4s var(--ease)}
+.nav-links a{position:relative; padding:4px 0; opacity:.9}
+.nav-links a::after{content:''; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:currentColor; transition:width .4s var(--ease)}
 .nav-links a:hover::after{width:100%}
-.lang{display:flex; align-items:center; gap:2px; font-family:var(--sans); font-size:12px; border:1px solid rgba(255,255,255,.4); border-radius:40px; padding:5px; cursor:pointer}
-.lang button{background:none; border:none; color:#fff; cursor:pointer; font:inherit; padding:3px 11px; border-radius:40px; opacity:.55; transition:.3s}
-.lang button.on{background:#fff; color:var(--ink); opacity:1}
+.lang{display:flex; align-items:center; gap:2px; font-family:var(--sans); font-size:12px; border:1px solid rgba(255,255,255,.45); border-radius:40px; padding:5px; cursor:pointer}
+.lang button{background:none; border:none; color:inherit; cursor:pointer; font:inherit; padding:3px 11px; border-radius:40px; opacity:.6; transition:.3s}
+.lang button.on{background:#fff; color:#171310; opacity:1}
 
-#webgl{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0; transition:opacity .6s ease; background:radial-gradient(125% 95% at 50% 22%, #F3EEE3 0%, #ECE3D2 60%, #E2D6BE 100%)}
-body.hero-on #webgl{opacity:1}
-#webgl canvas{display:block; width:100%; height:100%}
+/* ============ FILM HERO ============ */
+#filmStage{position:fixed; inset:0; z-index:0; overflow:hidden; background:#171310; opacity:0; transition:opacity .6s ease}
+body.hero-on #filmStage{opacity:1}
+.film-layer{position:absolute; inset:-5%; background-size:cover; background-position:center; opacity:0; will-change:opacity,transform}
+.film-vignette{position:absolute; inset:0; pointer-events:none; z-index:1;
+  background:linear-gradient(180deg, rgba(15,11,8,.5) 0%, rgba(15,11,8,.12) 20%, transparent 42%, rgba(15,11,8,.15) 62%, rgba(15,11,8,.66) 100%)}
 
-.hero-scroll{height:1100vh; position:relative; z-index:1}
+.hero-scroll{height:680vh; position:relative; z-index:1}
 
 .hero-ui{position:fixed; inset:0; z-index:2; pointer-events:none; opacity:1; transition:opacity .5s ease}
 body:not(.hero-on) .hero-ui{opacity:0}
 .hero-head{position:absolute; top:50%; left:0; right:0; transform:translateY(-50%); text-align:center; padding:0 24px; will-change:opacity,transform}
-.hero-head .eyebrow{margin-bottom:24px; display:block; color:var(--oxblood)}
-.hero-head h1{font-size:clamp(46px,9vw,150px); color:#2A2622; line-height:.95; font-weight:300; letter-spacing:-.02em}
-.hero-head h1 em{font-style:italic; color:var(--oxblood)}
-.hero-head .sub{margin-top:26px; font-family:var(--sans); letter-spacing:.34em; text-transform:uppercase; font-size:11px; color:rgba(42,38,34,.62)}
+.hero-head .eyebrow{margin-bottom:24px; display:block; color:rgba(255,249,240,.82)}
+.hero-head h1{font-size:clamp(46px,9vw,154px); color:#fff; line-height:.95; font-weight:300; letter-spacing:-.02em; text-shadow:0 10px 60px rgba(10,7,4,.55)}
+.hero-head h1 em{font-style:italic; color:var(--gold)}
+.hero-head .sub{margin-top:26px; font-family:var(--sans); letter-spacing:.34em; text-transform:uppercase; font-size:11px; color:rgba(255,249,240,.78)}
 html[lang="he"] .hero-head .sub{letter-spacing:.12em}
-.phase-tag{position:absolute; top:96px; left:50%; transform:translateX(-50%); font-family:var(--sans); font-size:10px; letter-spacing:.4em; text-transform:uppercase; color:var(--oxblood); opacity:.85}
-.enter-hint{position:absolute; bottom:12vh; left:0; right:0; text-align:center; opacity:0; font-family:var(--sans); font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:#2A2622}
-.enter-hint b{display:block; font-family:var(--serif); font-size:30px; letter-spacing:0; text-transform:none; margin-bottom:8px; color:var(--oxblood)}
-.room-label{position:absolute; left:0; right:0; bottom:15vh; text-align:center; opacity:0; will-change:opacity}
-.room-label .rl-num{font-family:var(--sans); font-size:11px; letter-spacing:.4em; color:var(--oxblood)}
-.room-label .rl-name{font-family:var(--serif); font-size:clamp(40px,7vw,90px); color:#3a2e22; line-height:1; margin-top:8px; text-shadow:0 4px 26px rgba(255,250,240,.6)}
-.progress-rail{position:fixed; top:50%; right:26px; transform:translateY(-50%); height:120px; width:2px; background:rgba(120,100,80,.3); z-index:1001; overflow:hidden}
-html[lang="he"] .progress-rail{right:auto; left:26px}
-.progress-rail i{position:absolute; top:0; left:0; width:100%; height:0; background:var(--oxblood)}
+
+.scene-cap{position:absolute; left:var(--pad); bottom:15vh; opacity:0; will-change:opacity,transform; max-width:80%}
+html[lang="he"] .scene-cap{left:auto; right:var(--pad); text-align:right}
+.scene-cap .sc-num{font-family:var(--sans); font-size:12px; letter-spacing:.42em; color:var(--gold); margin-bottom:12px; display:flex; align-items:center; gap:14px}
+.scene-cap .sc-num::after{content:''; width:46px; height:1px; background:var(--gold); opacity:.6}
+html[lang="he"] .scene-cap .sc-num{flex-direction:row-reverse}
+.scene-cap .sc-name{font-family:var(--serif); font-size:clamp(46px,8vw,120px); color:#fff; line-height:.92; text-shadow:0 8px 50px rgba(10,8,5,.55)}
+
+.progress-rail{position:fixed; top:50%; right:30px; transform:translateY(-50%); height:130px; width:2px; background:rgba(255,255,255,.28); z-index:1001; overflow:hidden}
+html[lang="he"] .progress-rail{right:auto; left:30px}
+.progress-rail i{position:absolute; top:0; left:0; width:100%; height:0; background:var(--gold)}
 body:not(.hero-on) .progress-rail{opacity:0; transition:opacity .4s}
-.scroll-cue{position:absolute; bottom:34px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; font-family:var(--sans); font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:rgba(42,38,34,.55)}
-.scroll-cue .bar{width:1px; height:46px; background:linear-gradient(var(--oxblood),transparent)}
+.scroll-cue{position:absolute; bottom:34px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; font-family:var(--sans); font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:rgba(255,249,240,.72)}
+.scroll-cue .bar{width:1px; height:46px; background:linear-gradient(var(--gold),transparent)}
 
 main{position:relative; z-index:3}
 section.block{position:relative}
 
+/* statement */
 .s1{background:#F4EEE2; color:var(--char); --accent:#7E2B2B}
-.s1 .pin-wrap{display:grid; grid-template-columns:1fr 1fr; min-height:100vh}
-.s1 .sticky-col{position:sticky; top:0; height:100vh; display:flex; align-items:center; justify-content:center; padding:var(--pad); overflow:hidden}
-.s1 .stack{position:relative; width:100%; max-width:520px; aspect-ratio:4/5}
-.s1 .stack .ph{position:absolute; inset:0; border:1px solid rgba(126,43,43,.4); background:linear-gradient(135deg,#ece3d2,#dccdb2); display:flex; align-items:flex-end; padding:20px; box-shadow:0 30px 80px -40px rgba(60,40,30,.4)}
-.s1 .stack .ph span{font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(60,40,30,.6)}
-.s1 .text-col{padding:var(--pad)}
-.s1 .text-block{min-height:100vh; display:flex; flex-direction:column; justify-content:center; max-width:480px}
-.s1 h2{font-size:clamp(46px,6.5vw,96px); margin:18px 0 26px}
-.s1 .text-block p{font-size:17px; color:rgba(42,38,34,.78); margin-bottom:18px}
-.s1 .meta{margin-top:30px; display:flex; gap:40px}
-.s1 .meta b{display:block; font-family:var(--serif); font-size:38px; line-height:1}
+.s1 .wrap{max-width:1100px; margin:0 auto; padding:20vh var(--pad); text-align:center}
+.s1 .eyebrow{margin-bottom:30px}
+.s1 h2{font-size:clamp(34px,4.6vw,74px); line-height:1.15; font-weight:300; max-width:20ch; margin:0 auto}
+.s1 h2 em{font-style:italic; color:var(--oxblood)}
+.s1 .meta{margin-top:8vh; display:flex; gap:7vw; justify-content:center; flex-wrap:wrap}
+.s1 .meta b{display:block; font-family:var(--serif); font-size:54px; line-height:1}
 .s1 .meta small{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--oxblood)}
 
-.s2{background:#C9AE86; color:#332a1f; padding:14vh var(--pad) 16vh; overflow:hidden; --accent:#7E2B2B}
-.s2 .head{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; margin-bottom:8vh}
-.s2 h2{font-size:clamp(50px,8vw,128px); color:#3a2e20}
+/* split feature */
+.s2{background:#EDE3D2; color:#3a2e20; --accent:#7E2B2B}
+.s2 .grid{display:grid; grid-template-columns:1fr 1fr; min-height:90vh}
+.s2 .ph{background-size:cover; background-position:center}
+.s2 .txt{padding:14vh var(--pad); display:flex; flex-direction:column; justify-content:center}
+.s2 h2{font-size:clamp(40px,5.5vw,92px); margin:18px 0 24px}
 .s2 h2 em{font-style:italic; color:var(--oxblood)}
-.s2 .head p{max-width:340px; font-size:16px; color:rgba(51,42,31,.82)}
-.s2-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
-.s2-grid .ph{aspect-ratio:3/4; overflow:hidden; position:relative; background:linear-gradient(160deg,#ddc8a2,#9c7c52); display:flex; align-items:flex-end; padding:18px; color:#fbf6ec}
-.s2-grid .ph:nth-child(2){aspect-ratio:3/4.6; transform:translateY(6vh)}
-.s2-grid .ph span{font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; opacity:.95}
-.s2-grid .ph i{position:absolute; inset:0; background:radial-gradient(circle at 70% 20%,rgba(255,255,255,.3),transparent 60%)}
+.s2 .txt p{font-size:17px; color:rgba(58,46,32,.8); max-width:42ch; margin-bottom:16px}
 
-.s3{background:#221E1A; color:#fff; padding:16vh var(--pad); position:relative; overflow:hidden; --accent:#9E3F39}
-.s3 .ov-svg{position:absolute; inset:0; width:100%; height:100%; pointer-events:none}
-.s3 .ov-svg path,.s3 .ov-svg line,.s3 .ov-svg rect{fill:none; stroke:rgba(158,63,57,.6); stroke-width:1; vector-effect:non-scaling-stroke; stroke-dasharray:1; stroke-dashoffset:1}
-.s3 .head{position:relative; z-index:2; margin-bottom:9vh}
-.s3 h2{font-size:clamp(56px,11vw,190px); line-height:.9}
-.s3 h2 em{font-style:italic; -webkit-text-stroke:1px #fff; color:transparent}
-.s3 .head p{max-width:360px; margin-top:24px; color:rgba(240,230,216,.7); font-size:16px}
-.s3-grid{position:relative; z-index:2; display:grid; grid-template-columns:repeat(3,1fr); gap:2px; border:1px solid rgba(158,63,57,.22)}
-.s3-grid .ph{aspect-ratio:4/5; background:#2a241f; position:relative; overflow:hidden; display:flex; align-items:flex-end; padding:20px}
-.s3-grid .ph::before{content:''; position:absolute; inset:0; background:linear-gradient(180deg,#322b24,#1d1813)}
-.s3-grid .ph span{position:relative; z-index:2; font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(240,230,216,.6)}
-.s3-grid .ph .ln{position:absolute; inset:0; z-index:1; opacity:.5}
-
-.projects{background:#1C1813; color:#fff; padding:16vh var(--pad); --accent:#9E3F39}
+/* projects */
+.projects{background:#1C1813; color:#fff; padding:16vh var(--pad); --accent:#D8B782}
 .projects .head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6vh; flex-wrap:wrap; gap:20px}
 .projects h2{font-size:clamp(42px,6vw,92px)}
 .projects .head p{color:rgba(240,230,216,.55); max-width:320px}
 .proj-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
-.proj-card{aspect-ratio:1/1; position:relative; overflow:hidden; cursor:pointer; background:linear-gradient(145deg,#2c241c,#1a1510); border:1px solid rgba(201,174,134,.12)}
-.proj-card .inner{position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:24px; transition:transform .9s var(--ease)}
-.proj-card:hover .inner{transform:scale(1.06)}
-.proj-card .num{font-family:var(--serif); font-size:54px; opacity:.22; line-height:1}
-.proj-card .cs{font-family:var(--sans); font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--oxbloodlt); margin-top:auto}
-.proj-card .nm{font-family:var(--serif); font-size:26px; margin-top:6px}
-.proj-card::after{content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 120%,rgba(126,43,43,.28),transparent 60%); opacity:0; transition:.6s}
-.proj-card:hover::after{opacity:1}
+.proj-card{aspect-ratio:4/5; position:relative; overflow:hidden; cursor:pointer; background:#2c241c}
+.proj-card .bg{position:absolute; inset:0; background-size:cover; background-position:center; transition:transform 1s var(--ease); filter:saturate(.96)}
+.proj-card:hover .bg{transform:scale(1.07)}
+.proj-card .inner{position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:24px; z-index:2; background:linear-gradient(transparent 45%, rgba(15,11,8,.72))}
+.proj-card .cs{font-family:var(--sans); font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--gold)}
+.proj-card .nm{font-family:var(--serif); font-size:28px; margin-top:6px; color:#fff}
 
+/* about */
 .about{background:#F4EEE2; color:var(--char); padding:18vh var(--pad); --accent:#7E2B2B}
 .about .wrap{display:grid; grid-template-columns:1.3fr .9fr; gap:8vw; align-items:center}
 .about h2{font-size:clamp(34px,4.4vw,68px); line-height:1.1; font-weight:300; max-width:18ch}
 .about h2 em{font-style:italic; color:var(--oxblood)}
 .about .lead{margin-top:30px; font-size:18px; color:rgba(42,38,34,.8); max-width:46ch}
 .about .sig{margin-top:34px; font-family:var(--serif); font-style:italic; font-size:30px}
-.about .portrait{aspect-ratio:3/4; background:linear-gradient(160deg,#e7ddc9,#cdbb9c); border:1px solid rgba(126,43,43,.35); position:relative; display:flex; align-items:flex-end; padding:22px; box-shadow:0 40px 90px -50px rgba(60,40,30,.5)}
-.about .portrait span{font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(60,40,30,.55)}
+.about .portrait{aspect-ratio:3/4; background-size:cover; background-position:center; border:1px solid rgba(126,43,43,.25); box-shadow:0 40px 90px -50px rgba(60,40,30,.5)}
 
-.contact{background:#171310; color:#fff; padding:16vh var(--pad) 6vh; --accent:#9E3F39}
+/* contact */
+.contact{background:#171310; color:#fff; padding:16vh var(--pad) 6vh; --accent:#D8B782}
 .contact .top{display:grid; grid-template-columns:1fr 1fr; gap:7vw}
 .contact h2{font-size:clamp(44px,6.5vw,104px); line-height:.95}
-.contact h2 em{font-style:italic; color:var(--oxbloodlt)}
+.contact h2 em{font-style:italic; color:var(--gold)}
 .contact .channels{margin-top:40px; display:flex; flex-direction:column}
 .contact .ch{display:flex; align-items:center; justify-content:space-between; gap:20px; padding:22px 4px; border-top:1px solid rgba(255,255,255,.12); transition:.4s}
 .contact .ch:last-child{border-bottom:1px solid rgba(255,255,255,.12)}
-.contact .ch:hover{padding-inline-start:14px; color:var(--oxbloodlt)}
+.contact .ch:hover{padding-inline-start:14px; color:var(--gold)}
 .contact .ch small{display:block; font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:rgba(255,255,255,.45); margin-bottom:6px}
 .contact .ch b{font-family:var(--serif); font-size:24px; font-weight:400}
 .contact .ch .arr{font-size:20px; opacity:.5}
@@ -162,34 +148,26 @@ form{display:flex; flex-direction:column; gap:26px; margin-top:10px}
 .field textarea{min-height:90px}
 .field label{position:absolute; left:0; top:10px; color:rgba(255,255,255,.45); pointer-events:none; transition:.3s var(--ease); font-size:16px}
 html[lang="he"] .field label{left:auto; right:0}
-.field input:focus,.field textarea:focus{outline:none; border-color:var(--oxbloodlt)}
+.field input:focus,.field textarea:focus{outline:none; border-color:var(--gold)}
 .field input:focus+label,.field textarea:focus+label,
-.field input:not(:placeholder-shown)+label,.field textarea:not(:placeholder-shown)+label{top:-14px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--oxbloodlt)}
+.field input:not(:placeholder-shown)+label,.field textarea:not(:placeholder-shown)+label{top:-14px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold)}
 .btn-send{align-self:flex-start; background:var(--oxblood); color:#fff; border:none; cursor:pointer; font-family:var(--sans); font-size:12px; letter-spacing:.24em; text-transform:uppercase; padding:18px 42px; border-radius:40px; transition:.4s var(--ease); margin-top:6px}
 .btn-send:hover{transform:translateY(-3px); box-shadow:0 18px 40px -16px rgba(126,43,43,.6)}
 footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,.1); display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; font-family:var(--sans); font-size:12px; letter-spacing:.1em; color:rgba(255,255,255,.45)}
 
 .reveal{opacity:0; transform:translateY(38px)}
-.no3d .hero-scroll{height:170vh}
-.no3d .hero-ui{position:fixed}
 .no-anim .reveal{opacity:1 !important; transform:none !important}
-.no-anim .s1 .sticky-col{position:relative; height:auto}
 
 @media (max-width:880px){
   .nav-links{display:none}
-  .s1 .pin-wrap{grid-template-columns:1fr}
-  .s1 .sticky-col{position:relative; top:auto; height:auto; padding:12vh var(--pad) 4vh}
-  .s1 .stack{max-width:none; aspect-ratio:4/3}
-  .s1 .text-block{min-height:auto; padding:4vh 0 14vh}
-  .s2-grid,.s3-grid,.proj-grid{grid-template-columns:1fr 1fr}
-  .s2-grid .ph:nth-child(2){transform:none}
+  .s2 .grid{grid-template-columns:1fr}
+  .s2 .ph{min-height:60vh}
+  .proj-grid{grid-template-columns:1fr 1fr}
   .about .wrap,.contact .top{grid-template-columns:1fr; gap:8vh}
   .progress-rail{display:none}
+  .scene-cap{bottom:18vh}
 }
-@media (max-width:560px){
-  .s2-grid,.s3-grid,.proj-grid{grid-template-columns:1fr}
-  .hero-scroll{height:800vh}
-}
+@media (max-width:560px){ .proj-grid{grid-template-columns:1fr} .hero-scroll{height:560vh} }
 </style>
 </head>
 <body class="hero-on">
@@ -210,23 +188,28 @@ footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,
 </nav>
 
 <div id="top"></div>
-<div id="webgl"></div>
+
+<!-- cinematic photo hero -->
+<div id="filmStage">
+  <div class="film-layer" style="background-image:url(images/01-hero.jpg)"></div>
+  <div class="film-layer" style="background-image:url(images/02-architecture.jpg)"></div>
+  <div class="film-layer" style="background-image:url(images/03-living.jpg)"></div>
+  <div class="film-layer" style="background-image:url(images/04-kitchen.jpg)"></div>
+  <div class="film-layer" style="background-image:url(images/05-bedroom.jpg)"></div>
+  <div class="film-layer" style="background-image:url(images/06-grounds.jpg)"></div>
+  <div class="film-vignette"></div>
+</div>
 <div class="hero-scroll" id="heroScroll"></div>
 
 <div class="hero-ui" id="heroUI">
-  <div class="phase-tag" id="phaseTag" data-i18n="ph_blueprint">Blueprint</div>
   <div class="hero-head" id="heroHead">
     <span class="eyebrow" data-i18n="hero_eyebrow">Andrea Pokroy — Architecture</span>
     <h1 data-i18n="hero_h1">Where Blueprints<br>Become <em>Home</em></h1>
-    <div class="sub" data-i18n="hero_sub">Keep scrolling — the drawing becomes a home you walk through</div>
+    <div class="sub" data-i18n="hero_sub">Scroll — a walk through the home</div>
   </div>
-  <div class="enter-hint" id="enterHint">
-    <b data-i18n="enter_b">Step inside</b>
-    <span data-i18n="enter_s">Keep scrolling ↓</span>
-  </div>
-  <div class="room-label" id="roomLabel">
-    <div class="rl-num" id="rlNum">01</div>
-    <div class="rl-name" id="rlName"></div>
+  <div class="scene-cap" id="sceneCap">
+    <div class="sc-num" id="scNum">01</div>
+    <div class="sc-name" id="scName"></div>
   </div>
   <div class="scroll-cue" id="scrollCue">
     <span data-i18n="scroll">Scroll</span>
@@ -237,64 +220,26 @@ footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,
 
 <main>
   <section class="block s1" id="s1" data-bg="#F4EEE2" data-fg="#2A2622">
-    <div class="pin-wrap">
-      <div class="sticky-col">
-        <div class="stack" id="s1stack">
-          <div class="ph"><span data-i18n="ph_c1">Heritage Villa · Slot 01</span></div>
-          <div class="ph"><span data-i18n="ph_c2">Stone Residence · Slot 02</span></div>
-          <div class="ph"><span data-i18n="ph_c3">Garden House · Slot 03</span></div>
-        </div>
-      </div>
-      <div class="text-col">
-        <div class="text-block">
-          <div class="eyebrow" data-i18n="s1_eyebrow">01 — Classic Architecture</div>
-          <h2 data-i18n="s1_h2">Built<br>to Last.</h2>
-          <p data-i18n="s1_p1">Proportion, symmetry, and material honesty. Heritage homes that hold their dignity for generations — stone that ages with grace, light that knows how to enter a room.</p>
-          <p data-i18n="s1_p2">Every threshold is a decision. Classic does not mean old; it means resolved.</p>
-          <div class="meta">
-            <div><b>24</b><small data-i18n="s1_m1">Years Crafting</small></div>
-            <div><b>40+</b><small data-i18n="s1_m2">Homes Delivered</small></div>
-          </div>
-        </div>
+    <div class="wrap">
+      <div class="eyebrow reveal" data-i18n="s1_eyebrow">The Practice</div>
+      <h2 class="reveal" data-i18n="s1_h2">Spaces that hold light, weather time, and <em>tell a story.</em></h2>
+      <div class="meta">
+        <div class="reveal"><b>24</b><small data-i18n="s1_m1">Years Crafting</small></div>
+        <div class="reveal"><b>40+</b><small data-i18n="s1_m2">Homes Delivered</small></div>
+        <div class="reveal"><b>∞</b><small data-i18n="s1_m3">Blueprints Drawn</small></div>
       </div>
     </div>
   </section>
 
-  <section class="block s2" id="s2" data-bg="#C9AE86" data-fg="#332A1F">
-    <div class="head">
-      <div>
-        <div class="eyebrow reveal" data-i18n="s2_eyebrow">02 — Warmth & Texture</div>
-        <h2 class="reveal" data-i18n="s2_h2">Where <em>Warmth</em><br>Lives.</h2>
+  <section class="block s2" id="s2" data-bg="#EDE3D2" data-fg="#3A2E20">
+    <div class="grid">
+      <div class="ph" style="background-image:url(images/03-living.jpg)"></div>
+      <div class="txt">
+        <div class="eyebrow reveal" data-i18n="s2_eyebrow">Interiors</div>
+        <h2 class="reveal" data-i18n="s2_h2">Warmth, <em>built in.</em></h2>
+        <p class="reveal" data-i18n="s2_p1">Plaster and oak, linen and stone. Every surface chosen to age beautifully and feel good under the hand.</p>
+        <p class="reveal" data-i18n="s2_p2">Rooms that wrap around daily life — generous, calm, and quietly luxurious.</p>
       </div>
-      <p class="reveal" data-i18n="s2_p">Oak, plaster, sunlight. Homes that wrap around you — tactile surfaces, arched thresholds, rooms that hold the afternoon light.</p>
-    </div>
-    <div class="s2-grid" id="s2grid">
-      <div class="ph"><i></i><span data-i18n="ph_w1">Courtyard House · Slot 01</span></div>
-      <div class="ph"><i></i><span data-i18n="ph_w2">Sunlit Loft · Slot 02</span></div>
-      <div class="ph"><i></i><span data-i18n="ph_w3">Olive Terrace · Slot 03</span></div>
-    </div>
-  </section>
-
-  <section class="block s3" id="s3" data-bg="#221E1A" data-fg="#ffffff">
-    <svg class="ov-svg" id="s3ov" viewBox="0 0 1000 700" preserveAspectRatio="none">
-      <rect x="120" y="90" width="760" height="520"/>
-      <line x1="120" y1="300" x2="880" y2="300"/>
-      <line x1="500" y1="90" x2="500" y2="610"/>
-      <line x1="120" y1="450" x2="880" y2="450"/>
-      <path d="M120,90 L500,300 L880,90"/>
-      <path d="M120,610 L500,450 L880,610"/>
-      <line x1="300" y1="90" x2="300" y2="610"/>
-      <line x1="700" y1="90" x2="700" y2="610"/>
-    </svg>
-    <div class="head">
-      <div class="eyebrow reveal" data-i18n="s3_eyebrow">03 — Modern Minimalist</div>
-      <h2 class="reveal" data-i18n="s3_h2">The Future,<br><em>Built.</em></h2>
-      <p class="reveal" data-i18n="s3_p">Reduction as luxury. Concrete, glass, and shadow arranged with surgical restraint. The blueprint never really leaves — it lives in the lines of the wall.</p>
-    </div>
-    <div class="s3-grid" id="s3grid">
-      <div class="ph"><span data-i18n="ph_m1">Monolith · Slot 01</span></div>
-      <div class="ph"><span data-i18n="ph_m2">Glass Pavilion · Slot 02</span></div>
-      <div class="ph"><span data-i18n="ph_m3">Floating Slab · Slot 03</span></div>
     </div>
   </section>
 
@@ -304,7 +249,7 @@ footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,
         <div class="eyebrow" data-i18n="proj_eyebrow">Selected Works</div>
         <h2 data-i18n="proj_h2">The Portfolio</h2>
       </div>
-      <p data-i18n="proj_p">A new collection of residences across Israel — currently in documentation. Real imagery arrives soon.</p>
+      <p data-i18n="proj_p">A collection of residences across Israel. Imagery shown is representative — Andrea's projects will replace these.</p>
     </div>
     <div class="proj-grid" id="projGrid"></div>
   </section>
@@ -317,7 +262,7 @@ footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,
         <p class="lead reveal" data-i18n="about_p">From classic heritage homes to bold modern structures, every project begins the same way — with a blueprint, and a dream.</p>
         <div class="sig reveal" data-i18n="about_sig">— Andrea</div>
       </div>
-      <div class="portrait reveal"><span data-i18n="about_portrait">Portrait · Placeholder</span></div>
+      <div class="portrait reveal" style="background-image:url(images/05-bedroom.jpg)"></div>
     </div>
   </section>
 
@@ -353,54 +298,38 @@ footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,
 const I18N={
  en:{ role:"Architect · Israel", nav_about:"About", nav_projects:"Projects", nav_contact:"Contact",
   hero_eyebrow:"Andrea Pokroy — Architecture", hero_h1:"Where Blueprints<br>Become <em>Home</em>",
-  hero_sub:"Keep scrolling — the drawing becomes a home you walk through", scroll:"Scroll",
-  enter_b:"Step inside", enter_s:"Keep scrolling ↓",
-  ph_blueprint:"Blueprint", ph_drawing:"Drawing", ph_construction:"Construction", ph_walk:"Walkthrough",
-  r_entrance:"Entrance", r_living:"Living Room", r_kitchen:"Kitchen", r_bedroom:"Bedroom", r_outdoor:"The Terrace",
-  s1_eyebrow:"01 — Classic Architecture", s1_h2:"Built<br>to Last.",
-  s1_p1:"Proportion, symmetry, and material honesty. Heritage homes that hold their dignity for generations — stone that ages with grace, light that knows how to enter a room.",
-  s1_p2:"Every threshold is a decision. Classic does not mean old; it means resolved.",
-  s1_m1:"Years Crafting", s1_m2:"Homes Delivered",
-  ph_c1:"Heritage Villa · Slot 01", ph_c2:"Stone Residence · Slot 02", ph_c3:"Garden House · Slot 03",
-  s2_eyebrow:"02 — Warmth & Texture", s2_h2:"Where <em>Warmth</em><br>Lives.",
-  s2_p:"Oak, plaster, sunlight. Homes that wrap around you — tactile surfaces, arched thresholds, rooms that hold the afternoon light.",
-  ph_w1:"Courtyard House · Slot 01", ph_w2:"Sunlit Loft · Slot 02", ph_w3:"Olive Terrace · Slot 03",
-  s3_eyebrow:"03 — Modern Minimalist", s3_h2:"The Future,<br><em>Built.</em>",
-  s3_p:"Reduction as luxury. Concrete, glass, and shadow arranged with surgical restraint. The blueprint never really leaves — it lives in the lines of the wall.",
-  ph_m1:"Monolith · Slot 01", ph_m2:"Glass Pavilion · Slot 02", ph_m3:"Floating Slab · Slot 03",
+  hero_sub:"Scroll — a walk through the home", scroll:"Scroll",
+  r_arch:"The Architecture", r_living:"The Living Room", r_kitchen:"The Kitchen", r_bedroom:"The Bedroom", r_outdoor:"The Grounds",
+  s1_eyebrow:"The Practice", s1_h2:"Spaces that hold light, weather time, and <em>tell a story.</em>",
+  s1_m1:"Years Crafting", s1_m2:"Homes Delivered", s1_m3:"Blueprints Drawn",
+  s2_eyebrow:"Interiors", s2_h2:"Warmth, <em>built in.</em>",
+  s2_p1:"Plaster and oak, linen and stone. Every surface chosen to age beautifully and feel good under the hand.",
+  s2_p2:"Rooms that wrap around daily life — generous, calm, and quietly luxurious.",
   proj_eyebrow:"Selected Works", proj_h2:"The Portfolio",
-  proj_p:"A new collection of residences across Israel — currently in documentation. Real imagery arrives soon.",
-  proj_card:"Project Coming Soon",
+  proj_p:"A collection of residences across Israel. Imagery shown is representative — Andrea's projects will replace these.",
+  proj_card:"View Project",
   about_eyebrow:"About", about_h2:"Andrea Pokroy — architect with a passion for spaces that <em>tell stories.</em>",
   about_p:"From classic heritage homes to bold modern structures, every project begins the same way — with a blueprint, and a dream.",
-  about_sig:"— Andrea", about_portrait:"Portrait · Placeholder",
+  about_sig:"— Andrea",
   contact_eyebrow:"Contact", contact_h2:"Let's draw<br>your <em>home.</em>",
   ch_wa:"WhatsApp", ch_em:"Email", ch_ph:"Phone",
   f_name:"Your name", f_email:"Email address", f_msg:"Tell me about your project", f_send:"Send Message",
   footer_made:"Architecture · Interiors · Israel", sent:"Thank you — I'll be in touch soon." },
  he:{ role:"אדריכלית · ישראל", nav_about:"אודות", nav_projects:"פרויקטים", nav_contact:"צור קשר",
   hero_eyebrow:"אנדריאה פוקרוי — אדריכלות", hero_h1:"כאן תוכניות<br>הופכות ל<em>בית</em>",
-  hero_sub:"המשיכו לגלול — השרטוט הופך לבית שאפשר לטייל בו", scroll:"גלילה",
-  enter_b:"היכנסו פנימה", enter_s:"המשיכו לגלול ↓",
-  ph_blueprint:"שרטוט", ph_drawing:"מתכננים", ph_construction:"בנייה", ph_walk:"סיור",
-  r_entrance:"כניסה", r_living:"סלון", r_kitchen:"מטבח", r_bedroom:"חדר שינה", r_outdoor:"המרפסת",
-  s1_eyebrow:"01 — אדריכלות קלאסית", s1_h2:"בנוי<br>לנצח.",
-  s1_p1:"פרופורציה, סימטריה וכנות חומרית. בתי מורשת ששומרים על כבודם לאורך דורות — אבן שמתיישנת בחן, אור שיודע להיכנס לחדר.",
-  s1_p2:"כל מפתן הוא החלטה. קלאסי אינו ישן; קלאסי הוא מוגמר.",
-  s1_m1:"שנות יצירה", s1_m2:"בתים שנמסרו",
-  ph_c1:"וילת מורשת · מקום 01", ph_c2:"בית אבן · מקום 02", ph_c3:"בית גן · מקום 03",
-  s2_eyebrow:"02 — חום ומרקם", s2_h2:"כאן ה<em>חום</em><br>שוכן.",
-  s2_p:"עץ אלון, טיח, אור שמש. בתים שעוטפים אותך — משטחים מוחשיים, מפתנים מקושתים, חדרים ששומרים את אור אחר הצהריים.",
-  ph_w1:"בית חצר · מקום 01", ph_w2:"לופט שטוף שמש · מקום 02", ph_w3:"מרפסת זיתים · מקום 03",
-  s3_eyebrow:"03 — מודרני מינימליסטי", s3_h2:"העתיד,<br><em>בנוי.</em>",
-  s3_p:"צמצום כיוקרה. בטון, זכוכית וצל מסודרים באיפוק כירורגי. התוכנית לעולם אינה עוזבת — היא חיה בקווי הקיר.",
-  ph_m1:"מונוליט · מקום 01", ph_m2:"ביתן זכוכית · מקום 02", ph_m3:"לוח מרחף · מקום 03",
+  hero_sub:"גללו — סיור בתוך הבית", scroll:"גלילה",
+  r_arch:"האדריכלות", r_living:"הסלון", r_kitchen:"המטבח", r_bedroom:"חדר השינה", r_outdoor:"המתחם",
+  s1_eyebrow:"המשרד", s1_h2:"מרחבים שאוחזים באור, מתיישנים בחן, ו<em>מספרים סיפור.</em>",
+  s1_m1:"שנות יצירה", s1_m2:"בתים שנמסרו", s1_m3:"תוכניות שורטטו",
+  s2_eyebrow:"עיצוב פנים", s2_h2:"חום, <em>בנוי פנימה.</em>",
+  s2_p1:"טיח ועץ אלון, פשתן ואבן. כל משטח נבחר כדי להתיישן יפה ולהרגיש טוב למגע.",
+  s2_p2:"חדרים שעוטפים את חיי היומיום — נדיבים, רגועים, ויוקרתיים בשקט.",
   proj_eyebrow:"עבודות נבחרות", proj_h2:"התיק",
-  proj_p:"אוסף חדש של בתי מגורים ברחבי ישראל — כעת בתיעוד. תמונות אמיתיות בקרוב.",
-  proj_card:"פרויקט בקרוב",
+  proj_p:"אוסף בתי מגורים ברחבי ישראל. התמונות הן להמחשה — הפרויקטים של אנדריאה יחליפו אותן.",
+  proj_card:"צפו בפרויקט",
   about_eyebrow:"אודות", about_h2:"אנדריאה פוקרוי — אדריכלית עם תשוקה למרחבים ש<em>מספרים סיפור.</em>",
   about_p:"מבתי מורשת קלאסיים ועד מבנים מודרניים נועזים, כל פרויקט מתחיל באותו אופן — עם תוכנית, ועם חלום.",
-  about_sig:"— אנדריאה", about_portrait:"דיוקן · ממלא מקום",
+  about_sig:"— אנדריאה",
   contact_eyebrow:"צור קשר", contact_h2:"בואו נשרטט<br>את ה<em>בית</em> שלכם.",
   ch_wa:"וואטסאפ", ch_em:"אימייל", ch_ph:"טלפון",
   f_name:"השם שלך", f_email:"כתובת אימייל", f_msg:"ספרו לי על הפרויקט שלכם", f_send:"שליחת הודעה",
@@ -414,35 +343,62 @@ function applyLang(lang){
   document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.getAttribute("data-i18n"); if(d[k]!==undefined) el.innerHTML=d[k];});
   document.querySelectorAll(".proj-card .cs").forEach(el=>el.textContent=d.proj_card);
   document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.lang===lang));
-  const pt=document.getElementById("phaseTag"); if(pt) pt.dataset.k="";
-  const rn=document.getElementById("rlName"); if(rn) rn.dataset.k="";
+  const sn=document.getElementById("scName"); if(sn) sn.dataset.k="";
   if(window.ScrollTrigger) ScrollTrigger.refresh();
 }
 document.getElementById("lang").addEventListener("click",e=>{const b=e.target.closest("button"); if(b) applyLang(b.dataset.lang);});
 
-const projNames=["Tel Aviv House","Carmel Retreat","Jaffa Court","Negev Pavilion","Herzliya Villa","Galilee Studio"];
+/* project cards (reuse the real photos) */
+const PROJ=[
+  {img:"02-architecture.jpg",nm:"Hillside Villa"},{img:"06-grounds.jpg",nm:"Garden Residence"},{img:"01-hero.jpg",nm:"Infinity House"},
+  {img:"03-living.jpg",nm:"Plaster & Oak"},{img:"04-kitchen.jpg",nm:"The Kitchen House"},{img:"05-bedroom.jpg",nm:"Calm Quarters"}
+];
 const pg=document.getElementById("projGrid");
-projNames.forEach((n,i)=>{const c=document.createElement("div"); c.className="proj-card";
-  c.innerHTML=`<div class="inner"><div class="num">0${i+1}</div><div class="cs">Project Coming Soon</div><div class="nm">${n}</div></div>`; pg.appendChild(c);});
+PROJ.forEach((p,i)=>{const c=document.createElement("div"); c.className="proj-card";
+  c.innerHTML=`<div class="bg" style="background-image:url(images/${p.img})"></div><div class="inner"><div class="cs">View Project</div><div class="nm">${p.nm}</div></div>`; pg.appendChild(c);});
 document.getElementById("year").textContent="2026";
 
+/* cursor */
 const cursor=document.getElementById("cursor");
 let cx=innerWidth/2,cy=innerHeight/2,tx=cx,ty=cy;
 addEventListener("mousemove",e=>{tx=e.clientX;ty=e.clientY});
 (function l(){cx+=(tx-cx)*.18;cy+=(ty-cy)*.18;cursor.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;requestAnimationFrame(l);})();
 document.querySelectorAll("a,button,.proj-card,.ch").forEach(el=>{el.addEventListener("mouseenter",()=>cursor.classList.add("big"));el.addEventListener("mouseleave",()=>cursor.classList.remove("big"));});
 
-/* ============================================================ 3D HERO */
-const HAS3D=(typeof THREE!=="undefined");
+/* ============================================================ FILM WALKTHROUGH */
 const HASGSAP=(typeof gsap!=="undefined" && typeof ScrollTrigger!=="undefined");
-let heroProgress=0, targetP=0, heroActive=true;
+let targetP=0, heroActive=true, smoothP=0;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-const inv=(a,b,v)=>b===a?0:clamp((v-a)/(b-a),0,1);
-const ss=(a,b,v)=>{const t=inv(a,b,v);return t*t*(3-2*t);};
+const SCENES=[{},{key:"r_arch"},{key:"r_living"},{key:"r_kitchen"},{key:"r_bedroom"},{key:"r_outdoor"}];
+const layers=Array.prototype.slice.call(document.querySelectorAll(".film-layer"));
+const N=SCENES.length;
+const heroHead=document.getElementById("heroHead"), sceneCap=document.getElementById("sceneCap");
+const scNum=document.getElementById("scNum"), scName=document.getElementById("scName");
+const scrollCue=document.getElementById("scrollCue"), railFill=document.getElementById("railFill");
 
-if(HAS3D){ try{ initThree(); }catch(e){ console.error("3D init failed:",e); document.documentElement.classList.add("no3d"); } }
-else { document.documentElement.classList.add("no3d"); }
+function filmUpdate(p){
+  const pos=p*(N-1);
+  for(let i=0;i<layers.length;i++){
+    const d=Math.abs(pos-i);
+    layers[i].style.opacity=clamp(1-d,0,1);
+    const local=clamp(pos-i+0.5,0,1);            // 0 entering -> 1 leaving
+    layers[i].style.transform="scale("+(1.04+0.13*local)+") translate3d(0,"+((pos-i)*-1.4)+"%,0)";
+  }
+  heroHead.style.opacity=clamp(1-pos/0.5,0,1);
+  heroHead.style.transform="translateY("+(-50 - pos*7)+"%)";
+  scrollCue.style.opacity=clamp(1-pos/0.3,0,1);
+  railFill.style.height=(p*100)+"%";
+  const near=Math.round(pos);
+  if(near>=1 && near<N){
+    const k=SCENES[near].key;
+    if(scName.dataset.k!==k){ scName.dataset.k=k; scName.textContent=I18N[LANG][k]; scNum.textContent="0"+near; }
+    sceneCap.style.opacity=clamp(1-Math.abs(pos-near)/0.46,0,1);
+  } else sceneCap.style.opacity=0;
+}
+function filmLoop(){ requestAnimationFrame(filmLoop); smoothP+=(targetP-smoothP)*0.09; filmUpdate(smoothP); }
+filmUpdate(0); filmLoop();
 
+/* scroll driver (works with or without GSAP) */
 (function setupHeroScroll(){
   const hs=document.getElementById("heroScroll");
   function upd(){
@@ -458,279 +414,6 @@ else { document.documentElement.classList.add("no3d"); }
   upd();
 })();
 
-function initThree(){
-  const holder=document.getElementById("webgl");
-  const scene=new THREE.Scene();
-  const camera=new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 420);
-  const renderer=new THREE.WebGLRenderer({antialias:true});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-  renderer.setSize(innerWidth,innerHeight);
-  renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-  renderer.outputEncoding=THREE.sRGBEncoding; renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.05;
-  holder.appendChild(renderer.domElement);
-  scene.fog=new THREE.Fog(0xEFE7D6, 30, 185);
-
-  const STOPS=[
-    {p:0.00,c:new THREE.Color(0xEFE7D6)},
-    {p:0.20,c:new THREE.Color(0xF0EADC)},
-    {p:0.45,c:new THREE.Color(0xF2EDE1)},
-    {p:0.75,c:new THREE.Color(0xF4EFE6)},
-    {p:1.00,c:new THREE.Color(0xF5F1EA)}
-  ];
-  const _c=new THREE.Color();
-  function bgAt(p){ for(let i=0;i<STOPS.length-1;i++){ if(p<=STOPS[i+1].p){const t=ss(STOPS[i].p,STOPS[i+1].p,p);return _c.copy(STOPS[i].c).lerp(STOPS[i+1].c,t);} } return _c.copy(STOPS[STOPS.length-1].c); }
-
-  const walls=[], solids=[], wires=[], tickers=[];
-  const COL={};
-  Object.assign(COL,{ plaster:0xE6DAC2, lime:0xEDE4D2, stone:0xD2C7B0, marble:0xECE6D8, oak:0xC6AB80, oakDk:0x9C7C4F,
-    wood:0x7A5E3A, walnut:0x5E472D, linen:0xEAE1CF, linen2:0xDED3BC, oat:0xD7CAB0, taupe:0xC6B79C, charcoal:0x3A352F,
-    jute:0xC7B388, rattan:0xC59B5E, black:0x232220, olive:0x6F7B4E, oliveDk:0x556240, palm:0x5E7544, pot:0xCBBDA2,
-    ceramic:0xE7DECB, water:0x86B6AE, deck:0xE1D7C2, towel:0xEFE7D6, art1:0x9C7C66, art2:0x6F7B4E });
-
-  const WIRE=0x9E3F39;
-  const HL=4.2, HG=6.8, HR=8.7, HW=8, ZF=26, ZB=-26;
-
-  /* ---- helpers (with shadows for a grounded, finished look) ---- */
-  function reg(mesh,mat){ mesh.castShadow=true; mesh.receiveShadow=true; scene.add(mesh); solids.push(mat); }
-  function box(w,h,d,x,y,z,col,maxOp){ const mat=new THREE.MeshStandardMaterial({color:(col===undefined?0xCCC2B0:col),roughness:.85,metalness:.02,transparent:true,opacity:0}); mat.userData={maxOp:(maxOp===undefined?1:maxOp)}; const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat); m.position.set(x,y,z); reg(m,mat); return m; }
-  function rbox(w,h,d,x,y,z,col,rz,ry,maxOp){ const mat=new THREE.MeshStandardMaterial({color:(col===undefined?0xCCC2B0:col),roughness:.85,metalness:.02,transparent:true,opacity:0}); mat.userData={maxOp:(maxOp===undefined?1:maxOp)}; const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat); m.position.set(x,y,z); m.rotation.set(0,ry||0,rz||0); reg(m,mat); return m; }
-  function cyl(rt,rb,h,x,y,z,col,maxOp,seg){ const mat=new THREE.MeshStandardMaterial({color:col,roughness:.8,metalness:.03,transparent:true,opacity:0}); mat.userData={maxOp:(maxOp===undefined?1:maxOp)}; const m=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,seg||18),mat); m.position.set(x,y,z); reg(m,mat); return m; }
-  function sph(r,x,y,z,col,maxOp,sy){ const mat=new THREE.MeshStandardMaterial({color:col,roughness:.9,transparent:true,opacity:0}); mat.userData={maxOp:(maxOp===undefined?1:maxOp)}; const m=new THREE.Mesh(new THREE.SphereGeometry(r,14,12),mat); m.position.set(x,y,z); m.scale.y=(sy||1); reg(m,mat); return m; }
-  function planeRX(w,d,x,y,z,col,maxOp){ const mat=new THREE.MeshStandardMaterial({color:col,roughness:.95,transparent:true,opacity:0,side:THREE.DoubleSide}); mat.userData={maxOp:(maxOp===undefined?1:maxOp)}; const m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),mat); m.rotation.x=-Math.PI/2; m.position.set(x,y,z); m.receiveShadow=true; scene.add(m); solids.push(mat); return m; }
-  function glass(w,h,x,y,z,rotY){ const mat=new THREE.MeshBasicMaterial({color:0xF8F6EE,transparent:true,opacity:0,side:THREE.DoubleSide}); mat.userData={maxOp:.85}; const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),mat); m.position.set(x,y,z); m.rotation.y=rotY||0; scene.add(m); solids.push(mat); return m; }
-  function water(w,d,x,y,z){ const mat=new THREE.MeshStandardMaterial({color:COL.water,roughness:.12,metalness:.3,transparent:true,opacity:0}); mat.userData={maxOp:.92}; const m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),mat); m.rotation.x=-Math.PI/2; m.position.set(x,y,z); m.receiveShadow=true; scene.add(m); solids.push(mat); return m; }
-
-  function archHole(cx,bottom,ow,spring){ const p=new THREE.Path(); p.moveTo(cx-ow,bottom); p.lineTo(cx-ow,spring); const seg=18; for(let i=0;i<=seg;i++){ const a=Math.PI-(Math.PI*i/seg); p.lineTo(cx+Math.cos(a)*ow, spring+Math.sin(a)*ow); } p.lineTo(cx+ow,bottom); p.lineTo(cx-ow,bottom); return p; }
-  function archWall(W,th,holes,x,z,rotY,startP,wallH){
-    const Hh=wallH||HL; const shape=new THREE.Shape();
-    shape.moveTo(-W/2,0); shape.lineTo(W/2,0); shape.lineTo(W/2,Hh); shape.lineTo(-W/2,Hh); shape.lineTo(-W/2,0);
-    (holes||[]).forEach(o=>shape.holes.push(archHole(o.cx,o.bottom,o.ow,o.spring)));
-    const geo=new THREE.ExtrudeGeometry(shape,{depth:th,bevelEnabled:false,curveSegments:18}); geo.translate(0,0,-th/2);
-    const mat=new THREE.MeshStandardMaterial({color:COL.plaster,roughness:.98,metalness:0,transparent:true,opacity:0}); mat.userData={maxOp:1};
-    const mesh=new THREE.Mesh(geo,mat); mesh.castShadow=true; mesh.receiveShadow=true;
-    const em=new THREE.LineBasicMaterial({color:WIRE,transparent:true,opacity:1});
-    const wf=new THREE.LineSegments(new THREE.EdgesGeometry(geo),em);
-    const grp=new THREE.Group(); grp.add(mesh); grp.add(wf); grp.position.set(x,0,z); grp.rotation.y=rotY||0; grp.scale.y=0.001;
-    scene.add(grp); walls.push({grp,startP}); solids.push(mat); wires.push(em);
-  }
-  function gableEnd(z,startP){
-    const s=new THREE.Shape(); s.moveTo(-HW,HG); s.lineTo(HW,HG); s.lineTo(0,HR); s.lineTo(-HW,HG);
-    const geo=new THREE.ExtrudeGeometry(s,{depth:0.25,bevelEnabled:false}); geo.translate(0,0,-0.125);
-    const mat=new THREE.MeshStandardMaterial({color:COL.plaster,roughness:.98,transparent:true,opacity:0}); mat.userData={maxOp:1};
-    const mesh=new THREE.Mesh(geo,mat); mesh.castShadow=true; mesh.receiveShadow=true;
-    const grp=new THREE.Group(); grp.add(mesh); grp.position.set(0,0,z); grp.scale.y=0.001;
-    scene.add(grp); walls.push({grp,startP}); solids.push(mat);
-  }
-  function steelWindow(x,z,axis,ow,bottom,top){ const h=top-bottom, gy=bottom+h/2, gw=ow*2-0.2, rotY=axis==='x'?Math.PI/2:0; glass(gw,h-0.1,x,gy,z,rotY); const place=(bw,bh,bd,ox,oy,oz)=>box(bw,bh,bd,x+ox,gy+oy,z+oz,COL.black,1); if(axis==='x'){ [-gw/2,-gw/6,gw/6,gw/2].forEach(o=>place(0.07,h,0.07,0,0,o)); place(0.07,0.07,gw,0,0,0); place(0.07,0.07,gw,0,h/2-0.1,0);} else { [-gw/2,-gw/6,gw/6,gw/2].forEach(o=>place(0.07,h,0.07,o,0,0)); place(gw,0.07,0.07,0,0,0); place(gw,0.07,0.07,0,h/2-0.1,0);} }
-
-  /* ---- styled props ---- */
-  function rug(w,d,x,z,col){ box(w,0.05,d,x,0.03,z,col,.95); }
-  function lamp(x,y,z){ cyl(0.13,0.16,0.5,x,y+0.25,z,COL.ceramic); cyl(0.3,0.22,0.36,x,y+0.66,z,COL.linen,1,20); }
-  function vase(x,y,z,col){ cyl(0.17,0.12,0.5,x,y+0.25,z,col||COL.ceramic); for(let i=0;i<3;i++){ rbox(0.04,1.0,0.04, x+(i-1)*0.12, y+0.95, z, COL.oliveDk, (i-1)*0.18, 0); sph(0.16, x+(i-1)*0.22, y+1.4, z, COL.olive,1,.8); } }
-  function basket(x,y,z){ cyl(0.3,0.24,0.42,x,y+0.21,z,COL.rattan,1,16); }
-  function pendant(x,y,z,r){ box(0.04,y-2.9,0.04, x,(y+2.9)/2,z, 0x3a2f20); cyl(r*0.62,r,0.55,x,y,z,COL.rattan,1,20); }
-  function pot(x,z,s){ s=s||1; cyl(0.34*s,0.26*s,0.5*s,x,0.25*s,z,COL.pot,1,18); }
-  function tree(x,z,sc){ const s=sc||1; cyl(0.12*s,0.16*s,1.7*s,x,0.85*s,z,0x5b4a30,1,10); sph(0.95*s,x,2.0*s,z,COL.olive,.97,.9); sph(0.62*s,x+0.5*s,1.7*s,z+0.2*s,COL.oliveDk,.97,.9); pot(x,z,s); }
-  function palm(x,z,sc){ const s=sc||1; cyl(0.14*s,0.2*s,2.6*s,x,1.3*s,z,0x6a5638,1,10); for(let i=0;i<7;i++){ rbox(0.2*s,0.05,2.4*s, x+Math.cos(i/7*6.28)*1.0*s, 2.7*s, z+Math.sin(i/7*6.28)*1.0*s, 0.5, i/7*6.28, .96); } }
-  function art(w,h,x,y,z,ry){ rbox(w,h,0.06,x,y,z,COL.walnut,0,ry); const nx=x+Math.sin(ry)*0.04, nz=z+Math.cos(ry)*0.04; rbox(w-0.16,h-0.16,0.02,nx,y,nz,COL.art1,0,ry); }
-  function slatScreen(x0,z,len,h,ry){ const n=Math.floor(len/0.28); for(let i=0;i<=n;i++){ const o=-len/2+i*0.28; rbox(0.06,h,0.06, x0+Math.cos(ry)*o, h/2, z+ -Math.sin(ry)*o, COL.oak,0,ry); } box((ry===0?len:0.1), 0.1, (ry===0?0.1:len), x0, h, z, COL.oak,1); }
-
-  /* ================= SHELL — open plan, vaulted great-room ================= */
-  // side walls in 3 height zones
-  archWall(8,0.3,[], -HW,-22, Math.PI/2, 0.03, HL);  archWall(8,0.3,[], HW,-22,-Math.PI/2, 0.03, HL);   // entrance
-  const grWin=[{cx:-9,bottom:1.3,ow:1.8,spring:3.2},{cx:-9,bottom:5.0,ow:1.0,spring:5.6},{cx:6,bottom:1.3,ow:1.8,spring:3.2},{cx:6,bottom:5.0,ow:1.0,spring:5.6}];
-  archWall(30,0.3,grWin, -HW,-3, Math.PI/2, 0.06, HG); archWall(30,0.3,grWin, HW,-3,-Math.PI/2, 0.06, HG); // great-room (tall, clerestory)
-  const bdWin=[{cx:0,bottom:1.3,ow:1.8,spring:3.2}];
-  archWall(14,0.3,bdWin, -HW,19, Math.PI/2, 0.12, HL); archWall(14,0.3,bdWin, HW,19,-Math.PI/2, 0.12, HL); // bedroom
-  // end + partition walls
-  archWall(16,0.3,[{cx:0,bottom:0,ow:1.8,spring:2.3}], 0,ZB,0, 0.02, HL);            // front entry
-  archWall(16,0.3,[{cx:0,bottom:0,ow:2.6,spring:2.8}], 0,ZF,0, 0.10, HL);            // back french door
-  archWall(16,0.25,[{cx:0,bottom:0,ow:2.4,spring:2.7}], 0,-18,0, 0.07, HG);          // partition entry|great
-  archWall(16,0.25,[{cx:0,bottom:0,ow:2.4,spring:2.7}], 0,12,0, 0.14, HG);           // partition great|bed
-  gableEnd(-18,0.16); gableEnd(12,0.22);
-
-  // floor
-  planeRX(16,52, 0,0.0,0, COL.oak, 1);
-  // flat ceilings over low rooms
-  planeRX(16,8, 0,HL,-22, COL.lime, .95); planeRX(16,14, 0,HL,19, COL.lime, .95);
-  // vaulted ceiling over great-room (two sloped slabs)
-  const slope=Math.atan2(HR-HG, HW), slen=Math.hypot(HW,HR-HG);
-  rbox(slen,0.22,30, -HW/2,(HG+HR)/2,-3, 0xDED2B8, slope, 0, .96);
-  rbox(slen,0.22,30,  HW/2,(HG+HR)/2,-3, 0xDED2B8,-slope, 0, .96);
-  // exposed rafters following the vault
-  for(let z=-17;z<=11;z+=3.2){ rbox(slen,0.2,0.34, -HW/2,(HG+HR)/2+0.16,z, COL.oakDk, slope,0,1); rbox(slen,0.2,0.34, HW/2,(HG+HR)/2+0.16,z, COL.oakDk,-slope,0,1); }
-  box(0.34,0.4,30, 0,HR-0.1,-3, COL.wood,1); // ridge beam
-  // beams in low rooms
-  for(let z=-25;z<=-19;z+=3){ box(16.2,0.34,0.46,0,HL-0.3,z,COL.oakDk,1); }
-  for(let z=13;z<=25;z+=3){ box(16.2,0.34,0.46,0,HL-0.3,z,COL.oakDk,1); }
-  // roofs (exterior silhouette)
-  box(16.6,0.28,8.6, 0,HL+0.16,-22, COL.stone,1); box(16.6,0.28,14.6, 0,HL+0.16,19, COL.stone,1);
-  rbox(slen+0.4,0.3,30.6, -HW/2,(HG+HR)/2+0.3,-3, 0x8C7350, slope,0,1); rbox(slen+0.4,0.3,30.6, HW/2,(HG+HR)/2+0.3,-3, 0x8C7350,-slope,0,1);
-  // ground
-  planeRX(320,320, 0,-0.08,0, 0xD0C3A6, 1);
-
-  // glass / steel windows
-  steelWindow(-HW,-9,'x',1.8,1.3,4.7); steelWindow(HW,-9,'x',1.8,1.3,4.7);
-  steelWindow(-HW,6,'x',1.8,1.3,4.7);  steelWindow(HW,6,'x',1.8,1.3,4.7);
-  glass(1.8,1.1,-HW+0.02,5.5,-9,Math.PI/2); glass(1.8,1.1,HW-0.02,5.5,-9,Math.PI/2); glass(1.8,1.1,-HW+0.02,5.5,6,Math.PI/2); glass(1.8,1.1,HW-0.02,5.5,6,Math.PI/2);
-  steelWindow(-HW,19,'x',1.8,1.3,4.7); steelWindow(HW,19,'x',1.8,1.3,4.7);
-  steelWindow(0,ZF,'z',2.6,0.1,5.5);
-  // plaster accent wall behind kitchen (left of great-room)
-  box(0.16,HG-0.4,11, -7.86,(HG-0.4)/2,5, COL.stone, 1);
-
-  /* ================= INTERIOR (warm neutrals, styled) ================= */
-  // ENTRANCE (z -26..-18)
-  box(2.8,0.85,0.5, 5.2,0.42,-22, COL.wood); basket(4.4,0,-22); basket(6.0,0,-22);
-  lamp(5.2,0.85,-22.6); art(1.3,1.7,0,2.4,-25.7,0); rug(3,2,0,-21,COL.jute); tree(-5.6,-21,1.0);
-  // GREAT-ROOM · LIVING (z -18..-4)
-  box(5.4,0.5,1.7,-3.4,0.42,-9,COL.linen); box(5.4,0.72,0.35,-3.4,0.8,-9.8,COL.linen);
-  box(1.7,0.5,3.2,-5.8,0.42,-6.6,COL.linen); box(0.35,0.74,1.7,-6.2,0.62,-9,COL.linen2);
-  [[-5.6,-9,COL.oat],[-3.9,-9,COL.taupe],[-2.4,-9,COL.oat],[-5.9,-7.6,COL.taupe],[-5.9,-5.6,COL.oat]].forEach(c=> box(0.7,0.5,0.6,c[0],0.95,c[1],c[2]));
-  box(2.4,0.42,1.2,-3.4,0.21,-6.0,COL.wood); cyl(0.3,0.34,0.1,-3.8,0.47,-6.1,COL.marble,1,22); sph(0.16,-3.0,0.5,-5.9,COL.olive,1,.7);
-  rug(6.4,4.6,-3.6,-8,COL.jute);
-  // console + styling behind sofa (the Pinterest look)
-  box(3.4,0.75,0.55,-3.6,0.38,-10.8,COL.wood); basket(-4.8,0,-10.8); basket(-2.4,0,-10.8);
-  lamp(-4.7,0.78,-10.9); lamp(-2.5,0.78,-10.9); vase(-3.6,0.78,-10.9,COL.ceramic);
-  art(2.4,1.5,-3.6,3.0,-12.8,0);
-  box(0.13,2.0,0.13,-7.0,1.0,-4.8,COL.wood); cyl(0.34,0.26,0.34,-7.0,2.15,-4.8,COL.linen2,1,20);
-  tree(6.2,-15,1.05); palm(6.6,-12.5,0.9);
-  // slatted wood divider between living & kitchen
-  slatScreen(-2.0,-2.0,6.0,3.2,0);
-  // GREAT-ROOM · KITCHEN (z -4..12)
-  box(2.2,1.0,4.6, 2.0,0.5,4, COL.stone); box(2.5,0.12,4.9,2.0,1.06,4,COL.marble);
-  box(0.9,1.0,7.4, 7.2,0.5,4, COL.lime); box(0.55,0.9,6.6, 7.35,3.0,4, COL.oak,.97);
-  box(2.2,1.4,1.0, 0.0,3.4,4, COL.lime,1);
-  [1.4,4.0,6.6].forEach(zz=> cyl(0.26,0.26,0.6,0.6,0.3,zz,COL.wood,1,18));
-  pendant(2.0,3.3,1.6,0.34); pendant(2.0,3.3,4.0,0.34); pendant(2.0,3.3,6.4,0.34);
-  sph(0.4,2.0,1.3,2.2,COL.olive,1,.8); cyl(0.28,0.2,0.18,2.0,1.24,5.4,COL.marble,1,20);
-  // dining just off kitchen
-  box(2.8,0.14,1.2,4.6,0.95,9.0,COL.oak); box(0.16,0.95,1.2,3.4,0.47,9.0,COL.wood); box(0.16,0.95,1.2,5.8,0.47,9.0,COL.wood);
-  [8.2,9.0,9.8].forEach(zz=>{ box(0.5,0.5,0.5,3.4,0.27,zz,COL.wood); box(0.5,0.5,0.5,5.8,0.27,zz,COL.wood); });
-  pendant(4.6,3.2,9.0,0.4); tree(6.4,10.5,0.9);
-  // BEDROOM (z 12..26)
-  box(3.9,0.4,2.9,-2.7,0.2,19,COL.wood); box(3.7,0.42,2.8,-2.7,0.55,19,COL.linen); box(3.7,0.24,2.8,-2.7,0.78,19.4,COL.linen2,.97);
-  [[-3.9,18.1],[-1.5,18.1],[-3.9,18.9],[-1.5,18.9]].forEach(c=> box(0.95,0.34,0.6,c[0],0.85,c[1],COL.oat));
-  box(2.6,0.16,1.4,-2.7,0.9,19.5,COL.taupe,1); // folded throw at foot
-  box(3.9,1.5,0.22,-2.7,0.86,17.45,COL.linen);
-  box(0.75,0.55,0.7,-4.95,0.28,18,COL.oak); box(0.75,0.55,0.7,-0.45,0.28,18,COL.oak); lamp(-4.95,0.55,18); lamp(-0.45,0.55,18);
-  box(0.6,2.7,3.8,7.3,1.35,19,COL.oak,.97); rug(4.6,3.2,-2.4,20,COL.jute);
-  box(3.0,0.5,0.6,-2.7,0.27,21.6,COL.linen); art(1.2,1.6,-6.0,2.6,16.6,Math.PI/2); art(1.2,1.6,-6.0,2.6,21.4,Math.PI/2);
-  tree(6.2,23,0.95);
-
-  /* ================= OUTDOOR · RESORT CABANA (z 26..56) ================= */
-  planeRX(34,32, 0,0.02,41, COL.deck, 1);
-  // pool (front-left)
-  box(10,0.6,20, -6,-0.05,42, COL.stone,1); water(9.0,19.0,-6,0.18,42); box(10.6,0.22,0.7,-6,0.2,31.6,COL.deck,1);
-  // sun loungers + side table by pool
-  [37,42].forEach(zz=>{ box(0.95,0.32,2.2,-0.4,0.2,zz,COL.wood); box(0.95,0.14,2.2,-0.4,0.4,zz,COL.towel,1); box(0.95,0.5,0.5,-0.4,0.5,zz-1.0,COL.towel,1); }); cyl(0.3,0.26,0.5,-0.4,0.25,39.5,COL.marble,1,18);
-  // CABANA structure (right) — plaster piers + plank roof
-  [[2.0,32],[13.0,32],[2.0,50],[13.0,50]].forEach(c=> box(0.6,3.6,0.6,c[0],1.8,c[1],COL.plaster,1));
-  box(12,0.5,19, 7.5,3.7,41, COL.plaster,1);           // cabana beam frame
-  for(let zz=32; zz<=50; zz+=1.0){ box(11.6,0.12,0.5, 7.5,3.45,zz, COL.oakDk,1); } // plank ceiling
-  box(0.5,3.6,19, 13.3,1.8,41, COL.plaster,1);          // cabana back wall
-  pendant(7.5,2.8,40,0.6);                              // big rattan pendant
-  // built-in sofas facing each other under cabana
-  box(6.0,0.45,1.5, 7.5,0.4,35, COL.linen); box(6.0,0.6,0.3, 7.5,0.7,34.3, COL.linen);
-  box(6.0,0.45,1.5, 7.5,0.4,47, COL.linen); box(6.0,0.6,0.3, 7.5,0.7,47.7, COL.linen);
-  [[5.6,35],[7.5,35],[9.4,35],[5.6,47],[7.5,47],[9.4,47]].forEach(c=> box(0.7,0.5,0.6,c[0],0.85,c[1],(c[0]<7.5?COL.oat:COL.taupe)));
-  box(2.2,0.4,1.1, 7.5,0.2,41, COL.marble); rug(7.0,8.0,7.5,41,COL.jute);
-  // stone bar + black stools + BBQ (back of cabana)
-  box(5.0,1.05,0.9, 9.0,0.52,49, COL.stone); box(5.0,0.1,1.0, 9.0,1.07,49, COL.marble);
-  [7.6,9.0,10.4].forEach(xx=> cyl(0.24,0.24,0.62,xx,0.31,47.9,COL.black,1,16));
-  box(2.0,1.0,0.7, 4.4,0.5,49.2, COL.black); box(2.1,0.16,0.8,4.4,1.05,49.2,0x35322d,1);
-  // greenery framing the terrace
-  [[-12.5,32,1.1],[-13,52,1.2],[14,32,1.0],[14.5,52,1.2],[0,55,1.0]].forEach(t=> tree(t[0],t[1],t[2]));
-  palm(-13.5,42,1.2); palm(15,46,1.1); palm(13,30,1.0);
-  pot(11.5,33,1.1); pot(3.0,33,1.0); pot(11.5,49,1.0);
-  // low planter edging
-  box(34,0.5,0.5,0,0.25,57,COL.stone,1); box(0.5,0.5,31,-16.5,0.25,41,COL.stone,1); box(0.5,0.5,31,16.5,0.25,41,COL.stone,1);
-  // warm lanterns
-  [[7.5,35],[7.5,47],[9.0,49],[-0.4,39.5]].forEach(c=>{ cyl(0.12,0.12,0.34,c[0],0.95,c[1],0xF2E2BC,1,12); const pl=new THREE.PointLight(0xFFE6B8,0,6,2); pl.position.set(c[0],1.2,c[1]); scene.add(pl); tickers.push((p,sOp)=>{ pl.intensity=sOp*0.45; }); });
-
-  /* ---- procedural material textures (canvas-generated; multiply over each object's color) ---- */
-  function ctex(size,draw){ const cv=document.createElement('canvas'); cv.width=cv.height=size; draw(cv.getContext('2d'),size); const t=new THREE.CanvasTexture(cv); t.wrapS=t.wrapT=THREE.RepeatWrapping; t.encoding=THREE.sRGBEncoding; t.anisotropy=4; return t; }
-  const TEX_WOOD=ctex(256,(g,s)=>{ g.fillStyle='#fff'; g.fillRect(0,0,s,s); for(let i=0;i<120;i++){ const x=(i*23)%s; g.strokeStyle='rgba(70,46,22,'+(0.05+0.06*((i*7)%5)/5)+')'; g.lineWidth=1+((i*3)%3); g.beginPath(); g.moveTo(x,0); g.bezierCurveTo(x+5,s*0.3,x-5,s*0.7,x+2,s); g.stroke(); } });
-  const TEX_PLASTER=ctex(256,(g,s)=>{ g.fillStyle='#fff'; g.fillRect(0,0,s,s); for(let i=0;i<1100;i++){ const a=0.02+0.03*((i*13)%5)/5; g.fillStyle=(i%2?'rgba(120,108,90,':'rgba(255,255,255,')+a+')'; g.beginPath(); g.arc((i*97)%s,(i*61)%s,1+((i*5)%4),0,6.28); g.fill(); } });
-  const TEX_FABRIC=ctex(64,(g,s)=>{ g.fillStyle='#fff'; g.fillRect(0,0,s,s); g.strokeStyle='rgba(90,78,60,0.12)'; g.lineWidth=1; for(let i=0;i<s;i+=3){ g.beginPath(); g.moveTo(i,0); g.lineTo(i,s); g.moveTo(0,i); g.lineTo(s,i); g.stroke(); } });
-  const TEX_JUTE=ctex(64,(g,s)=>{ g.fillStyle='#fff'; g.fillRect(0,0,s,s); g.strokeStyle='rgba(80,62,38,0.24)'; g.lineWidth=2; for(let i=0;i<s;i+=6){ g.beginPath(); g.moveTo(i,0); g.lineTo(i,s); g.moveTo(0,i); g.lineTo(s,i); g.stroke(); } });
-  const TEX_MARBLE=ctex(256,(g,s)=>{ g.fillStyle='#fff'; g.fillRect(0,0,s,s); g.strokeStyle='rgba(120,110,92,0.22)'; for(let i=0;i<8;i++){ g.lineWidth=1+((i*3)%2); let x=(i*48)%s,y=0; g.beginPath(); g.moveTo(x,y); for(let k=0;k<6;k++){ x+=(((i*9+k*17)%22)-11); y+=s/6; g.lineTo(x,y);} g.stroke(); } });
-  const TEXMAP=[
-    {tex:TEX_WOOD, cols:[COL.oak,COL.oakDk,COL.wood,COL.walnut,COL.rattan,0xDED2B8,0x8C7350,0x6a5638,0x5b4a30], scale:2.4},
-    {tex:TEX_FABRIC, cols:[COL.linen,COL.linen2,COL.oat,COL.taupe,COL.towel], scale:1.3},
-    {tex:TEX_JUTE, cols:[COL.jute], scale:0.7},
-    {tex:TEX_MARBLE, cols:[COL.marble], scale:1.7},
-    {tex:TEX_PLASTER, cols:[COL.plaster,COL.lime,COL.stone,COL.deck,COL.ceramic,COL.pot], scale:2.8}
-  ];
-  scene.traverse(function(o){ if(!o.isMesh||!o.material||o.material.map||!o.material.color) return; const hv=o.material.color.getHex(); let ent=null; for(const e of TEXMAP){ if(e.cols.indexOf(hv)>=0){ent=e;break;} } if(!ent) return; if(o.geometry&&!o.geometry.boundingBox) o.geometry.computeBoundingBox(); let su=2,sv=2; if(o.geometry&&o.geometry.boundingBox){ const bb=o.geometry.boundingBox,dx=bb.max.x-bb.min.x,dy=bb.max.y-bb.min.y,dz=bb.max.z-bb.min.z; su=Math.max(dx,dz)||2; sv=Math.max(dy,Math.min(dx,dz))||2; } const t=ent.tex.clone(); t.needsUpdate=true; t.wrapS=t.wrapT=THREE.RepeatWrapping; t.repeat.set(Math.max(1,su/(ent.scale*2)),Math.max(1,sv/(ent.scale*2))); o.material.map=t; o.material.needsUpdate=true; });
-
-  /* ================= LIGHTING (bright airy daylight + shadows) ================= */
-  scene.add(new THREE.HemisphereLight(0xFFFBF2, 0x9A8E76, 1.15));
-  const sun=new THREE.DirectionalLight(0xFFF6E6, 1.5); sun.position.set(34,46,20); sun.castShadow=true;
-  sun.shadow.mapSize.set(2048,2048); sun.shadow.bias=-0.0004;
-  const sc=sun.shadow.camera; sc.left=-55; sc.right=55; sc.top=55; sc.bottom=-55; sc.near=1; sc.far=170; sc.updateProjectionMatrix();
-  scene.add(sun);
-  const fill=new THREE.DirectionalLight(0xF1ECDE, 0.5); fill.position.set(-26,28,-18); scene.add(fill);
-  [[-7,2.4,-9],[7,2.4,-9],[-7,2.4,6],[7,2.4,6],[-7,2.4,19],[7,2.4,19]].forEach(pp=>{ const pl=new THREE.PointLight(0xFFF4E0,0,22,2); pl.position.set(pp[0],pp[1],pp[2]); scene.add(pl); tickers.push((p,sOp)=>{ pl.intensity=sOp*0.32; }); });
-
-  /* ================= CAMERA PATH ================= */
-  const V=(x,y,z)=>new THREE.Vector3(x,y,z);
-  const KF=[
-    {p:0.00, pos:V(28,46,2),    look:V(0,1,2)},
-    {p:0.10, pos:V(38,28,-46),  look:V(0,6,-6)},
-    {p:0.22, pos:V(31,16,-54),  look:V(0,6,-10)},
-    {p:0.34, pos:V(0,2.6,-44),  look:V(0,3.0,-26)},
-    {p:0.42, pos:V(0,1.75,-22), look:V(0,2.0,-17)},
-    {p:0.50, pos:V(0,1.75,-13), look:V(-1.6,3.6,-6)},
-    {p:0.58, pos:V(0.3,1.75,-8),look:V(-2.2,1.8,-8)},
-    {p:0.66, pos:V(0,1.75,-1),  look:V(2.2,1.9,5)},
-    {p:0.74, pos:V(0,1.75,7),   look:V(0,1.8,12)},
-    {p:0.82, pos:V(0,1.7,15),   look:V(-2.2,1.7,20)},
-    {p:0.89, pos:V(0,1.85,21),  look:V(0,1.8,28)},
-    {p:0.94, pos:V(0,2.1,30),   look:V(2,1.3,42)},
-    {p:1.00, pos:V(-7,3.4,31),  look:V(5,0.6,47)}
-  ];
-  const _p=new THREE.Vector3(), _l=new THREE.Vector3();
-  function camAt(p){ let i=0; while(i<KF.length-2 && p>KF[i+1].p) i++; const a=KF[i], b=KF[i+1], t=ss(a.p,b.p,p); _p.copy(a.pos).lerp(b.pos,t); _l.copy(a.look).lerp(b.look,t); if(p>0.42 && p<0.9){ _p.y += Math.sin(p*44)*0.02; } camera.position.copy(_p); camera.lookAt(_l); }
-
-  const heroHead=document.getElementById("heroHead"), scrollCue=document.getElementById("scrollCue");
-  const phaseTag=document.getElementById("phaseTag"), roomLabel=document.getElementById("roomLabel");
-  const rlNum=document.getElementById("rlNum"), rlName=document.getElementById("rlName");
-  const railFill=document.getElementById("railFill"), enterHint=document.getElementById("enterHint");
-  const ROOMS=[[0.40,0.52,"r_entrance","01"],[0.52,0.66,"r_living","02"],[0.66,0.79,"r_kitchen","03"],[0.79,0.89,"r_bedroom","04"],[0.89,1.001,"r_outdoor","05"]];
-
-  let shadowOn=false;
-  function updateScene(p){
-    const bg=bgAt(p); scene.background=bg.clone(); scene.fog.color.copy(bg);
-    for(const w of walls){ w.grp.scale.y=Math.max(0.02, ss(w.startP,w.startP+0.18,p)); }
-    const sOp=ss(0.22,0.40,p);
-    for(const m of solids){ m.opacity=sOp*m.userData.maxOp; }
-    const wOp=1-ss(0.36,0.52,p)*0.9;
-    for(const m of wires){ m.opacity=wOp; }
-    for(const f of tickers){ f(p,sOp); }
-    const wantShadow = p>0.40; if(wantShadow!==shadowOn){ shadowOn=wantShadow; sun.castShadow=wantShadow; }
-    camAt(p);
-
-    heroHead.style.opacity=1-ss(0.05,0.14,p);
-    heroHead.style.transform=`translateY(${-50 - p*34}%)`;
-    scrollCue.style.opacity=1-ss(0.02,0.10,p);
-    railFill.style.height=(p*100)+"%";
-    enterHint.style.opacity=ss(0.22,0.30,p)*(1-ss(0.38,0.44,p));
-    const pk=p<0.10?"ph_blueprint":p<0.24?"ph_drawing":p<0.40?"ph_construction":"ph_walk";
-    if(phaseTag.dataset.k!==pk){phaseTag.dataset.k=pk; phaseTag.textContent=I18N[LANG][pk];}
-    let ro=0, active=null;
-    for(const r of ROOMS){ if(p>=r[0]&&p<r[1]){active=r; const lt=inv(r[0],r[1],p); ro=Math.min(ss(0,0.2,lt),1-ss(0.82,1,lt)); break;} }
-    if(active){ if(rlName.dataset.k!==active[2]){rlName.dataset.k=active[2]; rlName.textContent=I18N[LANG][active[2]]; rlNum.textContent=active[3];} roomLabel.style.opacity=ro; }
-    else roomLabel.style.opacity=0;
-  }
-
-  function animate(){ requestAnimationFrame(animate); heroProgress+=(targetP-heroProgress)*0.085; updateScene(heroProgress); if(heroActive) renderer.render(scene,camera); }
-  updateScene(0); animate();
-
-  function resize(){ const w=holder.clientWidth||window.innerWidth||1, h=holder.clientHeight||window.innerHeight||1; camera.aspect=w/h; camera.updateProjectionMatrix(); renderer.setSize(w,h); }
-  addEventListener("resize",resize); resize();
-  if(window.ResizeObserver){ new ResizeObserver(resize).observe(holder); }
-}
-
 /* ============================================================ PAGE ANIMATIONS */
 if(HASGSAP){
   gsap.registerPlugin(ScrollTrigger);
@@ -738,29 +421,8 @@ if(HASGSAP){
     ScrollTrigger.create({trigger:sec,start:"top 60%",end:"bottom 40%",
       onToggle:self=>{ if(self.isActive){ gsap.to(document.body,{backgroundColor:sec.dataset.bg,color:sec.dataset.fg,duration:.7,ease:"none",overwrite:"auto"}); } }});
   });
-  const slides=gsap.utils.toArray("#s1stack .ph");
-  if(slides.length){
-    gsap.set(slides,{clipPath:"inset(100% 0 0 0)",opacity:0});
-    gsap.set(slides[0],{clipPath:"inset(0% 0 0 0)",opacity:1});
-    ScrollTrigger.create({trigger:"#s1 .pin-wrap",start:"top top",end:"bottom bottom",
-      onUpdate:self=>{const idx=Math.min(slides.length-1,Math.floor(self.progress*slides.length));
-        slides.forEach((s,i)=>gsap.to(s,{clipPath:i<=idx?"inset(0% 0 0 0)":"inset(100% 0 0 0)",opacity:i<=idx?1:0,duration:.6,ease:"power2.out",overwrite:"auto"}));}});
-  }
-  gsap.from("#s1 .text-block > *",{y:50,opacity:0,duration:1,stagger:.12,ease:"power3.out",scrollTrigger:{trigger:"#s1 .text-block",start:"top 75%"}});
-  gsap.utils.toArray("#s2grid .ph").forEach((ph,i)=>{ gsap.fromTo(ph,{scale:1.4,opacity:0,y:60},{scale:1,opacity:1,y:i===1?60:0,duration:1.3,ease:"power3.out",scrollTrigger:{trigger:"#s2grid",start:"top 80%"}}); });
-  revealOnScroll("#s2 .reveal");
-  const ov=document.querySelectorAll("#s3ov rect, #s3ov line, #s3ov path");
-  ov.forEach(p=>{const len=p.getTotalLength();p.style.strokeDasharray=len;p.style.strokeDashoffset=len;});
-  gsap.to(ov,{strokeDashoffset:0,duration:1.6,stagger:.12,ease:"power2.inOut",scrollTrigger:{trigger:"#s3",start:"top 60%"}});
-  revealOnScroll("#s3 .reveal");
-  document.querySelectorAll("#s3grid .ph").forEach(ph=>{
-    const ln=document.createElement("div"); ln.className="ln";
-    ln.innerHTML=`<svg viewBox="0 0 100 125" preserveAspectRatio="none" style="width:100%;height:100%"><g fill="none" stroke="rgba(158,63,57,.5)" stroke-width="1" vector-effect="non-scaling-stroke"><rect x="14" y="20" width="72" height="85"/><line x1="14" y1="62" x2="86" y2="62"/><line x1="50" y1="20" x2="50" y2="105"/><path d="M14,20 L50,62 L86,20"/></g></svg>`;
-    ph.appendChild(ln);
-    gsap.fromTo(ln,{opacity:0,scale:1.1},{opacity:.5,scale:1,duration:1.1,ease:"power2.out",scrollTrigger:{trigger:ph,start:"top 85%"}});
-  });
+  revealOnScroll("#s1 .reveal"); revealOnScroll("#s2 .reveal"); revealOnScroll("#about .reveal");
   gsap.from("#projGrid .proj-card",{y:60,opacity:0,duration:.9,stagger:.08,ease:"power3.out",scrollTrigger:{trigger:"#projGrid",start:"top 80%"}});
-  revealOnScroll("#about .reveal");
   gsap.from("#contact .ch",{x:30,opacity:0,duration:.8,stagger:.1,ease:"power3.out",scrollTrigger:{trigger:"#contact .channels",start:"top 80%"}});
   ScrollTrigger.refresh();
 } else { document.documentElement.classList.add("no-anim"); }
