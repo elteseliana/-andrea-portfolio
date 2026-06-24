@@ -21,13 +21,13 @@
 <style>
 :root{
   --cream:#F2EBDD; --sand:#E3D6BE; --oak:#C9AE86; --plaster:#ECE3D2; --stone:#D8CFBE;
-  --char:#2A2622; --ink:#211D18; --oxblood:#7E2B2B; --oxbloodlt:#A2413B;
+  --char:#2A2622; --ink:#211D18; --oxblood:#7E2B2B; --oxbloodlt:#9E3F39;
   --serif:'Cormorant Garamond', serif; --sans:'DM Sans', sans-serif; --he:'Heebo', sans-serif;
   --ease:cubic-bezier(.6,.01,.05,1); --pad:clamp(22px,6vw,120px); --accent:#7E2B2B;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:auto}
-body{background:#1A1611; color:var(--cream); font-family:var(--sans); font-weight:300; line-height:1.6; overflow-x:hidden; -webkit-font-smoothing:antialiased; transition:background-color .7s linear, color .7s linear}
+body{background:#EFE7D6; color:var(--char); font-family:var(--sans); font-weight:300; line-height:1.6; overflow-x:hidden; -webkit-font-smoothing:antialiased; transition:background-color .7s linear, color .7s linear}
 html[lang="he"] body{font-family:var(--he)}
 html[lang="he"] h1, html[lang="he"] h2, html[lang="he"] h3{font-family:var(--he); font-weight:400}
 ::selection{background:var(--oxblood); color:#fff}
@@ -54,37 +54,36 @@ html[lang="he"] .nav .logo span{display:none}
 .lang button{background:none; border:none; color:#fff; cursor:pointer; font:inherit; padding:3px 11px; border-radius:40px; opacity:.55; transition:.3s}
 .lang button.on{background:#fff; color:var(--ink); opacity:1}
 
-#webgl{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0; transition:opacity .6s ease; background:radial-gradient(125% 95% at 50% 20%, #2a2218 0%, #1d1812 55%, #14100b 100%)}
+#webgl{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0; transition:opacity .6s ease; background:radial-gradient(125% 95% at 50% 22%, #F3EEE3 0%, #ECE3D2 60%, #E2D6BE 100%)}
 body.hero-on #webgl{opacity:1}
 #webgl canvas{display:block; width:100%; height:100%}
 
-.hero-scroll{height:1000vh; position:relative; z-index:1}
+.hero-scroll{height:1100vh; position:relative; z-index:1}
 
 .hero-ui{position:fixed; inset:0; z-index:2; pointer-events:none; opacity:1; transition:opacity .5s ease}
 body:not(.hero-on) .hero-ui{opacity:0}
 .hero-head{position:absolute; top:50%; left:0; right:0; transform:translateY(-50%); text-align:center; padding:0 24px; will-change:opacity,transform}
-.hero-head .eyebrow{margin-bottom:24px; display:block; color:var(--oxbloodlt)}
-.hero-head h1{font-size:clamp(46px,9vw,150px); color:#fff; line-height:.95; font-weight:300; letter-spacing:-.02em; text-shadow:0 8px 60px rgba(10,7,4,.6)}
-.hero-head h1 em{font-style:italic; color:var(--oxbloodlt)}
-.hero-head .sub{margin-top:26px; font-family:var(--sans); letter-spacing:.34em; text-transform:uppercase; font-size:11px; color:rgba(255,255,255,.7)}
+.hero-head .eyebrow{margin-bottom:24px; display:block; color:var(--oxblood)}
+.hero-head h1{font-size:clamp(46px,9vw,150px); color:#2A2622; line-height:.95; font-weight:300; letter-spacing:-.02em}
+.hero-head h1 em{font-style:italic; color:var(--oxblood)}
+.hero-head .sub{margin-top:26px; font-family:var(--sans); letter-spacing:.34em; text-transform:uppercase; font-size:11px; color:rgba(42,38,34,.62)}
 html[lang="he"] .hero-head .sub{letter-spacing:.12em}
-.phase-tag{position:absolute; top:96px; left:50%; transform:translateX(-50%); font-family:var(--sans); font-size:10px; letter-spacing:.4em; text-transform:uppercase; color:var(--oxbloodlt); opacity:.85}
-.enter-hint{position:absolute; bottom:12vh; left:0; right:0; text-align:center; opacity:0; font-family:var(--sans); font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:#fff}
-.enter-hint b{display:block; font-family:var(--serif); font-size:30px; letter-spacing:0; text-transform:none; margin-bottom:8px; color:var(--oxbloodlt)}
+.phase-tag{position:absolute; top:96px; left:50%; transform:translateX(-50%); font-family:var(--sans); font-size:10px; letter-spacing:.4em; text-transform:uppercase; color:var(--oxblood); opacity:.85}
+.enter-hint{position:absolute; bottom:12vh; left:0; right:0; text-align:center; opacity:0; font-family:var(--sans); font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:#2A2622}
+.enter-hint b{display:block; font-family:var(--serif); font-size:30px; letter-spacing:0; text-transform:none; margin-bottom:8px; color:var(--oxblood)}
 .room-label{position:absolute; left:0; right:0; bottom:15vh; text-align:center; opacity:0; will-change:opacity}
 .room-label .rl-num{font-family:var(--sans); font-size:11px; letter-spacing:.4em; color:var(--oxblood)}
-.room-label .rl-name{font-family:var(--serif); font-size:clamp(40px,7vw,90px); color:#3a2e22; line-height:1; margin-top:8px; text-shadow:0 4px 30px rgba(255,250,240,.5)}
-.progress-rail{position:fixed; top:50%; right:26px; transform:translateY(-50%); height:120px; width:2px; background:rgba(140,120,100,.35); z-index:1001; overflow:hidden}
+.room-label .rl-name{font-family:var(--serif); font-size:clamp(40px,7vw,90px); color:#3a2e22; line-height:1; margin-top:8px; text-shadow:0 4px 26px rgba(255,250,240,.6)}
+.progress-rail{position:fixed; top:50%; right:26px; transform:translateY(-50%); height:120px; width:2px; background:rgba(120,100,80,.3); z-index:1001; overflow:hidden}
 html[lang="he"] .progress-rail{right:auto; left:26px}
 .progress-rail i{position:absolute; top:0; left:0; width:100%; height:0; background:var(--oxblood)}
 body:not(.hero-on) .progress-rail{opacity:0; transition:opacity .4s}
-.scroll-cue{position:absolute; bottom:34px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; font-family:var(--sans); font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:rgba(255,255,255,.6)}
-.scroll-cue .bar{width:1px; height:46px; background:linear-gradient(var(--oxbloodlt),transparent)}
+.scroll-cue{position:absolute; bottom:34px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; font-family:var(--sans); font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:rgba(42,38,34,.55)}
+.scroll-cue .bar{width:1px; height:46px; background:linear-gradient(var(--oxblood),transparent)}
 
 main{position:relative; z-index:3}
 section.block{position:relative}
 
-/* S1 */
 .s1{background:#F4EEE2; color:var(--char); --accent:#7E2B2B}
 .s1 .pin-wrap{display:grid; grid-template-columns:1fr 1fr; min-height:100vh}
 .s1 .sticky-col{position:sticky; top:0; height:100vh; display:flex; align-items:center; justify-content:center; padding:var(--pad); overflow:hidden}
@@ -99,7 +98,6 @@ section.block{position:relative}
 .s1 .meta b{display:block; font-family:var(--serif); font-size:38px; line-height:1}
 .s1 .meta small{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--oxblood)}
 
-/* S2 */
 .s2{background:#C9AE86; color:#332a1f; padding:14vh var(--pad) 16vh; overflow:hidden; --accent:#7E2B2B}
 .s2 .head{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; margin-bottom:8vh}
 .s2 h2{font-size:clamp(50px,8vw,128px); color:#3a2e20}
@@ -111,22 +109,20 @@ section.block{position:relative}
 .s2-grid .ph span{font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; opacity:.95}
 .s2-grid .ph i{position:absolute; inset:0; background:radial-gradient(circle at 70% 20%,rgba(255,255,255,.3),transparent 60%)}
 
-/* S3 */
-.s3{background:#221E1A; color:#fff; padding:16vh var(--pad); position:relative; overflow:hidden; --accent:#A2413B}
+.s3{background:#221E1A; color:#fff; padding:16vh var(--pad); position:relative; overflow:hidden; --accent:#9E3F39}
 .s3 .ov-svg{position:absolute; inset:0; width:100%; height:100%; pointer-events:none}
-.s3 .ov-svg path,.s3 .ov-svg line,.s3 .ov-svg rect{fill:none; stroke:rgba(162,65,59,.6); stroke-width:1; vector-effect:non-scaling-stroke; stroke-dasharray:1; stroke-dashoffset:1}
+.s3 .ov-svg path,.s3 .ov-svg line,.s3 .ov-svg rect{fill:none; stroke:rgba(158,63,57,.6); stroke-width:1; vector-effect:non-scaling-stroke; stroke-dasharray:1; stroke-dashoffset:1}
 .s3 .head{position:relative; z-index:2; margin-bottom:9vh}
 .s3 h2{font-size:clamp(56px,11vw,190px); line-height:.9}
 .s3 h2 em{font-style:italic; -webkit-text-stroke:1px #fff; color:transparent}
 .s3 .head p{max-width:360px; margin-top:24px; color:rgba(240,230,216,.7); font-size:16px}
-.s3-grid{position:relative; z-index:2; display:grid; grid-template-columns:repeat(3,1fr); gap:2px; border:1px solid rgba(162,65,59,.22)}
+.s3-grid{position:relative; z-index:2; display:grid; grid-template-columns:repeat(3,1fr); gap:2px; border:1px solid rgba(158,63,57,.22)}
 .s3-grid .ph{aspect-ratio:4/5; background:#2a241f; position:relative; overflow:hidden; display:flex; align-items:flex-end; padding:20px}
 .s3-grid .ph::before{content:''; position:absolute; inset:0; background:linear-gradient(180deg,#322b24,#1d1813)}
 .s3-grid .ph span{position:relative; z-index:2; font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(240,230,216,.6)}
 .s3-grid .ph .ln{position:absolute; inset:0; z-index:1; opacity:.5}
 
-/* projects */
-.projects{background:#1C1813; color:#fff; padding:16vh var(--pad); --accent:#A2413B}
+.projects{background:#1C1813; color:#fff; padding:16vh var(--pad); --accent:#9E3F39}
 .projects .head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6vh; flex-wrap:wrap; gap:20px}
 .projects h2{font-size:clamp(42px,6vw,92px)}
 .projects .head p{color:rgba(240,230,216,.55); max-width:320px}
@@ -140,7 +136,6 @@ section.block{position:relative}
 .proj-card::after{content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 120%,rgba(126,43,43,.28),transparent 60%); opacity:0; transition:.6s}
 .proj-card:hover::after{opacity:1}
 
-/* about */
 .about{background:#F4EEE2; color:var(--char); padding:18vh var(--pad); --accent:#7E2B2B}
 .about .wrap{display:grid; grid-template-columns:1.3fr .9fr; gap:8vw; align-items:center}
 .about h2{font-size:clamp(34px,4.4vw,68px); line-height:1.1; font-weight:300; max-width:18ch}
@@ -150,8 +145,7 @@ section.block{position:relative}
 .about .portrait{aspect-ratio:3/4; background:linear-gradient(160deg,#e7ddc9,#cdbb9c); border:1px solid rgba(126,43,43,.35); position:relative; display:flex; align-items:flex-end; padding:22px; box-shadow:0 40px 90px -50px rgba(60,40,30,.5)}
 .about .portrait span{font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(60,40,30,.55)}
 
-/* contact */
-.contact{background:#171310; color:#fff; padding:16vh var(--pad) 6vh; --accent:#A2413B}
+.contact{background:#171310; color:#fff; padding:16vh var(--pad) 6vh; --accent:#9E3F39}
 .contact .top{display:grid; grid-template-columns:1fr 1fr; gap:7vw}
 .contact h2{font-size:clamp(44px,6.5vw,104px); line-height:.95}
 .contact h2 em{font-style:italic; color:var(--oxbloodlt)}
@@ -194,7 +188,7 @@ footer{margin-top:14vh; padding-top:30px; border-top:1px solid rgba(255,255,255,
 }
 @media (max-width:560px){
   .s2-grid,.s3-grid,.proj-grid{grid-template-columns:1fr}
-  .hero-scroll{height:720vh}
+  .hero-scroll{height:800vh}
 }
 </style>
 </head>
@@ -362,7 +356,7 @@ const I18N={
   hero_sub:"Keep scrolling — the drawing becomes a home you walk through", scroll:"Scroll",
   enter_b:"Step inside", enter_s:"Keep scrolling ↓",
   ph_blueprint:"Blueprint", ph_drawing:"Drawing", ph_construction:"Construction", ph_walk:"Walkthrough",
-  r_entrance:"Entrance", r_living:"Living Room", r_kitchen:"Kitchen", r_bedroom:"Bedroom",
+  r_entrance:"Entrance", r_living:"Living Room", r_kitchen:"Kitchen", r_bedroom:"Bedroom", r_outdoor:"The Terrace",
   s1_eyebrow:"01 — Classic Architecture", s1_h2:"Built<br>to Last.",
   s1_p1:"Proportion, symmetry, and material honesty. Heritage homes that hold their dignity for generations — stone that ages with grace, light that knows how to enter a room.",
   s1_p2:"Every threshold is a decision. Classic does not mean old; it means resolved.",
@@ -389,7 +383,7 @@ const I18N={
   hero_sub:"המשיכו לגלול — השרטוט הופך לבית שאפשר לטייל בו", scroll:"גלילה",
   enter_b:"היכנסו פנימה", enter_s:"המשיכו לגלול ↓",
   ph_blueprint:"שרטוט", ph_drawing:"מתכננים", ph_construction:"בנייה", ph_walk:"סיור",
-  r_entrance:"כניסה", r_living:"סלון", r_kitchen:"מטבח", r_bedroom:"חדר שינה",
+  r_entrance:"כניסה", r_living:"סלון", r_kitchen:"מטבח", r_bedroom:"חדר שינה", r_outdoor:"המרפסת",
   s1_eyebrow:"01 — אדריכלות קלאסית", s1_h2:"בנוי<br>לנצח.",
   s1_p1:"פרופורציה, סימטריה וכנות חומרית. בתי מורשת ששומרים על כבודם לאורך דורות — אבן שמתיישנת בחן, אור שיודע להיכנס לחדר.",
   s1_p2:"כל מפתן הוא החלטה. קלאסי אינו ישן; קלאסי הוא מוגמר.",
@@ -449,7 +443,6 @@ const ss=(a,b,v)=>{const t=inv(a,b,v);return t*t*(3-2*t);};
 if(HAS3D){ try{ initThree(); }catch(e){ console.error("3D init failed:",e); document.documentElement.classList.add("no3d"); } }
 else { document.documentElement.classList.add("no3d"); }
 
-/* Universal hero scroll manager — works with OR without THREE/GSAP */
 (function setupHeroScroll(){
   const hs=document.getElementById("heroScroll");
   function upd(){
@@ -468,47 +461,44 @@ else { document.documentElement.classList.add("no3d"); }
 function initThree(){
   const holder=document.getElementById("webgl");
   const scene=new THREE.Scene();
-  const camera=new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 320);
+  const camera=new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 400);
   const renderer=new THREE.WebGLRenderer({antialias:true});
   renderer.setPixelRatio(Math.min(devicePixelRatio,2));
   renderer.setSize(innerWidth,innerHeight);
   holder.appendChild(renderer.domElement);
-  scene.fog=new THREE.Fog(0x1a1611, 18, 120);
+  scene.fog=new THREE.Fog(0xEFE7D6, 28, 175);
 
-  /* warm color journey: dark blueprint -> bright daylight home */
+  /* light & airy color journey (paper -> bright daylight) */
   const STOPS=[
-    {p:0.00,c:new THREE.Color(0x19150F)},
-    {p:0.12,c:new THREE.Color(0x2A2218)},
-    {p:0.26,c:new THREE.Color(0x6B5B45)},
-    {p:0.40,c:new THREE.Color(0xB6A283)},
-    {p:0.55,c:new THREE.Color(0xD9CCB0)},
-    {p:0.72,c:new THREE.Color(0xECE2CC)},
-    {p:1.00,c:new THREE.Color(0xF3EAD6)}
+    {p:0.00,c:new THREE.Color(0xEFE7D6)},
+    {p:0.20,c:new THREE.Color(0xF0EADC)},
+    {p:0.45,c:new THREE.Color(0xF2EDE1)},
+    {p:0.75,c:new THREE.Color(0xF4EFE6)},
+    {p:1.00,c:new THREE.Color(0xF5F1EA)}
   ];
   const _c=new THREE.Color();
   function bgAt(p){ for(let i=0;i<STOPS.length-1;i++){ if(p<=STOPS[i+1].p){const t=ss(STOPS[i].p,STOPS[i+1].p,p);return _c.copy(STOPS[i].c).lerp(STOPS[i+1].c,t);} } return _c.copy(STOPS[STOPS.length-1].c); }
 
   const walls=[], solids=[], wires=[], tickers=[];
-  const COL={ plaster:0xECE3D2, stone:0xD8CFBE, oak:0xC9AE86, oakDk:0x9A7B50, wood:0x7A5E3A,
-              linen:0xE8DECB, linen2:0xDED2BB, jute:0xC9B58C, rattan:0xC49A5E, black:0x201E1B,
-              olive:0x6E7A4E, pot:0xD3C7AE, oxblood:0x7E2B2B };
-  const WIRE=0xA2413B; // oxblood blueprint lines
-  const H=4.4, HW=8, ZB=-26, ZF=26;
+  const COL={ plaster:0xE8DEC9, stone:0xD7CDB8, oak:0xC7AC83, oakDk:0xA07E50, wood:0x7A5E3A,
+              linen:0xEAE1CF, linen2:0xDED3BC, oat:0xD9CCB2, taupe:0xC8BAA0, jute:0xC9B58C,
+              rattan:0xC49A5E, black:0x232220, olive:0x6F7B4E, oliveDk:0x586540, pot:0xD3C7AE,
+              water:0x84B7B0, deck:0xE2D9C5, towel:0xF1EBDD };
+  const WIRE=0x9E3F39; // oxblood blueprint lines on the warm paper
+  const H=5.4, HW=8, ZF=26, ZB=-26;
 
-  /* ---- arched opening path (manual points = predictable) ---- */
   function archHole(cx,bottom,ow,spring){
     const p=new THREE.Path();
     p.moveTo(cx-ow,bottom); p.lineTo(cx-ow,spring);
     const seg=18; for(let i=0;i<=seg;i++){ const a=Math.PI-(Math.PI*i/seg); p.lineTo(cx+Math.cos(a)*ow, spring+Math.sin(a)*ow); }
     p.lineTo(cx+ow,bottom); p.lineTo(cx-ow,bottom); return p;
   }
-  /* extruded wall (in local XY, thickness in Z), optional arched holes; rises on scroll */
   function archWall(W,th,holes,x,z,rotY,startP){
     const shape=new THREE.Shape();
     shape.moveTo(-W/2,0); shape.lineTo(W/2,0); shape.lineTo(W/2,H); shape.lineTo(-W/2,H); shape.lineTo(-W/2,0);
     (holes||[]).forEach(o=>shape.holes.push(archHole(o.cx,o.bottom,o.ow,o.spring)));
     const geo=new THREE.ExtrudeGeometry(shape,{depth:th,bevelEnabled:false,curveSegments:18}); geo.translate(0,0,-th/2);
-    const mat=new THREE.MeshStandardMaterial({color:COL.plaster,roughness:.97,metalness:0,transparent:true,opacity:0}); mat.userData={maxOp:1};
+    const mat=new THREE.MeshStandardMaterial({color:COL.plaster,roughness:.98,metalness:0,transparent:true,opacity:0}); mat.userData={maxOp:1};
     const mesh=new THREE.Mesh(geo,mat);
     const em=new THREE.LineBasicMaterial({color:WIRE,transparent:true,opacity:1});
     const wf=new THREE.LineSegments(new THREE.EdgesGeometry(geo),em);
@@ -516,134 +506,164 @@ function initThree(){
     scene.add(grp); walls.push({grp,startP}); solids.push(mat); wires.push(em);
   }
   function box(w,h,d,x,y,z,col,maxOp){
-    const mat=new THREE.MeshStandardMaterial({color:(col===undefined?0xCCC2B0:col),roughness:.8,metalness:.03,transparent:true,opacity:0}); mat.userData={maxOp:(maxOp===undefined?1:maxOp)};
+    const mat=new THREE.MeshStandardMaterial({color:(col===undefined?0xCCC2B0:col),roughness:.82,metalness:.03,transparent:true,opacity:0}); mat.userData={maxOp:(maxOp===undefined?1:maxOp)};
     const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat); m.position.set(x,y,z); scene.add(m); solids.push(mat); return m;
   }
   function plane(w,d,x,y,z,col,rotX,maxOp){
     const mat=new THREE.MeshStandardMaterial({color:(col===undefined?0xCCC2B0:col),roughness:.95,transparent:true,opacity:0,side:THREE.DoubleSide}); mat.userData={maxOp:(maxOp===undefined?1:maxOp)};
     const m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),mat); m.rotation.x=rotX; m.position.set(x,y,z); scene.add(m); solids.push(mat); return m;
   }
-  /* bright daylight glass */
+  function sph(r,x,y,z,col,maxOp,sy){
+    const mat=new THREE.MeshStandardMaterial({color:col,roughness:.9,transparent:true,opacity:0}); mat.userData={maxOp:(maxOp===undefined?1:maxOp)};
+    const m=new THREE.Mesh(new THREE.SphereGeometry(r,12,10),mat); m.position.set(x,y,z); m.scale.y=(sy||1); scene.add(m); solids.push(mat); return m;
+  }
+  function tree(x,z,scale){ const s=scale||1; box(0.22*s,1.7*s,0.22*s, x,0.85*s,z, 0x5b4a30); sph(0.9*s, x,1.9*s,z, COL.olive,.96,.85); sph(0.6*s, x+0.5*s,1.6*s,z+0.2*s, COL.oliveDk,.96,.85); box(0.85*s,0.7*s,0.85*s, x,0.35*s,z, COL.pot); }
   function glass(w,h,x,y,z,rotY){
-    const mat=new THREE.MeshBasicMaterial({color:0xF6F4EC,transparent:true,opacity:0,side:THREE.DoubleSide}); mat.userData={maxOp:.95};
+    const mat=new THREE.MeshBasicMaterial({color:0xF8F6EE,transparent:true,opacity:0,side:THREE.DoubleSide}); mat.userData={maxOp:.9};
     const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),mat); m.position.set(x,y,z); m.rotation.y=rotY||0; scene.add(m); solids.push(mat); return m;
   }
-  /* black steel arched window: glass + slim black mullions, set into a wall opening */
-  function steelWindow(x,z,axis,zc,ow,bottom,top){
-    // axis 'x' => window in side wall (faces along x), spans along z; 'z' => back wall faces -z, spans along x
-    const h=top-bottom, gy=bottom+h/2, gw=ow*2-0.2;
-    const rotY = axis==='x' ? Math.PI/2 : 0;
+  function steelWindow(x,z,axis,ow,bottom,top){
+    const h=top-bottom, gy=bottom+h/2, gw=ow*2-0.2, rotY=axis==='x'?Math.PI/2:0;
     glass(gw,h-0.1, x, gy, z, rotY);
-    const barC=COL.black;
-    const place=(bw,bh,bd,ox,oy,oz)=>box(bw,bh,bd, x+ox, gy+oy, z+oz, barC, 1);
-    if(axis==='x'){
-      // verticals run in Y, spaced along z; horizontal runs along z
-      [-gw/2, -gw/6, gw/6, gw/2].forEach(o=> place(0.06,h,0.06, 0,0, o));
-      place(0.06,0.06,gw, 0,0,0);
-      place(0.06,0.06,gw, 0,h/2-0.1,0);
-    } else {
-      [-gw/2,-gw/6,gw/6,gw/2].forEach(o=> place(0.06,h,0.06, o,0,0));
-      place(gw,0.06,0.06, 0,0,0);
-      place(gw,0.06,0.06, 0,h/2-0.1,0);
-    }
+    const place=(bw,bh,bd,ox,oy,oz)=>box(bw,bh,bd, x+ox, gy+oy, z+oz, COL.black, 1);
+    if(axis==='x'){ [-gw/2,-gw/6,gw/6,gw/2].forEach(o=>place(0.07,h,0.07,0,0,o)); place(0.07,0.07,gw,0,0,0); place(0.07,0.07,gw,0,h/2-0.1,0); }
+    else { [-gw/2,-gw/6,gw/6,gw/2].forEach(o=>place(0.07,h,0.07,o,0,0)); place(gw,0.07,0.07,0,0,0); place(gw,0.07,0.07,0,h/2-0.1,0); }
+  }
+  function water(w,d,x,y,z){
+    const mat=new THREE.MeshStandardMaterial({color:COL.water,roughness:.15,metalness:.25,transparent:true,opacity:0}); mat.userData={maxOp:.9};
+    const m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),mat); m.rotation.x=-Math.PI/2; m.position.set(x,y,z); scene.add(m); solids.push(mat); return m;
   }
 
-  /* ===== SHELL ===== */
-  // side walls with arched windows (windows at z = -10 living, 3 kitchen, 16 bedroom)
-  const sideWin=[{cx:-10,bottom:1.2,ow:1.5,spring:2.7},{cx:3,bottom:1.2,ow:1.5,spring:2.7},{cx:16,bottom:1.2,ow:1.5,spring:2.7}];
+  /* ===== SHELL (open plan, tall) ===== */
+  const sideWin=[{cx:-8,bottom:1.3,ow:1.7,spring:3.3},{cx:6,bottom:1.3,ow:1.7,spring:3.3},{cx:18,bottom:1.3,ow:1.7,spring:3.3}];
   archWall(52,0.3, sideWin, -HW,0, Math.PI/2, 0.03);
   archWall(52,0.3, sideWin,  HW,0,-Math.PI/2, 0.03);
-  // back wall with big arched window
-  archWall(16,0.3, [{cx:0,bottom:0.7,ow:2.4,spring:1.9}], 0,ZF, 0, 0.10);
-  // front wall with arched entrance door
-  archWall(16,0.3, [{cx:0,bottom:0,ow:1.7,spring:2.0}], 0,ZB, 0, 0.02);
-  // partitions with arched doorways
-  archWall(16,0.25, [{cx:0,bottom:0,ow:2.0,spring:1.9}], 0,-17, 0, 0.06);
-  archWall(16,0.25, [{cx:0,bottom:0,ow:2.0,spring:1.9}], 0,-4, 0, 0.12);
-  archWall(16,0.25, [{cx:0,bottom:0,ow:2.0,spring:1.9}], 0,10, 0, 0.18);
+  archWall(16,0.3, [{cx:0,bottom:0,ow:2.4,spring:2.7}], 0,ZF, 0, 0.10);     // back: arched french door to terrace
+  archWall(16,0.3, [{cx:0,bottom:0,ow:1.8,spring:2.3}], 0,ZB, 0, 0.02);     // front: arched entry
+  archWall(16,0.25,[{cx:0,bottom:0,ow:2.2,spring:2.5}], 0,-18, 0, 0.07);    // partition entry|great-room
+  archWall(16,0.25,[{cx:0,bottom:0,ow:2.2,spring:2.5}], 0,12, 0, 0.15);     // partition great-room|bedroom
 
-  // floor, ceiling, roof, site
-  plane(16,52, 0,0.0,0, COL.oak, -Math.PI/2, 1);
-  plane(16,52, 0,H,0, COL.plaster, Math.PI/2, .92);
-  box(17.4,0.3,53.4, 0,H+0.18,0, 0x6E5E48, 1);              // roof slab
-  plane(220,220, 0,-0.06,0, 0xCBBE9E, -Math.PI/2, 1);       // site ground (warm stone)
+  plane(16,52, 0,0.0,0, COL.oak, -Math.PI/2, 1);          // oak floor
+  plane(16,52, 0,H,0, COL.plaster, Math.PI/2, .92);       // ceiling
+  box(17.4,0.3,53.4, 0,H+0.18,0, 0xE7DCC4, 1);            // roof slab
+  plane(280,280, 0,-0.08,0, 0xCFC2A4, -Math.PI/2, 1);     // ground
 
-  // exposed wood beams across the ceiling
-  for(let z=-23; z<=24; z+=3.4){ box(16.4,0.34,0.5, 0, H-0.28, z, COL.oakDk, 1); }
-  box(0.5,0.4,52, -3.5,H-0.5,0, COL.wood,1); box(0.5,0.4,52, 3.5,H-0.5,0, COL.wood,1); // ridge runners
+  for(let z=-23; z<=24; z+=3.0){ box(16.4,0.36,0.5, 0,H-0.34,z, COL.oakDk, 1); } // beams
+  box(0.5,0.42,52, -3.6,H-0.58,0, COL.wood,1); box(0.5,0.42,52, 3.6,H-0.58,0, COL.wood,1);
 
-  // glass + steel for the windows
-  steelWindow(-HW,0,'x',-10,1.5,1.2,3.9); steelWindow(HW,0,'x',-10,1.5,1.2,3.9);
-  steelWindow(-HW,3,'x', 3,1.5,1.2,3.9);  steelWindow(HW,3,'x', 3,1.5,1.2,3.9);
-  steelWindow(-HW,16,'x',16,1.5,1.2,3.9); steelWindow(HW,16,'x',16,1.5,1.2,3.9);
-  steelWindow(0,ZF,'z',0,2.4,0.7,4.0);
+  // glass + steel for big windows / back door
+  steelWindow(-HW,-8,'x',1.7,1.3,4.6); steelWindow(HW,-8,'x',1.7,1.3,4.6);
+  steelWindow(-HW,6,'x',1.7,1.3,4.6);  steelWindow(HW,6,'x',1.7,1.3,4.6);
+  steelWindow(-HW,18,'x',1.7,1.3,4.6); steelWindow(HW,18,'x',1.7,1.3,4.6);
+  steelWindow(0,ZF,'z',2.4,0.1,5.2); // back french door glazing
 
-  /* ===== FURNITURE ===== */
-  // Entrance (z -26..-17)
-  box(2.4,0.85,0.5, 5.6,0.42,-22, COL.wood);
+  // accent stone wall behind kitchen-ish (left, great-room)
+  box(0.18,H-0.4,12, -7.85,(H-0.4)/2,4, COL.stone, 1);
+
+  /* ===== INTERIOR FURNITURE (warm neutrals, plush, organic) ===== */
+  // Entrance (z -26..-18)
+  box(2.6,0.85,0.5, 5.4,0.42,-22, COL.wood);
   box(3,0.05,2, 0,0.03,-21, COL.jute, .92);
-  box(0.2,1.7,0.2, -6.0,0.85,-21, 0x5b4a30); box(1.5,1.5,1.5, -6.0,2.1,-21, COL.olive,.95); box(0.85,0.7,0.85,-6.0,0.35,-21, COL.pot);
-  // Living (z -17..-4)
-  box(4.4,0.45,1.5, -4.4,0.45,-9, COL.linen);
-  box(4.4,0.65,0.35,-4.4,0.78,-9.75, COL.linen);
-  box(0.35,0.6,1.5,-6.6,0.55,-9, COL.linen2); box(0.35,0.6,1.5,-2.2,0.55,-9, COL.linen2);
-  box(0.7,0.45,0.55,-5.6,0.9,-9, COL.oxblood,1); box(0.7,0.45,0.55,-3.4,0.9,-9, COL.oxblood,1); // oxblood cushions
-  box(2.6,0.12,1.3,-5.0,0.86,-9.2, COL.oxblood,1); // oxblood throw
-  box(2.0,0.4,1.0, -3.8,0.2,-6.4, COL.wood);       // coffee table
-  box(5.2,0.05,3.4,-4.0,0.03,-9, COL.jute, .92);   // rug
-  box(3.2,0.5,0.5, 6.4,0.3,-9, COL.oak);           // media console
-  box(0.12,2.0,0.12,-6.8,1.0,-5.5, COL.wood); box(0.55,0.45,0.55,-6.8,2.1,-5.5, 0xF0E4C8,.92); // floor lamp
-  // Kitchen (z -4..10)
-  box(2.0,0.95,3.6, 2.2,0.475,3, COL.stone);       // island base
-  box(2.3,0.1,3.9, 2.2,1.0,3, COL.oak);            // island top
-  box(0.85,0.95,6.4, 6.9,0.475,3, COL.plaster);    // counter run (right)
-  box(0.5,0.85,5.6, 7.0,2.7,3, COL.oak,.97);       // upper cabinets
-  [1.0,3.0,5.0].forEach(zz=> box(0.45,0.55,0.45, 0.7,0.27,zz, COL.wood));   // stools
-  [1.4,3.0,4.6].forEach(zz=>{ box(0.04,1.0,0.04, 2.2,3.4,zz, 0x3a2f20); box(0.4,0.4,0.4, 2.2,2.75,zz, COL.rattan,1); }); // rattan pendants
-  box(0.5,0.5,0.5, 2.2,1.25,1.2, COL.olive,.95);   // herb on island
-  // Bedroom (z 10..26)
-  box(3.6,0.4,2.6, -2.8,0.2,18, COL.wood);         // bed base
-  box(3.4,0.35,2.5,-2.8,0.52,18, COL.linen);       // mattress
-  box(3.4,0.2,2.5, -2.8,0.7,18.3, COL.linen2,.96); // duvet
-  box(3.2,0.14,0.9,-2.8,0.66,19.7, COL.oxblood,1); // oxblood throw
-  box(3.6,1.2,0.2, -2.8,0.7,16.75, COL.linen);     // headboard
-  box(0.7,0.5,0.65,-4.9,0.27,17, COL.oak); box(0.7,0.5,0.65,-0.7,0.27,17, COL.oak);
-  box(0.6,2.6,3.4, 6.9,1.3,18, COL.oak,.97);       // wardrobe
-  box(4.2,0.05,2.8,-2.4,0.03,19, COL.jute, .92);   // rug
-  box(2.8,0.5,0.6, -2.8,0.27,20.4, COL.linen);     // bench
-  box(0.2,1.6,0.2, 6.0,0.8,23, 0x5b4a30); box(1.4,1.4,1.4, 6.0,2.0,23, COL.olive,.95); box(0.8,0.7,0.8,6.0,0.35,23, COL.pot); // bedroom olive
+  tree(-5.8,-21,1.0);
+  box(1.4,0.5,0.55, 5.4,1.2,-22, COL.taupe,.9);          // basket of branches mass
+  // Great-room — LIVING side (z -18..-4)
+  box(5.2,0.5,1.7, -3.4,0.4,-9, COL.linen);              // sectional main seat
+  box(5.2,0.7,0.35,-3.4,0.78,-9.8, COL.linen);           // back
+  box(1.7,0.5,3.2, -5.7,0.4,-6.5, COL.linen);            // chaise return
+  box(0.35,0.7,1.7,-6.1,0.6,-9, COL.linen2);             // arm
+  [[-5.6,-9],[-3.8,-9],[-2.2,-9],[-5.7,-7.5],[-5.7,-5.5]].forEach(c=> box(0.7,0.45,0.55, c[0],0.92,c[1], (Math.random>0? COL.oat:COL.taupe))); // cushions
+  box(0.7,0.45,0.55,-5.6,0.92,-9, COL.oat); box(0.7,0.45,0.55,-3.8,0.92,-9, COL.taupe); box(0.7,0.45,0.55,-2.4,0.92,-9, COL.oat);
+  box(2.4,0.42,1.2, -3.4,0.21,-6.0, COL.wood);           // chunky coffee table
+  box(6.2,0.05,4.4,-3.6,0.03,-8, COL.jute, .92);         // big rug
+  box(0.13,2.1,0.13,-7.0,1.05,-4.8, COL.wood); box(0.6,0.5,0.6,-7.0,2.2,-4.8, COL.linen2,.92); // floor lamp
+  tree(6.0,-15,0.95);                                    // plant near windows
+  box(3.0,0.5,0.45, 7.4,0.3,-9, COL.oak);                // console under window
+  // Great-room — KITCHEN side (z -4..12)
+  box(2.2,1.0,4.4, 2.0,0.5,4, COL.stone);                // island base (stone)
+  box(2.5,0.12,4.7,2.0,1.06,4, COL.oak);                 // island top (oak)
+  box(0.9,1.0,7.0, 7.2,0.5,4, COL.plaster);              // counter run (right)
+  box(0.55,0.9,6.2, 7.3,3.0,4, COL.oak,.97);             // upper cabinetry
+  box(2.2,1.3,1.0, 0.0,3.5,4, COL.plaster,1);            // plaster range hood
+  [1.4,4.0,6.6].forEach(zz=> box(0.5,0.6,0.5, 0.6,0.3,zz, COL.wood)); // stools
+  [1.6,4.0,6.4].forEach(zz=>{ box(0.05,1.3,0.05, 2.0,4.0,zz, 0x3a2f20); sph(0.32, 2.0,3.1,zz, COL.rattan,1,.9); }); // rattan pendants
+  box(0.55,0.45,0.55, 2.0,1.35,2.2, COL.olive,.95);      // herb on island
+  // Bedroom (z 12..26)
+  box(3.8,0.4,2.8, -2.8,0.2,19, COL.wood);               // bed base
+  box(3.6,0.4,2.7, -2.8,0.55,19, COL.linen);             // mattress
+  box(3.6,0.22,2.7,-2.8,0.78,19.3, COL.linen2,.96);      // duvet
+  [[-3.9,18.2],[-1.7,18.2],[-3.9,18.9],[-1.7,18.9]].forEach(c=> box(0.9,0.32,0.55, c[0],0.84,c[1], COL.oat)); // pillows
+  box(3.8,1.4,0.22, -2.8,0.85,17.55, COL.linen);         // upholstered headboard
+  box(0.7,0.5,0.65,-5.0,0.27,18, COL.oak); box(0.7,0.5,0.65,-0.6,0.27,18, COL.oak); // nightstands
+  box(0.6,2.7,3.6, 7.3,1.35,19, COL.oak,.97);            // wardrobe
+  box(4.4,0.05,3.0,-2.4,0.03,20, COL.jute, .92);         // rug
+  box(3.0,0.5,0.6, -2.8,0.27,21.5, COL.linen);           // bench
+  tree(6.0,23,0.95);
 
-  /* ===== LIGHTING (bright daylight) ===== */
-  scene.add(new THREE.HemisphereLight(0xFBF6EC, 0x6A5E4C, 1.15));
-  const sun=new THREE.DirectionalLight(0xFFF6E6, 1.25); sun.position.set(26,34,-14); scene.add(sun);
-  const sun2=new THREE.DirectionalLight(0xF3ECDC, 0.5); sun2.position.set(-20,24,20); scene.add(sun2);
-  // soft window light fills (ramp in with materials)
-  [[-7,2,-10],[7,2,-10],[-7,2,3],[7,2,3],[-7,2,16],[7,2,16],[0,2.4,24]].forEach(pp=>{
-    const pl=new THREE.PointLight(0xFFF3DD,0,20,2); pl.position.set(pp[0],pp[1],pp[2]); scene.add(pl);
-    tickers.push((p,sOp)=>{ pl.intensity=sOp*0.5; });
-  });
+  /* ===== OUTDOOR TERRACE (z 26..54) ===== */
+  plane(30,30, 0,0.02,40, COL.deck, -Math.PI/2, 1);                 // travertine deck
+  // pool (left)
+  box(9,0.5,20, -5.5,-0.02,40, COL.stone,1);                       // pool shell rim
+  water(8.2,19.2, -5.5,0.16,40);                                    // water
+  box(9.4,0.2,0.6, -5.5,0.18,29.7, COL.deck,1);                     // coping front
+  // sun loungers by pool (right edge of pool)
+  [34,39].forEach(zz=>{ box(0.9,0.3,2.2, -0.6,0.18,zz, COL.wood); box(0.9,0.12,2.2,-0.6,0.36,zz, COL.towel,1); box(0.9,0.5,0.5,-0.6,0.45,zz-1.0, COL.towel,1); });
+  box(0.6,0.4,0.6, -0.6,0.2,36.5, COL.wood);                       // side table between loungers
+  // pergola (right) posts + beams
+  [[2.5,30],[12.5,30],[2.5,49],[12.5,49]].forEach(c=> box(0.28,3.4,0.28, c[0],1.7,c[1], COL.wood));
+  for(let xx=2.5; xx<=12.5; xx+=2.5){ box(0.2,0.2,19.6, xx,3.4,39.5, COL.oakDk,1); }
+  box(10.4,0.22,0.25, 7.5,3.4,30, COL.wood,1); box(10.4,0.22,0.25, 7.5,3.4,49, COL.wood,1);
+  // outdoor lounge under pergola
+  box(4.4,0.45,1.6, 5.6,0.38,33, COL.linen);  box(4.4,0.6,0.3, 5.6,0.7,32.3, COL.linen);
+  box(1.6,0.45,3.0, 4.0,0.38,35, COL.linen);  // L return
+  [[4.4,33],[6.0,33],[4.0,35.5]].forEach(c=> box(0.7,0.45,0.55, c[0],0.85,c[1], COL.oat));
+  box(1.8,0.4,1.0, 6.2,0.2,35.4, COL.wood);   // outdoor coffee table
+  box(5.4,0.05,4.4, 5.6,0.05,34, COL.jute,.9);// outdoor rug
+  // dining (under pergola, mid)
+  box(3.4,0.16,1.3, 8.4,0.95,41, COL.oak); box(0.18,0.95,1.3,7.0,0.47,41,COL.wood); box(0.18,0.95,1.3,9.8,0.47,41,COL.wood);
+  [39.6,41,42.4].forEach(zz=>{ box(0.5,0.55,0.5, 7.0,0.27,zz, COL.wood); box(0.5,0.55,0.5, 9.8,0.27,zz, COL.wood); });
+  // outdoor bar + BBQ (back-right, near pergola edge)
+  box(4.2,1.0,0.8, 9.0,0.5,47.5, COL.stone);   // bar counter
+  box(4.2,0.1,0.9, 9.0,1.05,47.5, COL.oak);    // bar top
+  [7.8,9.0,10.2].forEach(xx=> box(0.45,0.6,0.45, xx,0.3,46.3, COL.wood)); // bar stools
+  box(2.0,1.1,0.7, 4.6,0.55,47.7, COL.black);  // BBQ grill body
+  box(2.1,0.18,0.8, 4.6,1.18,47.7, 0x35322d,1);// grill hood
+  box(0.5,1.0,0.5, 3.2,0.5,47.7, COL.stone);   // grill side cabinet
+  // greenery around the terrace
+  [[ -12,30,1.1],[-12,50,1.1],[13,30,1.0],[13.5,52,1.2],[0,52,1.0],[-2,30,0.8]].forEach(t=> tree(t[0],t[1],t[2]));
+  // low planters edging the deck
+  box(30,0.5,0.5, 0,0.25,54.5, COL.stone,1); box(0.5,0.5,29, -14.5,0.25,40, COL.stone,1); box(0.5,0.5,29, 14.5,0.25,40, COL.stone,1);
+  // warm lanterns (subtle ambiance)
+  [[5.6,34],[9.0,47.5],[-0.6,36.5],[8.4,41]].forEach(c=>{ box(0.22,0.34,0.22, c[0],0.95,c[1], 0xF3E2BC,1); const pl=new THREE.PointLight(0xFFE6B8,0,6,2); pl.position.set(c[0],1.1,c[1]); scene.add(pl); tickers.push((p,sOp)=>{ pl.intensity=sOp*0.5; }); });
 
-  /* ===== CAMERA PATH ===== */
+  /* ===== LIGHTING (bright, airy daylight) ===== */
+  scene.add(new THREE.HemisphereLight(0xFFFBF2, 0x9A8E76, 1.3));
+  const sun=new THREE.DirectionalLight(0xFFF7E8, 1.45); sun.position.set(30,40,18); scene.add(sun);
+  const fill=new THREE.DirectionalLight(0xF1ECDE, 0.55); fill.position.set(-24,26,-18); scene.add(fill);
+  [[-7,2.4,-9],[7,2.4,-9],[-7,2.4,6],[7,2.4,6],[-7,2.4,18],[7,2.4,18]].forEach(pp=>{ const pl=new THREE.PointLight(0xFFF4E0,0,22,2); pl.position.set(pp[0],pp[1],pp[2]); scene.add(pl); tickers.push((p,sOp)=>{ pl.intensity=sOp*0.4; }); });
+
+  /* ===== CAMERA PATH (blueprint -> build -> rooms -> out to terrace) ===== */
   const V=(x,y,z)=>new THREE.Vector3(x,y,z);
   const KF=[
-    {p:0.00, pos:V(26,34,2),    look:V(0,0,0)},
-    {p:0.10, pos:V(32,19,-42),  look:V(0,4,-8)},
-    {p:0.22, pos:V(27,11,-48),  look:V(0,4,-12)},
-    {p:0.34, pos:V(0,2.3,-40),  look:V(0,2.5,-26)},
-    {p:0.44, pos:V(0,1.7,-22),  look:V(0,1.8,-17)},
-    {p:0.54, pos:V(0,1.7,-13),  look:V(-2.2,1.6,-9)},
-    {p:0.63, pos:V(0.3,1.7,-8), look:V(0,1.6,-4)},
-    {p:0.72, pos:V(0,1.7,-1),   look:V(2.2,1.6,3)},
-    {p:0.80, pos:V(0,1.7,5),    look:V(0,1.6,10)},
-    {p:0.89, pos:V(0,1.7,13),   look:V(-2.2,1.6,18)},
-    {p:1.00, pos:V(0.7,1.65,18),look:V(2.6,1.55,26)}
+    {p:0.00, pos:V(28,42,2),    look:V(0,0,2)},
+    {p:0.10, pos:V(36,24,-46),  look:V(0,5,-6)},
+    {p:0.22, pos:V(30,13,-52),  look:V(0,5,-10)},
+    {p:0.34, pos:V(0,2.5,-42),  look:V(0,2.7,-26)},
+    {p:0.43, pos:V(0,1.75,-22), look:V(0,1.85,-17)},
+    {p:0.52, pos:V(0,1.75,-12), look:V(-2.4,1.6,-7)},
+    {p:0.60, pos:V(0.4,1.75,-6),look:V(0,1.6,-1)},
+    {p:0.68, pos:V(0,1.75,0),   look:V(2.4,1.6,5)},
+    {p:0.76, pos:V(0,1.75,8),   look:V(0,1.6,13)},
+    {p:0.83, pos:V(0,1.75,15),  look:V(-2.2,1.6,20)},
+    {p:0.89, pos:V(0,1.8,21),   look:V(0,1.75,27)},
+    {p:0.94, pos:V(0,1.95,30),  look:V(2,1.0,40)},
+    {p:1.00, pos:V(-6.5,3.0,31),look:V(4,0.3,45)}
   ];
   const _p=new THREE.Vector3(), _l=new THREE.Vector3();
   function camAt(p){
     let i=0; while(i<KF.length-2 && p>KF[i+1].p) i++;
     const a=KF[i], b=KF[i+1], t=ss(a.p,b.p,p);
     _p.copy(a.pos).lerp(b.pos,t); _l.copy(a.look).lerp(b.look,t);
-    if(p>0.42){ _p.y += Math.sin(p*48)*0.02; }
+    if(p>0.42 && p<0.9){ _p.y += Math.sin(p*46)*0.02; }
     camera.position.copy(_p); camera.lookAt(_l);
   }
 
@@ -651,14 +671,14 @@ function initThree(){
   const phaseTag=document.getElementById("phaseTag"), roomLabel=document.getElementById("roomLabel");
   const rlNum=document.getElementById("rlNum"), rlName=document.getElementById("rlName");
   const railFill=document.getElementById("railFill"), enterHint=document.getElementById("enterHint");
-  const ROOMS=[[0.42,0.54,"r_entrance","01"],[0.54,0.70,"r_living","02"],[0.70,0.84,"r_kitchen","03"],[0.84,1.001,"r_bedroom","04"]];
+  const ROOMS=[[0.41,0.52,"r_entrance","01"],[0.52,0.66,"r_living","02"],[0.66,0.79,"r_kitchen","03"],[0.79,0.89,"r_bedroom","04"],[0.89,1.001,"r_outdoor","05"]];
 
   function updateScene(p){
     const bg=bgAt(p); scene.background=bg.clone(); scene.fog.color.copy(bg);
     for(const w of walls){ w.grp.scale.y=Math.max(0.02, ss(w.startP,w.startP+0.18,p)); }
     const sOp=ss(0.22,0.40,p);
     for(const m of solids){ m.opacity=sOp*m.userData.maxOp; }
-    const wOp=1-ss(0.36,0.52,p)*0.88;
+    const wOp=1-ss(0.36,0.52,p)*0.9;
     for(const m of wires){ m.opacity=wOp; }
     for(const f of tickers){ f(p,sOp); }
     camAt(p);
@@ -708,7 +728,7 @@ if(HASGSAP){
   revealOnScroll("#s3 .reveal");
   document.querySelectorAll("#s3grid .ph").forEach(ph=>{
     const ln=document.createElement("div"); ln.className="ln";
-    ln.innerHTML=`<svg viewBox="0 0 100 125" preserveAspectRatio="none" style="width:100%;height:100%"><g fill="none" stroke="rgba(162,65,59,.5)" stroke-width="1" vector-effect="non-scaling-stroke"><rect x="14" y="20" width="72" height="85"/><line x1="14" y1="62" x2="86" y2="62"/><line x1="50" y1="20" x2="50" y2="105"/><path d="M14,20 L50,62 L86,20"/></g></svg>`;
+    ln.innerHTML=`<svg viewBox="0 0 100 125" preserveAspectRatio="none" style="width:100%;height:100%"><g fill="none" stroke="rgba(158,63,57,.5)" stroke-width="1" vector-effect="non-scaling-stroke"><rect x="14" y="20" width="72" height="85"/><line x1="14" y1="62" x2="86" y2="62"/><line x1="50" y1="20" x2="50" y2="105"/><path d="M14,20 L50,62 L86,20"/></g></svg>`;
     ph.appendChild(ln);
     gsap.fromTo(ln,{opacity:0,scale:1.1},{opacity:.5,scale:1,duration:1.1,ease:"power2.out",scrollTrigger:{trigger:ph,start:"top 85%"}});
   });
