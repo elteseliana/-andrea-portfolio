@@ -3,8 +3,8 @@
 Vite + vanilla JS, GSAP ScrollTrigger and Lenis. A full-screen `<canvas>` stays pinned for 700vh
 while scroll position scrubs through an image sequence made from the clips in `/footage`.
 
-> The clips in `/footage` right now are **placeholders** (a rendered cartoon car) so the pipeline
-> works end to end. Replace them with your real footage (see below).
+> The clips in `/footage` are currently generated from 3 stills in `/stills` (foamed → rinse → clean)
+> with crossfades and a slow push-in (`npm run stills`). Swap in real video any time (see below).
 
 ## Run locally
 ```bash
@@ -30,7 +30,10 @@ npm run build && npm run preview   # production build check
    `04-polish.mp4`, `05-reveal.mp4` (any of .mp4 .mov .m4v .webm works; only the number order matters).
 3. Run `npm run frames`. This rebuilds `public/frames/` (desktop and mobile sets),
    `public/frames/manifest.json` and `public/og-image.jpg`.
-   Options: `npm run frames -- --fps 24 --quality 80 --width 1920 --mobile-width 900 --mobile-step 2`
+   The npm script uses `--fps 16 --quality 65`: photo-real foam/spray frames are ~200 KB each, so
+   this keeps the desktop set around 50 MB (the page appears after ~5 MB; the rest streams in).
+   For fast real camera motion use more frames: `node scripts/extract-frames.mjs --fps 24 --quality 70`.
+   All options: `--fps --quality --width --mobile-width --mobile-step`
 4. `npm run dev`, scroll through, then commit and push. Vercel redeploys automatically.
 
 Notes:
@@ -41,7 +44,8 @@ Notes:
 - Shoot landscape with a locked-off or slow, steady camera. Shaky handheld footage looks jittery when scrubbed.
 - A new `version` is written to the manifest on every run, so browsers never show stale frames.
 - No ffmpeg? `brew install ffmpeg` (macOS), `sudo apt-get install -y ffmpeg` (Linux), `winget install Gyan.FFmpeg` (Windows).
-- To regenerate the placeholders: `npm run placeholder-footage` (needs Playwright).
+- Only have stills? Put exactly 3 same-angle images in `stills/` named `01-…`, `02-…`, `03-…`
+  (dirty/foamed → rinse → clean), then `npm run stills && npm run frames`.
 
 ## Deploy free on Vercel
 1. Push this repo to GitHub (the generated frames in `public/frames` are committed; Vercel has no ffmpeg).

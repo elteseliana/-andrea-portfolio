@@ -1,14 +1,14 @@
 {
-  "version": "mwgthqlc",
-  "fps": 24,
+  "version": "mwgtul9y",
+  "fps": 16,
   "desktop": {
-    "count": 360,
+    "count": 240,
     "width": 1920,
     "height": 1080,
     "path": "frames/desktop/"
   },
   "mobile": {
-    "count": 180,
+    "count": 120,
     "width": 900,
     "height": 506,
     "path": "frames/mobile/",
@@ -16,17 +16,17 @@
   },
   "clips": [
     {
-      "name": "01-dirty",
+      "name": "01-arrive",
       "from": 0,
       "to": 0.2
     },
     {
-      "name": "02-foam",
+      "name": "02-wash",
       "from": 0.2,
       "to": 0.4
     },
     {
-      "name": "03-rinse",
+      "name": "03-inspect",
       "from": 0.4,
       "to": 0.6
     },
