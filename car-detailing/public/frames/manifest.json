@@ -1,0 +1,44 @@
+{
+  "version": "mwgtul9y",
+  "fps": 16,
+  "desktop": {
+    "count": 240,
+    "width": 1920,
+    "height": 1080,
+    "path": "frames/desktop/"
+  },
+  "mobile": {
+    "count": 120,
+    "width": 900,
+    "height": 506,
+    "path": "frames/mobile/",
+    "step": 2
+  },
+  "clips": [
+    {
+      "name": "01-arrive",
+      "from": 0,
+      "to": 0.2
+    },
+    {
+      "name": "02-wash",
+      "from": 0.2,
+      "to": 0.4
+    },
+    {
+      "name": "03-inspect",
+      "from": 0.4,
+      "to": 0.6
+    },
+    {
+      "name": "04-polish",
+      "from": 0.6,
+      "to": 0.8
+    },
+    {
+      "name": "05-reveal",
+      "from": 0.8,
+      "to": 1
+    }
+  ]
+}
