@@ -20,14 +20,14 @@
   --bg:#16191d; --card:#1f2328; --card2:#272c32; --text:#e8e6e1; --muted:#a2a8b0;
   --border:#343a42; --accent:#6fb3b0; --accent-soft:#24393a; --accent-text:#0f1416;
   --ok:#6cc08d; --ok-soft:#1f3527; --bad:#e58a7d; --bad-soft:#3d2421; --warn:#e0b161; --warn-soft:#3b301c;
-  --src:#2a2619; --src-border:#5a4d2a; --shadow:none;
+  --src:#2a2619; --src-border:#5a4d2a; --shadow:none; color-scheme:dark;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#16191d; --card:#1f2328; --card2:#272c32; --text:#e8e6e1; --muted:#a2a8b0;
     --border:#343a42; --accent:#6fb3b0; --accent-soft:#24393a; --accent-text:#0f1416;
     --ok:#6cc08d; --ok-soft:#1f3527; --bad:#e58a7d; --bad-soft:#3d2421; --warn:#e0b161; --warn-soft:#3b301c;
-    --src:#2a2619; --src-border:#5a4d2a; --shadow:none;
+    --src:#2a2619; --src-border:#5a4d2a; --shadow:none; color-scheme:dark;
   }
 }
 :root[data-size="1"]{--fs:20px} :root[data-size="2"]{--fs:22px} :root[data-size="-1"]{--fs:16px}
@@ -47,7 +47,7 @@ bdi.he{unicode-bidi:isolate}
 .iconbtn{border:1px solid var(--border);background:var(--card);border-radius:12px;min-width:44px;height:44px;
   display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0 10px}
 .iconbtn svg{width:22px;height:22px}
-main{max-width:760px;margin:0 auto;padding:16px}
+main{max-width:760px;margin:0 auto;padding-block:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 /* ---------- bottom nav ---------- */
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--card);border-top:1px solid var(--border);
   display:flex;justify-content:space-around;padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
@@ -1679,12 +1679,12 @@ const DATA = {
   function dayTabs(d, on) {
     if (d.review) {
       return '<div class="tabs">' +
-        tab('#day/d5', 'Overview', on === 'over') + tab('#timeline', 'Timeline', on === 'tl') + tab('#terms', 'Key terms', on === 'terms') +
-        tab('#test/d5', 'Mock Bagrut', on === 'test') + tab('#test/random', 'Random mock', on === 'random') +
-        tab('#quiz/all', 'Quiz: all days', on === 'quiz') + tab('#cards/all', 'All cards', on === 'cards') + '</div>';
+        tab('#day--d5', 'Overview', on === 'over') + tab('#timeline', 'Timeline', on === 'tl') + tab('#terms', 'Key terms', on === 'terms') +
+        tab('#test--d5', 'Mock Bagrut', on === 'test') + tab('#test--random', 'Random mock', on === 'random') +
+        tab('#quiz--all', 'Quiz: all days', on === 'quiz') + tab('#cards--all', 'All cards', on === 'cards') + '</div>';
     }
-    return '<div class="tabs">' + tab('#day/' + d.id, 'Topics', on === 'topics') + tab('#cards/' + d.id, 'Flashcards', on === 'cards') +
-      tab('#quiz/' + d.id, 'Quiz', on === 'quiz') + tab('#test/' + d.id, 'Bagrut test', on === 'test') + '</div>';
+    return '<div class="tabs">' + tab('#day--' + d.id, 'Topics', on === 'topics') + tab('#cards--' + d.id, 'Flashcards', on === 'cards') +
+      tab('#quiz--' + d.id, 'Quiz', on === 'quiz') + tab('#test--' + d.id, 'Bagrut test', on === 'test') + '</div>';
     function tab(h, l, o) { return '<a href="' + h + '"' + (o ? ' class="on"' : '') + '>' + l + '</a>'; }
   }
   function zmrtMini() {
@@ -1703,7 +1703,7 @@ const DATA = {
     DAYS.forEach(function (d) {
       var isToday = todayDay && todayDay.id === d.id;
       var ts = testScore(d.bagrut);
-      var href = '#day/' + d.id;
+      var href = '#day--' + d.id;
       h += '<a class="card daycard' + (isToday ? ' today' : '') + '" href="' + href + '">' +
         '<div class="spread"><span class="num">' + esc(d.label) + ' · ' + esc(d.dayName) + '</span>' + (isToday ? '<span class="chip accent">Today</span>' : '') + '</div>' +
         '<div class="ttl">' + esc(d.title) + '</div>' + he('<span class="muted small">' + esc(d.he) + '</span>');
@@ -1739,12 +1739,12 @@ const DATA = {
     h += '<div class="card"><div class="spread"><b>Topics</b><span class="chip ' + (lc === d.topics.length ? 'ok' : 'accent') + '">' + lc + ' / ' + d.topics.length + ' learned</span></div><div class="tlist">';
     d.topics.forEach(function (t, i) {
       var on = !!S.learned[t.id];
-      h += '<a href="#topic/' + t.id + '"><span class="tick' + (on ? ' on' : '') + '">' + (on ? '✓' : (i + 1)) + '</span><span style="flex:1;min-width:0"><b>' + esc(t.title) + '</b>' + he('<span class="small muted">' + esc(t.he) + '</span>') + '</span></a>';
+      h += '<a href="#topic--' + t.id + '"><span class="tick' + (on ? ' on' : '') + '">' + (on ? '✓' : (i + 1)) + '</span><span style="flex:1;min-width:0"><b>' + esc(t.title) + '</b>' + he('<span class="small muted">' + esc(t.he) + '</span>') + '</span></a>';
     });
     h += '</div></div>';
     var ts = testScore(d.bagrut);
     h += '<div class="card"><h3>End-of-day Bagrut test</h3><p class="small muted" style="margin:0 0 10px">' + d.bagrut.length + ' questions · 100 points · tests only what ' + esc(d.label) + ' taught.' +
-      (ts.ans ? ' Your score so far: <b>' + ts.got + ' / ' + ts.tot + '</b> (' + ts.ans + ' answered).' : '') + '</p><a class="btn primary block" href="#test/' + d.id + '">Start the Bagrut test</a></div>';
+      (ts.ans ? ' Your score so far: <b>' + ts.got + ' / ' + ts.tot + '</b> (' + ts.ans + ' answered).' : '') + '</p><a class="btn primary block" href="#test--' + d.id + '">Start the Bagrut test</a></div>';
     return h;
   }
 
@@ -1753,14 +1753,14 @@ const DATA = {
     var h = '<p class="muted small" style="margin:0 2px 4px">Thursday</p><h2 style="margin:0 2px 2px">' + esc(d.title) + '</h2>' + he('<p class="muted" style="margin:0 2px 12px">' + esc(d.he) + '</p>') + dayTabs(d, 'over');
     h += '<div class="card"><h3>Thursday plan (about 60-90 min)</h3><ol style="padding-left:20px;margin:6px 0">' +
       '<li><a href="#timeline">Timeline</a>: hide the years and test yourself (15 min).</li>' +
-      '<li><a href="#terms">Key terms</a> or <a href="#cards/all">all flashcards</a> (15 min).</li>' +
-      '<li><a href="#test/d5">Full mock Bagrut</a>: 6 questions mixing all days, 100 points (45 min). Write, then check.</li>' +
+      '<li><a href="#terms">Key terms</a> or <a href="#cards--all">all flashcards</a> (15 min).</li>' +
+      '<li><a href="#test--d5">Full mock Bagrut</a>: 6 questions mixing all days, 100 points (45 min). Write, then check.</li>' +
       '<li><a href="#weak">Weak spots</a>: reread only those topics.</li></ol></div>';
     h += '<div class="card"><div class="spread"><h3 style="margin:0">Mock Bagrut</h3>' + (ts.ans ? '<span class="chip ' + chipFor(ts.pct) + '">' + ts.got + ' / ' + ts.tot + '</span>' : '') + '</div>' +
       '<p class="small muted">New questions that mix all 4 days, including a source question. Or build a random mock from all the day tests.</p>' +
-      '<div class="row"><a class="btn primary" href="#test/d5">Full mock Bagrut</a><a class="btn" href="#test/random">Random mock</a></div></div>';
+      '<div class="row"><a class="btn primary" href="#test--d5">Full mock Bagrut</a><a class="btn" href="#test--random">Random mock</a></div></div>';
     h += '<div class="card"><h3>Your days</h3>';
-    STUDY.forEach(function (x) { var s = testScore(x.bagrut); h += '<div class="spread" style="padding:6px 0"><a href="#day/' + x.id + '">' + esc(x.label) + ': ' + esc(x.title) + '</a><span class="chip ' + (s.ans ? chipFor(s.pct) : '') + '">' + (s.ans ? s.got + '/' + s.tot : 'not started') + '</span></div>'; });
+    STUDY.forEach(function (x) { var s = testScore(x.bagrut); h += '<div class="spread" style="padding:6px 0"><a href="#day--' + x.id + '">' + esc(x.label) + ': ' + esc(x.title) + '</a><span class="chip ' + (s.ans ? chipFor(s.pct) : '') + '">' + (s.ans ? s.got + '/' + s.tot : 'not started') + '</span></div>'; });
     h += '</div>';
     return h;
   }
@@ -1770,7 +1770,7 @@ const DATA = {
     var t = o.t, d = o.day, on = !!S.learned[t.id];
     var prev = d.topics[o.i - 1], next = d.topics[o.i + 1];
     var nq = d.bagrut.filter(function (q) { return q.topic === t.id; }).length;
-    var h = '<p class="muted small" style="margin:0 2px 4px"><a href="#day/' + d.id + '">' + esc(d.label) + '</a> · Topic ' + (o.i + 1) + ' of ' + d.topics.length + '</p>' +
+    var h = '<p class="muted small" style="margin:0 2px 4px"><a href="#day--' + d.id + '">' + esc(d.label) + '</a> · Topic ' + (o.i + 1) + ' of ' + d.topics.length + '</p>' +
       '<h2 style="margin:0 2px 2px">' + esc(t.title) + '</h2>' + he('<p class="muted" style="margin:0 2px 12px;font-weight:600">' + esc(t.he) + '</p>');
     h += '<div class="card"><div class="tiny muted" style="font-weight:700;letter-spacing:.05em;margin-bottom:6px">MAIN IDEA</div><div class="main-idea">' + fmt(t.main) + '</div>' +
       '<div class="tiny muted" style="font-weight:700;letter-spacing:.05em;margin:16px 0 0">KEY FACTS</div><ul class="facts">' + t.facts.map(function (f) { return '<li>' + fmt(f) + '</li>'; }).join('') + '</ul>';
@@ -1782,9 +1782,9 @@ const DATA = {
         (shown ? '<div class="answer rtl" dir="rtl" lang="he">' + paras(t.test.a) + '</div>' : '<button class="btn reveal" data-act="showTest" data-t="' + t.id + '">Show model answer</button>') + '</div>';
     }
     h += '<label class="learned card"><input type="checkbox" data-act="learn" data-t="' + t.id + '"' + (on ? ' checked' : '') + '> <span><b>Mark as learned</b><br><span class="small muted">I can explain this without looking.</span></span></label>';
-    if (nq) h += '<a class="btn block" style="margin-bottom:12px" href="#test/t/' + t.id + '">Practice Bagrut questions on this topic (' + nq + ')</a>';
-    h += '<div class="spread">' + (prev ? '<a class="btn" href="#topic/' + prev.id + '">← Previous</a>' : '<span></span>') +
-      (next ? '<a class="btn primary" href="#topic/' + next.id + '">Next topic →</a>' : '<a class="btn primary" href="#test/' + d.id + '">Bagrut test →</a>') + '</div>';
+    if (nq) h += '<a class="btn block" style="margin-bottom:12px" href="#test--t--' + t.id + '">Practice Bagrut questions on this topic (' + nq + ')</a>';
+    h += '<div class="spread">' + (prev ? '<a class="btn" href="#topic--' + prev.id + '">← Previous</a>' : '<span></span>') +
+      (next ? '<a class="btn primary" href="#topic--' + next.id + '">Next topic →</a>' : '<a class="btn primary" href="#test--' + d.id + '">Bagrut test →</a>') + '</div>';
     return h;
   }
 
@@ -1843,10 +1843,10 @@ const DATA = {
       (mixed ? '<span class="chip">' + esc(day.label) + '</span>' : '') + (r ? '<span class="chip ' + chipFor(r.pct) + '">Last: ' + r.got + '/' + q.pts + '</span>' : '') + '</div>';
     if (q.src) h += '<div class="src rtl" dir="rtl" lang="he">' + esc(q.src.text) + (q.src.cite ? '<cite>' + esc(q.src.cite) + '</cite>' : '') + '</div>';
     h += '<div class="qtext rtl" dir="rtl" lang="he">' + esc(q.q) + '</div>';
-    h += '<textarea dir="rtl" lang="he" data-draft="' + q.id + '" placeholder="כתבי כאן את התשובה שלך...">' + esc(S.drafts[q.id] || '') + '</textarea>';
+    h += '<textarea id="ans-' + q.id + '" dir="rtl" lang="he" data-draft="' + q.id + '" placeholder="כתבי כאן את התשובה שלך...">' + esc(S.drafts[q.id] || '') + '</textarea>';
     if (!u.open) {
       h += '<div class="row" style="margin-top:10px"><button class="btn primary" data-act="check" data-q="' + q.id + '">Check</button>' +
-        (topic ? '<a class="btn ghost small" href="#topic/' + topic.t.id + '">Review topic</a>' : '') + '</div>';
+        (topic ? '<a class="btn ghost small" href="#topic--' + topic.t.id + '">Review topic</a>' : '') + '</div>';
     } else {
       h += '<div class="model rtl" dir="rtl" lang="he"><div class="tiny muted" style="font-weight:700;margin-bottom:6px">תשובה לדוגמה</div>' + paras(q.model) + '</div>';
       h += '<div class="tiny muted" style="font-weight:700;margin:8px 0 2px">Tick the points your answer included:</div><ul class="keys rtl" dir="rtl" lang="he">';
@@ -1860,7 +1860,7 @@ const DATA = {
         var p = u.scored.pct;
         h += '<div class="result ' + pctClass(p) + '">' + u.scored.got + ' / ' + q.pts + ' points (' + p + '%)' +
           (p >= 80 ? ' · Great answer.' : p >= 55 ? ' · Good start; add the missing points.' : ' · Reread the topic and try again.') + '</div>' +
-          '<div class="row" style="margin-top:10px"><button class="btn" data-act="retry" data-q="' + q.id + '">Try again</button>' + (topic ? '<a class="btn ghost" href="#topic/' + topic.t.id + '">Review topic</a>' : '') + '</div>';
+          '<div class="row" style="margin-top:10px"><button class="btn" data-act="retry" data-q="' + q.id + '">Try again</button>' + (topic ? '<a class="btn ghost" href="#topic--' + topic.t.id + '">Review topic</a>' : '') + '</div>';
       }
     }
     return h + '</div>';
@@ -1877,10 +1877,10 @@ const DATA = {
   function vWeak() {
     var h = '<h2 style="margin:0 2px 6px">Weak spots</h2><p class="muted small" style="margin:0 2px 12px">Built from the key points you did not tick when scoring your Bagrut answers.</p>';
     var answered = ALLQ.filter(function (q) { return S.bq[q.id]; });
-    if (!answered.length) return h + '<div class="card empty">Nothing yet. Answer and score a few Bagrut questions first, and your weak spots will show up here.<br><br><a class="btn primary" href="#day/' + (todayDay ? todayDay.id : 'd1') + '">Go to today\'s day</a></div>';
+    if (!answered.length) return h + '<div class="card empty">Nothing yet. Answer and score a few Bagrut questions first, and your weak spots will show up here.<br><br><a class="btn primary" href="#day--' + (todayDay ? todayDay.id : 'd1') + '">Go to today\'s day</a></div>';
     var weakQ = answered.filter(function (q) { return S.bq[q.id].pct < 70; });
     h += '<div class="card"><div class="spread"><b>Questions under 70%</b><span class="chip ' + (weakQ.length ? 'bad' : 'ok') + '">' + weakQ.length + '</span></div>' +
-      (weakQ.length ? '<a class="btn primary block" style="margin-top:10px" href="#test/weak">Retry only these questions</a>' : '<p class="small muted" style="margin:6px 0 0">None. Nice work.</p>') + '</div>';
+      (weakQ.length ? '<a class="btn primary block" style="margin-top:10px" href="#test--weak">Retry only these questions</a>' : '<p class="small muted" style="margin:6px 0 0">None. Nice work.</p>') + '</div>';
     // topics
     var tp = {};
     answered.forEach(function (q) { var k = q.topic; tp[k] = tp[k] || { got: 0, tot: 0 }; tp[k].got += S.bq[q.id].got; tp[k].tot += q.pts; });
@@ -1889,7 +1889,7 @@ const DATA = {
     rows.forEach(function (r) {
       var t = TOPIC[r.k];
       var name = t ? esc(t.t.title) : 'Mixed (mock)';
-      h += '<div style="padding:8px 0;border-bottom:1px solid var(--border)"><div class="spread">' + (t ? '<a href="#topic/' + r.k + '">' + name + '</a>' : '<span>' + name + '</span>') + '<span class="chip ' + chipFor(r.p) + '">' + r.p + '%</span></div>' +
+      h += '<div style="padding:8px 0;border-bottom:1px solid var(--border)"><div class="spread">' + (t ? '<a href="#topic--' + r.k + '">' + name + '</a>' : '<span>' + name + '</span>') + '<span class="chip ' + chipFor(r.p) + '">' + r.p + '%</span></div>' +
         '<div class="bar" style="margin-top:6px"><i style="width:' + r.p + '%;background:var(--' + (r.p >= 80 ? 'ok' : r.p >= 55 ? 'warn' : 'bad') + ')"></i></div></div>';
     });
     h += '</div>';
@@ -1925,7 +1925,7 @@ const DATA = {
     var h = '<h2 style="margin:0 2px 10px">Flashcards</h2>';
     STUDY.concat([{ id: 'all', label: 'All days', title: 'Every term from days 1-4' }]).forEach(function (d) {
       var deck = deckFor(d.id), known = deck.filter(function (c) { return S.flash[c.k]; }).length;
-      h += '<a class="card daycard" href="#cards/' + d.id + '"><div class="spread"><b>' + esc(d.label) + '</b><span class="chip ' + (known === deck.length ? 'ok' : '') + '">' + known + ' / ' + deck.length + ' known</span></div><div class="small muted">' + esc(d.title) + '</div></a>';
+      h += '<a class="card daycard" href="#cards--' + d.id + '"><div class="spread"><b>' + esc(d.label) + '</b><span class="chip ' + (known === deck.length ? 'ok' : '') + '">' + known + ' / ' + deck.length + ' known</span></div><div class="small muted">' + esc(d.title) + '</div></a>';
     });
     return h;
   }
@@ -1957,7 +1957,7 @@ const DATA = {
   /* ---------- quiz ---------- */
   function vQuiz(arg) {
     if (!arg) return vQuizSetup();
-    var ids = arg === 'all' ? STUDY.map(function (d) { return d.id; }) : arg.split(',');
+    var ids = arg === 'all' ? STUDY.map(function (d) { return d.id; }) : arg.split(/[,-]/);
     if (!QZ || QZ.key !== arg) startQuiz(arg, ids);
     if (!QZ.items.length) return '<div class="card empty">No quiz questions for that choice.</div>';
     var d = ids.length === 1 ? dayById(ids[0]) : (arg === 'all' ? REVIEW : null);
@@ -2052,18 +2052,18 @@ const DATA = {
   /* ======================= ROUTER ======================= */
   var TITLES = { home: 'History Bagrut', quiz: 'Quick quiz', cards: 'Flashcards', weak: 'Weak spots', zmrt: 'How to answer', timeline: 'Timeline', terms: 'Key terms' };
   function render() {
-    var h = (location.hash || '#home').slice(1).split('/');
+    var h = (location.hash || '#home').slice(1).split(/--|\//);
     var v = h[0] || 'home', a = h[1], b = h[2], html = '', title = TITLES[v] || 'History Bagrut', parent = '#home';
     app._test = null;
     if (v === 'day' && dayById(a)) { html = vDay(dayById(a)); title = dayById(a).label + ' · ' + dayById(a).dayName; }
-    else if (v === 'topic') { html = vTopic(a); if (TOPIC[a]) { title = TOPIC[a].day.label + ' · Topic'; parent = '#day/' + TOPIC[a].day.id; } }
-    else if (v === 'test') { html = vTest(a, b); title = 'Bagrut practice'; if (dayById(a)) parent = '#day/' + a; else if (a === 't' && TOPIC[b]) parent = '#topic/' + b; else if (a === 'random') parent = '#day/d5'; else parent = '#weak'; }
-    else if (v === 'cards') { html = vCards(a); if (a) parent = a === 'all' ? '#cards' : '#day/' + a; }
-    else if (v === 'quiz') { html = vQuiz(a); if (a) parent = a === 'all' ? '#day/d5' : (dayById(a) ? '#day/' + a : '#quiz'); }
+    else if (v === 'topic') { html = vTopic(a); if (TOPIC[a]) { title = TOPIC[a].day.label + ' · Topic'; parent = '#day--' + TOPIC[a].day.id; } }
+    else if (v === 'test') { html = vTest(a, b); title = 'Bagrut practice'; if (dayById(a)) parent = '#day--' + a; else if (a === 't' && TOPIC[b]) parent = '#topic--' + b; else if (a === 'random') parent = '#day--d5'; else parent = '#weak'; }
+    else if (v === 'cards') { html = vCards(a); if (a) parent = a === 'all' ? '#cards' : '#day--' + a; }
+    else if (v === 'quiz') { html = vQuiz(a); if (a) parent = a === 'all' ? '#day--d5' : (dayById(a) ? '#day--' + a : '#quiz'); }
     else if (v === 'weak') html = vWeak();
     else if (v === 'zmrt') html = vZmrt();
-    else if (v === 'timeline') { html = vTimeline(); parent = '#day/d5'; }
-    else if (v === 'terms') { html = vTerms(); parent = '#day/d5'; }
+    else if (v === 'timeline') { html = vTimeline(); parent = '#day--d5'; }
+    else if (v === 'terms') { html = vTerms(); parent = '#day--d5'; }
     else if (v === 'home') html = vHome();
     else html = vNotFound();
     app.innerHTML = html;
@@ -2078,13 +2078,19 @@ const DATA = {
   }
 
   /* ======================= EVENTS ======================= */
+  function armed(el, msg) {
+    if (el.dataset.armed) return true;
+    el.dataset.armed = '1'; var old = el.textContent; el.textContent = msg; el.classList.add('bad');
+    setTimeout(function () { if (el.isConnected) { delete el.dataset.armed; el.textContent = old; if (!/resetAll/.test(el.dataset.act)) el.classList.remove('bad'); } }, 4000);
+    return false;
+  }
   document.addEventListener('click', function (e) {
     var el = e.target.closest('[data-act]'); if (!el) return;
     var act = el.dataset.act, id = el.dataset.q;
     if (act === 'back') { location.hash = el.dataset.to || '#home'; return; }
     if (act === 'theme') { S.theme = { auto: 'dark', dark: 'light', light: 'auto' }[S.theme] || 'auto'; applyPrefs(); save(); toast('Theme: ' + S.theme); if (location.hash === '' || location.hash === '#home') render(); return; }
     if (act === 'size') { S.size = { '0': 1, '1': 2, '2': -1, '-1': 0 }[String(S.size)]; applyPrefs(); save(); toast('Text size ' + ({ '-1': 'small', '0': 'normal', '1': 'large', '2': 'extra large' })[String(S.size)]); return; }
-    if (act === 'resetAll') { if (confirm('Delete ALL saved progress, answers and scores on this device?')) { localStorage.removeItem(KEY); S = load(); UI = {}; FC = null; QZ = null; applyPrefs(); render(); toast('Progress reset'); } return; }
+    if (act === 'resetAll') { if (armed(el, 'Tap again to delete everything')) { localStorage.removeItem(KEY); S = load(); UI = {}; FC = null; QZ = null; applyPrefs(); render(); toast('Progress reset'); } return; }
     if (act === 'showTest') { UI['t:' + el.dataset.t] = true; render(); return; }
     if (act === 'check') { UI[id] = { open: true, ticks: QBY[id].q.keys.map(function () { return false; }) }; save(); refreshQ(id); return; }
     if (act === 'score') {
@@ -2098,7 +2104,7 @@ const DATA = {
     if (act === 'retry') { UI[id] = { open: false }; refreshQ(id); var ta = document.querySelector('[data-draft="' + id + '"]'); if (ta) ta.focus(); return; }
     if (act === 'clearTest') {
       var T = testList(el.dataset.w, el.dataset.a);
-      if (T && confirm('Clear your written answers and scores for this test?')) { T.list.forEach(function (q) { delete S.bq[q.id]; delete S.drafts[q.id]; delete UI[q.id]; }); save(); render(); toast('Test cleared'); }
+      if (T && armed(el, 'Tap again to clear this test')) { T.list.forEach(function (q) { delete S.bq[q.id]; delete S.drafts[q.id]; delete UI[q.id]; }); save(); render(); toast('Test cleared'); }
       return;
     }
     if (act === 'newMock') { newRandomMock(); S.rmock.forEach(function (x) { delete UI[x]; }); render(); toast('New random mock'); return; }
@@ -2111,7 +2117,7 @@ const DATA = {
     if (act === 'cardsAll') { startCards(FC.id, true); render(); return; }
     if (act === 'cardsReset') { FC.deck.forEach(function (c) { delete S.flash[c.k]; }); save(); startCards(FC.id, true); render(); return; }
     if (act === 'qsel') { var d = el.dataset.d, s = S.quizSel || [], i = s.indexOf(d); if (i >= 0) s.splice(i, 1); else s.push(d); S.quizSel = s; save(); render(); return; }
-    if (act === 'qstart') { var key = STUDY.map(function (x) { return x.id; }).filter(function (x) { return S.quizSel.indexOf(x) >= 0; }).join(','); QZ = null; location.hash = '#quiz/' + key; return; }
+    if (act === 'qstart') { var key = STUDY.map(function (x) { return x.id; }).filter(function (x) { return S.quizSel.indexOf(x) >= 0; }).join('-'); QZ = null; location.hash = '#quiz--' + key; return; }
     if (act === 'pick') {
       var it = QZ.items[QZ.i]; if (it.picked !== undefined) return;
       it.picked = +el.dataset.o; it.right = it.picked === it.q.a; if (it.right) QZ.score++;
