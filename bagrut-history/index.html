@@ -106,6 +106,12 @@ button.chip.sel{background:var(--accent);color:var(--accent-text);border-color:v
 .tlist a:last-child{border-bottom:0}
 .tick{flex:0 0 28px;height:28px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.8em}
 .tick.on{background:var(--ok);border-color:var(--ok);color:#fff}
+/* lessons */
+.lesson p{margin:0 0 14px;line-height:1.7}
+.remember{background:var(--ok-soft);border-radius:12px;padding:12px 14px;margin:12px 0}
+.examtip{background:var(--warn-soft);border-radius:12px;padding:12px 14px;margin:12px 0}
+.remember b{color:var(--ok)} .examtip b{color:var(--warn)}
+.remember ul,.examtip ul{margin:6px 0 0;padding-left:20px} .remember li,.examtip li{margin:0 0 6px}
 /* booklet pairs */
 .pair{border-bottom:1px solid var(--border);padding:12px 0}
 .pair:last-child{border-bottom:0}
@@ -2683,6 +2689,760 @@ const DATA = {
   }
   ] /* end days */
 }; /* end DATA */
+/* =====================================================================
+   FULL LESSONS – a detailed English explanation of every booklet topic.
+   LESSONS['topic-id'] = { story: [paragraphs], remember: [...], exam: [...] }
+   ===================================================================== */
+const LESSONS = {};
+
+/* ---------------- CHAPTER 1: Germany becomes totalitarian ---------------- */
+LESSONS['c1-t1'] = {
+  story: [
+    `**First, what does "totalitarian" mean?** A {משטר טוטליטרי} is a regime that wants **total** control: not only over the government, but over every part of a person's life – what he reads, what his children learn, what job he has, even what he thinks. The opposite is a **democracy** {דמוקרטיה}, where power is split between the government, the parliament and the courts, there are many parties, and people have rights. The booklet's whole first chapter answers one question: **how did Germany turn from a democracy (the Weimar Republic) into a totalitarian state in about a year and a half?** It gives 6 features. This topic covers the first two.`,
+    `**Where we start: January 1933.** Hitler was appointed chancellor ({קנצלר} = head of the government) by President Hindenburg. But being chancellor did not give him total power yet – there was still a parliament (the {רייכסטאג}), other parties, and laws. So the very next day he called **new elections**, hoping to win a big majority that would let him do whatever he wanted.`,
+    `**The election campaign was violent.** The {ס"א} (SA, "storm troopers") was the Nazi party's private army of street fighters. During the campaign they beat and threatened opponents, **especially communists**, who were the Nazis' main political rivals.`,
+    `**The Reichstag fire.** A week before the election, the parliament building burned. The Nazis immediately said "the communists did it" and arrested many communist party members. (Booklet p.7 adds that in reality SS men set the fire.) The fire gave Hitler an excuse to say Germany was in an emergency. **Even after all this, the Nazis got only 44%** – less than half. This number matters: it shows most Germans did *not* vote for the Nazis, and that Hitler took total power by *other* means, not by winning a majority.`,
+    `**The Enabling Act ({חוק ההסמכה}), March 1933** – the most important law of the chapter. "Enabling" = it *enabled* the government to pass laws **without the parliament**. In a democracy laws must be voted on in parliament; after this act Hitler could simply write laws himself. The booklet says it was passed while SA and SS men surrounded and threatened the members of parliament. **From this moment, the booklet says, Germany became totalitarian.** Learn that sentence.`,
+    `**Getting rid of all other parties.** Next Hitler passed {החוק להגנת אחדות המפלגה והרייך} – "the Law to Protect the Unity of the Party and the Reich". It banned every party except the Nazi party. ({רייך} = "empire/state" in German, here meaning Germany.) Then he held **new elections with only one party on the ballot** – of course the Nazis "won" **95%** and every seat. So the parliament still existed on paper but was empty of opposition.`,
+    `**Why did he bother with laws at all?** This is a favorite idea of the booklet: Hitler knew that **Germans value law and order** ({חוק וסדר}). If he had simply grabbed power by force, many Germans would have objected. Because every extreme step was made "legal", most Germans accepted it. So the legal-looking path was a *strategy*.`,
+    `**Feature 2: one leader – {עקרון המנהיג} and the personality cult.** Hitler held that one man should lead the state in every field, so the cabinet (the ministers) hardly ever met – decisions came from him. In 1933 he declared **{אחדות המפלגה והמדינה}** – unity of party and state: the head of the Nazi party *is* the head of the state, with all powers. In 1934, when President Hindenburg died, Hitler also took the president's job – now there was nobody above him at all.`,
+    `**{האחדה – נאציפיקציה}.** {האחדה} means "making things one/uniform"; "nazification" means making something Nazi. Hitler made the **state and the party identical**: every public body – government offices, universities, the police – was filled with Nazi party people and had to follow Nazi values. The slogan that sums it up: **"עם אחד, מדינה אחת, מנהיג אחד"** – "One people, one state, one leader" (in German: *Ein Volk, ein Reich, ein Führer*).`,
+    `**The personality cult ({פולחן אישיות}).** "Cult" = worship. Germans were taught to worship Hitler almost like a god: he was a charismatic speaker; people believed he was a genius who never made mistakes; his birthday was a national holiday; he was presented as a simple Aryan who loves music and children. People called him "Mein Führer" (my leader) and ended conversations with "Heil Hitler" and a raised arm. The peak was the **mass rallies** – huge, carefully staged events with marching, drums, music and symbols, where Hitler spoke like a messenger from heaven.`,
+    `**A clever detail:** Hitler gave **unclear orders**. His officials then competed to guess what he "really" wanted and to please him. That way, when something failed, Hitler could say it wasn't his decision – he **escaped responsibility**, and his image as a leader who never errs stayed clean.`
+  ],
+  remember: [
+    `The 6 features (booklet box): {מפלגה, מנהיג, טרור, חינוך ותעמולה, מדיניות כלכלית, שליטה על אמצעי נשק}.`,
+    `Reichstag fire → blamed on communists → only **44%** → **Enabling Act (March 1933) = Germany becomes totalitarian** → one-party law → 95%.`,
+    `Unity of party and state (1933); Hitler also president (1934); "One people, one state, one leader".`,
+    `Everything done "by law" because Germans value law and order.`
+  ],
+  exam: [
+    `"הצג שתי דרכים שסייעו לנאצים לבסס את שליטתם" → Enabling Act / one-party law / personality cult are perfect answers: give the year, what it said, and explain how it gave Hitler total control.`,
+    `If asked "why did Germans accept it?" → the legality strategy (law and order) + hope he'd end the crisis (see topic 5).`
+  ]
+};
+
+LESSONS['c1-t2'] = {
+  story: [
+    `**Feature 3: terror ({טרור}).** Laws were not enough – Hitler also needed people to be **afraid** to oppose him. He had two armed organizations: the **SA** ({ס"א}) – the street army of the party – and the **SS** ({ס"ס}) – originally Hitler's bodyguard (founded 1925), which became the elite force of the regime, headed by Himmler.`,
+    `**Dachau ({דכאו}) – the first concentration camp.** It was opened in the **very first week** of Nazi rule in 1933. Notice the order: before the Nazis did anything to the Jews, they built a camp for their **political opponents**. The official idea was to "re-educate" them through labor – the sign "Arbeit macht frei", {העבודה משחררת} ("work sets you free"). Who was sent there, in order: first **communists**, then **religious people (clergy)**, **homosexuals**, **alcoholics**, and finally **Jews**.`,
+    `**Why Dachau matters (3 reasons the booklet gives):** (1) It was the **model** – later camps copied it: uniforms, prisoner numbers, harsh punishments, beatings and starvation. (2) It **broke people**: someone released from Dachau was so broken he never dared oppose the regime again – that's exactly the goal of terror. (3) It was a **training camp for the SS** – the same SS men later ran the extermination camps. Bodies of dead prisoners were burned and the ashes sent to the family – on purpose, to frighten everyone else.`,
+    `**The Night of the Long Knives ({ליל הסכינים הארוכות}), 1934.** By 1934 the SA had become huge and its leaders were seen as a threat. In one planned night, **the SS attacked the SA**, accusing its leaders of plotting a revolt, and the SA was effectively destroyed. Why would Hitler destroy his own party's army? Because the message to all of Germany was clear: **if Hitler destroys even his own people when they look like a threat, anyone who opposes him even a little will be crushed.** (Don't confuse it with Kristallnacht – the "Night of Broken Glass" against the Jews in 1938.)`,
+    `**More SS units.** The {ס"ד} – the SS intelligence service – among other things checked people's "racial purity". And the **Gestapo** ({הגסטאפו}) – the secret state police. Its special weapon was **informing** ({הלשנה}): it encouraged people to report on friends, neighbors and even family. When you can't trust your own neighbor, nobody dares organize opposition. That is how terror controls a whole society.`
+  ],
+  remember: [
+    `SA = party street army (1921); SS = Hitler's guard (1925) → elite terror force; Himmler heads the SS (1929).`,
+    `Dachau: first week of rule, 1933; opponents first, Jews last; model camp; SS training ground.`,
+    `Night of the Long Knives 1934: SS destroys SA → "anyone who opposes will be crushed".`,
+    `Gestapo = secret police; encouraged informing on friends, neighbors, family.`
+  ],
+  exam: [
+    `"Terror" is one of the best answers for "ways the Nazis established their rule": name Dachau + Gestapo + Night of the Long Knives, then explain: fear → no opposition.`
+  ]
+};
+
+LESSONS['c1-t3'] = {
+  story: [
+    `**Feature 4: education and propaganda ({חינוך ותעמולה}).** Terror controls people's actions; education and propaganda control their **minds**. A totalitarian regime wants people to *believe* in it, not just obey it.`,
+    `**Children.** Hitler saw children as {נכס לאומה} – an asset of the nation – and as **future soldiers**. The booklet gives his **order of priorities** for education, and the order itself teaches you the ideology: (1) **building the body** through lots of sport – because a strong race needs strong bodies; (2) traits like **courage and cruelty** – cruelty was a *goal*, because soldiers must not pity the enemy; (3) the **"world of the spirit"**, meaning Nazi ideology; (4) only last, **academic studies**. Notice: knowledge came last – a thinking person might ask questions.`,
+    `**The schools.** History was taught through **race theory**. The Nazis opened **elite schools** to train future leaders in discipline and order, and every school stressed the state, Nazi values and **obedience to Hitler**. **Every child had to join the Hitler Youth** ({ההיטלר יוגנד}) – the only legal youth movement – so children spent their free time inside Nazi ideology too. Boys were trained to defend Germany; girls to keep the family and have many healthy Aryan children.`,
+    `**Universities.** The booklet notes extreme nationalism was there even before Hitler. From 1933 the **Civil Service Law** ({חוק הפקידות}) banned Jews from working in universities. All staff had to be Nazis; anyone who refused to swear loyalty to Hitler and the party was fired and hunted by the Gestapo. Subjects were rewritten to fit the ideology – "German economics", "German biology" – science itself had to be "racial".`,
+    `**Culture and art.** The "Reich Chamber of Culture" ({לשכת הרייך לתרבות}) had a department for each art. Writers, painters and musicians had to swear loyalty to Hitler; refusers were exiled or sent to a camp. In 1933 the **students' union** organized the **book burning** ({שריפת ספרים}): millions of books by Jewish and communist writers were burned. (Chapter 4 adds: ~20,000 books at Opera Square, Berlin; Heine's warning "where they burn books they will in the end burn people".)`,
+    `**Propaganda.** Hitler founded the **Propaganda Ministry** headed by **Joseph Goebbels** ({גבלס}). Three core messages: (1) Hitler was sent by Providence ({ההשגחה העליונה}) to save Germany; (2) the Aryan race is the supreme race; (3) the Jews are the source of all evil and weakness and must be harmed in every way. The tools: mass rallies, newspapers, radio and cinema. The booklet's famous example: the regime handed out **cheap or free radios that could receive only one channel**, which broadcast Hitler's speeches. A "gift" that was really a propaganda machine in every home.`
+  ],
+  remember: [
+    `Priorities: body → courage & cruelty → ideology → studies.`,
+    `Hitler Youth – compulsory; elite schools; boys = soldiers, girls = mothers of Aryan children.`,
+    `1933: Civil Service Law (no Jews in universities); book burning by the students' union.`,
+    `Goebbels' Propaganda Ministry; one-channel radio.`
+  ],
+  exam: [
+    `"Education and propaganda" as a way to establish rule: example (Hitler Youth / one-channel radio) + explain: it created a generation that believed in Nazism and obeyed Hitler.`
+  ]
+};
+
+LESSONS['c1-t4'] = {
+  story: [
+    `**Feature 5: the economy ({מדיניות כלכלית}).** Remember why Hitler came to power: Germany was in deep economic crisis (the world crisis of 1929) with about **6 million unemployed**. If the Nazis could give people jobs, people would support them. Hitler wanted to **centralize everything** – so the government, not private owners, would control the economy.`,
+    `**The Four-Year Plan ({תוכנית ארבע השנים}).** The government took all economic powers and promised work for everyone. How? **Public works** ({עבודות ציבוריות}) – projects the state pays for: building **fast highways** (the Autobahn) and **producing weapons**. Notice that weapons production is already a hint at war.`,
+    `**Workers lost their freedom.** Trade unions ({איגודים מקצועיים} – organizations of workers that protect their rights) were banned, except the Nazi union, and the **right to strike was abolished**. In a totalitarian state workers can't organize against the government.`,
+    `**1936: a second Four-Year Plan** – this time openly to **prepare the economy and the army for war**, so that Germany could produce everything itself and not depend on imports ({יבוא}). Why does that matter? In a war, enemies blockade you; a country that depends on imports can be starved. **Result:** the policy "worked" – within two years most of the 6 million unemployed had jobs and living standards rose, which made the regime popular.`,
+    `**Feature 6: monopoly on weapons ({מונופול על כלי הנשק}).** "Monopoly" = only one has it. A dictator must make sure **every person with a gun** is loyal to him, so nobody can overthrow him. Step 1 – the **police**: **Göring**, minister of the interior, made the police Nazi by appointing SA and SS commanders, and told police to ignore SA violence. Step 2 – after the Night of the Long Knives, **Himmler** became commander of **all** police forces (SA, SS, Gestapo) and purged anyone anti-Nazi.`,
+    `Step 3 – the **army**: in **1934** came the **nazification of the army** – every soldier had to swear loyalty **to Hitler personally**, not to Germany or the constitution. That's a huge difference: the army now served one man. In **1935** Hitler restored **compulsory conscription** ({גיוס חובה}), which the Treaty of Versailles had banned – Germans saw this as restoring their national honor. He also appointed loyal Nazi commanders. **Result: every armed person in Germany was loyal to Hitler.**`
+  ],
+  remember: [
+    `Four-Year Plan: jobs via highways + weapons; unions banned, no strikes; 1936 second plan = war preparation; most of 6 million unemployed got work.`,
+    `Weapons: Göring (police) → Himmler (all police forces) → army swears loyalty to Hitler (1934) → conscription (1935, against Versailles).`
+  ],
+  exam: [
+    `Economy is an easy "way to establish rule": public works gave jobs → satisfied citizens supported the regime.`,
+    `Army oath to Hitler personally = the strongest example of "control of weapons".`
+  ]
+};
+
+LESSONS['c1-t5'] = {
+  story: [
+    `**This topic is the "story so far" – how Nazism rose, year by year (booklet p.7).** Read it as a chain of causes.`,
+    `**1919 – Versailles and Weimar.** Germany lost World War I. The peace treaty, the **Treaty of Versailles** ({חוזה ורסאי}), punished Germany: land taken, a small army only, huge payments. At the same time Germany became a democracy, the **Weimar Republic** ({רפובליקת ויימאר}). Many Germans linked the new democracy with the humiliation, because its leaders signed the treaty.`,
+    `**1920-1925 – the party grows.** 1920: Hitler becomes leader of the National Socialist (Nazi) party. 1921: the **SA** is founded – violence against opponents from the start. 1922: Germany's **Jewish foreign minister** (Walther Rathenau) is murdered – a sign of how violent the right-wing antisemitic atmosphere already was. 1923: Hitler tries a **coup** (an armed takeover) – it fails and he goes to prison. 1924: **in prison he writes "Mein Kampf"** ("My Struggle"), laying out his principles and how to achieve them. Lesson he learned: take power **legally**, not by a coup. 1925: the **SS** is founded as Hitler's bodyguard; Hindenburg is elected president.`,
+    `**1929 – the crisis.** A world economic crisis hits; millions lose their jobs. Himmler takes over the SS. Crisis is exactly when extreme parties grow, because desperate people want someone who promises a solution.`,
+    `**1933 – power.** President Hindenburg appoints Hitler chancellor because of Germany's hard situation, thinking Hitler might get Germany out of the crisis. **1934:** Hitler also becomes president and begins openly breaking Versailles (rebuilding the army, a pact with Poland). **1935:** agreement with Italy. **1936:** agreement with Austria and the **Berlin Olympics**. **1938:** Germany **annexes Austria** and part of Czechoslovakia. **1 September 1939:** Germany invades Poland – **World War II begins**.`,
+    `**Why did so many Germans welcome the Nazis?** The booklet gives exactly **two reasons**, and they're asked often: (1) **the crisis** – Germany was in deep crisis after WWI, and many hoped the Nazis would pull it out; (2) **national honor** – they hoped the Nazis would restore the honor that was humiliated when the Weimar government signed Versailles. One is economic, one is emotional/national.`,
+    `**The timeline on p.11** splits everything into two tracks: **domestic policy** ({מדיניות פנים} – inside Germany: the fire, the Enabling Act, Dachau, one party, the Night of the Long Knives) and **foreign policy** ({מדיניות חוץ} – outside: leaving the League of Nations, pacts, annexing Austria and the Sudetenland, invading Poland). Good to know the difference between the two words.`
+  ],
+  remember: [
+    `1919 Versailles/Weimar · 1920 Hitler leads party · 1921 SA · 1923 failed coup · 1924 Mein Kampf · 1925 SS · 1929 crisis · 1933 chancellor · 1934 president · 1936 Olympics · 1938 Austria · 1.9.1939 Poland.`,
+    `Two reasons Germans welcomed Hitler: hope to end the crisis + restore national honor after Versailles.`
+  ],
+  exam: [
+    `"הסבר שתי סיבות לכך שרבים קיבלו את הנאצים בהתלהבות" – give both reasons and connect each to WWI.`
+  ]
+};
+
+LESSONS['c1-t6'] = {
+  story: [
+    `**This page (p.7-8) is your ready-made answer bank.** The booklet lists **11 ways** the Nazis established their control in the 1930s and turned Germany totalitarian. Bagrut questions usually ask for **two** of them – so you should know all 11 and be able to explain any two well.`,
+    `**Group them so they're easy to remember:** **Legal/political steps (1-5):** (1) the Reichstag fire → emergency decrees that cancelled democracy; (2) the Enabling Act → Hitler legislates alone (passed under SA/SS threats; "from here Germany is totalitarian"); (3) the one-party law; (4) elections with only the Nazi party; (5) unity of party and state – the party leader is the state leader with no other authority. **Control of minds (6, 8, 9):** (6) personality cult; (8) education – youth movements whose first goal was to teach Nazi ideology; (9) propaganda. **Fear (7):** terror – Dachau, the Gestapo, the Night of the Long Knives. **Control of resources and force (10-11):** (10) all economic powers to the government; (11) nazification of the army (1934) – all arms bearers swore loyalty to Hitler.`,
+    `**How to write it on the test (זמר"ת + הסבר):** pick a way, give **when** (1933/1934), **what** exactly happened, and then **explain how it strengthened the regime** – e.g. "the Enabling Act let Hitler pass laws without parliament, so there was no longer any democratic check on him" or "terror made people afraid to oppose, so no opposition could organize". The explanation is where most points are lost – always say *how* it gave control.`
+  ],
+  remember: [
+    `11 ways = fire, Enabling Act, one-party law, one-party elections, party-state unity, personality cult, terror, education, propaganda, economy, army.`
+  ],
+  exam: [
+    `Booklet p.20 Q1 asks exactly this, plus "two steps against the Jews" (boycott 1933, Nuremberg 1935).`
+  ]
+};
+
+/* ---------------- CHAPTER 2: Nazi ideology ---------------- */
+LESSONS['c2-t1'] = {
+  story: [
+    `**What is an ideology?** {אידיאולוגיה} = a set of ideas and a worldview about how the world works and how it should be. The booklet stresses that Nazi ideology wasn't just talk: it **guided everything the Nazis did**. So when a question asks "explain how X expresses Nazi ideology", you connect an action back to these ideas.`,
+    `**Race theory ({תורת הגזע}) – the central principle.** The Nazis claimed humanity is divided into **races**, and three things are true about them: (1) races are **inborn** ({מולדים}) – you're born into one; (2) they are **ranked** ({מדרג}) – some are worth more than others; (3) they **can't change** – "if you're Aryan you can't become Slavic", and a Jew can't stop being a Jew. This third point is what made Nazi antisemitism so deadly: no conversion, no assimilation could save anyone.`,
+    `**The ranking.** At the top: the **Aryan race** – "supreme, pure and ruling", the **creator of culture**. In the middle: e.g. the **Slavic race** (Poles, Russians) – an inferior "slave race" whose job is to **serve** the Aryans. At the bottom: the **Jews** – not even a real race but a **"sub-race"** ({תת-גזע}), "harmful", "destroyers of culture", dangerous to the whole of society and the whole world. The pyramid on p.8 lists: Aryan, Nordic, Anglo-Saxon, Slavic, Black, Gypsy – and puts the Jews outside it as an "anti-race".`,
+    `**It became official.** Race theory became the **official ideology of the state**, and all the state's resources were used to spread it – schools, propaganda, laws. That's the connection to chapter 1: education and propaganda were tools for race theory.`,
+    `**The Jew as the opposite of the Aryan in three areas** (a typical exam detail): **appearance** ({חיצונית}) – the Aryan fair, blue-eyed, with a beautiful face and body; the "Semite" dark-skinned and dark-haired, "ugly"; **culture** ({תרבותית}) – the Aryan *creates* culture, the Semite *destroys* it, like a parasite ({טפיל}); **morality** ({מוסרית}) – the Aryan is good, beautiful and right, the Semite evil, crude and vile. Of course none of this is science – it's propaganda dressed up as science.`,
+    `**The struggle between races.** The Nazis believed there is a **natural and necessary struggle** between races, like in nature – **the strong survives** (this is twisted "social Darwinism"). Only through this struggle can the supreme race reach its potential. Therefore **race purity** ({טוהר הגזע}) is crucial: any mixing of races "damages" the supreme race and humanity. This is the logic behind the later ban on marriage between Jews and Germans (Nuremberg Laws) and behind Operation T4.`,
+    `**History explained by race.** In "Mein Kampf" Hitler claimed **all of history** can be explained by race – for example, he said Germany lost WWI because the Aryan race had mixed with inferior races and didn't keep its blood pure. So in his mind, "fixing" Germany meant purifying the race.`
+  ],
+  remember: [
+    `Races: inborn, ranked, unchangeable.`,
+    `Aryans = create culture (rule); Slavs = slaves (serve); Jews = sub-race, destroy culture.`,
+    `Jew vs Aryan: appearance, culture, morality.`,
+    `Natural struggle – strong survives → keep the race pure.`
+  ],
+  exam: [
+    `To explain any Nazi law or action, connect it to race theory: "because the Nazis believed the Jews were a harmful race that can't change, they..."`
+  ]
+};
+
+LESSONS['c2-t2'] = {
+  story: [
+    `**Volk ({פולק}) = "people/nation" in German.** In Nazi ideology the **nation is the supreme value** ({ערך עליון}), and the individual must sacrifice himself for it. Compare with democracy, where the individual's rights come first. In Nazism the individual counts only as part of the Volk.`,
+    `**From culture to race.** The booklet's title for this section is "מפולקיזם ללאומיות גזעית" – from "Volkism" to **racial nationalism**. At first Germans thought of their nation in terms of **culture** (language, traditions). The Nazis changed it to **biology and race** – you belong to the German nation only by **blood**. That's why a German Jew whose family lived in Germany for centuries could not be "German" in Nazi eyes.`,
+    `**The Third Reich ({הרייך השלישי}).** "Reich" = empire. The first Reich was the medieval Holy Roman Empire, the second was the German Empire of 1871-1918. Hitler wanted a **third** one: to make Germany a powerful empire again and **rule the whole world forever** – that's why it was also called **"the thousand-year Reich"**. For it to succeed this time, three conditions: keep the Aryan race **pure**, **remove the "sub-humans" (the Jews)**, and **enslave** the rest of humanity according to the race ladder. Notice that the plan to remove the Jews is written into the very idea of the Reich.`,
+    `**The ideal Nazi man and woman.** **The man:** physically strong, tough, connected to nature, acting on his instincts and drives (not on conscience or pity), founding a healthy traditional family. **The woman:** her role is to give birth to **racially pure children**, raise them in Nazi ideology and keep the family – the famous German slogan "Kinder, Küche, Kirche" ({מטבח, ילדים, כנסייה} – kitchen, children, church).`,
+    `**The posters on p.9.** "Winterhilfswerk – Ein Volk hilft sich selbst!" ("A people helps itself!") shows a perfect Aryan family – the Volk caring for its own. The "60,000 RM" poster shows a disabled man and says he costs the people 60,000 Reichsmarks – propaganda to make Germans see disabled people as a burden. That prepares you for T4 (next topic).`,
+    `**A new world without Jewish-Christian morality.** The Nazis wanted a new world built on "blood and soil" ({דם ואדמה}) – connection to German blood and German land. And they wanted to **cut off from Jewish-Christian morality** – values like mercy, helping the weak, the equal value of every person. In their new world, the only thing that matters is the **power of the supreme race**. This explains why they saw Judaism itself (not only Jews) as an enemy.`
+  ],
+  remember: [
+    `Volk = nation as supreme value; defined by race/blood.`,
+    `Third Reich = thousand-year empire ruling the world; needs pure race + removing Jews + enslaving others.`,
+    `Ideal man: strong, tough, instinctive; ideal woman: pure children, Nazi education, family.`,
+    `Cut off from Jewish-Christian morality; power of the supreme race above all.`
+  ],
+  exam: [
+    `Useful for explaining why the Nazis attacked the disabled (T4) and Jews: the individual has no value, only the race/nation.`
+  ]
+};
+
+LESSONS['c2-t3'] = {
+  story: [
+    `**Operation T4 – "euthanasia" ({אותנוזיה}) or "mercy killing" ({המתת חסד}).** The name is a lie: "mercy killing" sounds kind, but it was murder of disabled people. (T4 comes from the address of its office in Berlin, Tiergartenstraße 4.) The booklet presents it as **one of the ways the Nazis put their ideology into practice regarding race purity** – and it's important because it was a "rehearsal" for the murder of the Jews: gas, lies to families, doctors and officials carrying out killing.`,
+    `**Step 1 – sterilization.** Hitler believed that to keep the race "pure", "damaged" people must not be allowed to have children. So the regime **sterilized** ({עיקור} – an operation that makes a person unable to have children) about **400,000 people**, mainly people with disabilities.`,
+    `**Step 2 – murder (from 1939).** Then they began **murdering** people with physical disabilities and the mentally ill ({חולי נפש}). They were killed **by gas or poison**, and families were told the person died of something ordinary, like **pneumonia**. This lie is typical: the Nazis hid their crimes.`,
+    `**It leaked – and it was stopped (officially).** Word of the killings got out and **the church protested**. The operation was officially stopped – but it **continued secretly until the end of the war**, and about **200,000** people were murdered. A powerful point: public protest *did* have an effect here. When it came to the Jews, there was almost no such protest.`,
+    `**The booklet's question: which principles of Nazi ideology does T4 express?** (1) **Race theory / race purity** – "damaged" people must not pass on their genes; (2) **the struggle where the strong survives** – the weak have no right to live; (3) **the Volk above the individual** – a disabled person is seen only as a "cost" to the nation (the 60,000 RM poster); (4) **cutting off from Jewish-Christian morality** – no mercy for the weak.`
+  ],
+  remember: [
+    `~400,000 sterilized; from 1939 disabled & mentally ill murdered by gas/poison; families told "pneumonia".`,
+    `Church protested → officially stopped, secretly continued → ~200,000 murdered.`
+  ],
+  exam: [
+    `Booklet p.9 question – answer with at least two principles and explain each with a detail of T4.`
+  ]
+};
+
+LESSONS['c2-t4'] = {
+  story: [
+    `**Living space – {מרחב מחיה} (Lebensraum).** Hitler said the German nation needs **more land**: it must **conquer additional territories in Europe** where Aryans will live and find **sources of existence** ({מקורות קיום} – food, raw materials). Some of these lands had belonged to Germany before WWI (taken by Versailles), so this also connected to "fixing" the humiliation of 1919.`,
+    `**Why?** So that the German nation would have room for all its "national and creative forces", and so the Aryan race could **multiply and grow** in the conquered lands. And because Hitler wanted Germany to be a **world power** ({מעצמה}) – and in his view a power must hold a large territory.`,
+    `**The connection to race theory (very important).** Where is this land? **In the East** – Poland and the Soviet Union – where the **Slavs** live. According to race theory the Slavs are an inferior race that should **serve** the Aryans. So conquering their land and enslaving or expelling them is, in Nazi logic, "natural": the strong race takes from the weak. That's why the booklet later explains the invasions of Poland (1939) and the USSR (1941 – Barbarossa) partly by living space.`,
+    `**And the connection to the Jews:** the territories in the East were exactly where **millions of Jews** lived. Every conquest for living space brought millions more Jews under Nazi rule – which is how living space led to the ghettos (Poland) and the mass murder (USSR).`
+  ],
+  remember: [
+    `Lebensraum = conquer land in Europe (East) for the Aryan race to grow; make Germany a power.`,
+    `Link: race theory says Slavs should serve Aryans → taking their land is "natural".`,
+    `Link to the Jews: the East = where millions of Jews lived.`
+  ],
+  exam: [
+    `Booklet p.39 Q6: two steps against the Jews influenced by living space → conquest of Poland (ghettos), Barbarossa (shooting pits).`
+  ]
+};
+/* ---------------- CHAPTER 3: Antisemitism ---------------- */
+LESSONS['c3-t1'] = {
+  story: [
+    `**The big picture of this chapter.** Hatred of Jews existed for thousands of years, but it changed form three times: **traditional Jew-hatred** ({שנאת ישראל המסורתית}) → **modern antisemitism** ({אנטישמיות מודרנית}) → **Nazi antisemitism** ({אנטישמיות נאצית}). For each one, the booklet asks the same four questions: **why** did they hate (causes), **is there a solution** for the Jew, **how** was the hatred expressed, and **what was the goal**. If you learn the chapter as this 3×4 grid, you can answer any comparison question.`,
+    `**"עשו שונא ליעקב".** The booklet opens with a midrash: "It is a known rule that Esau hates Jacob" (Sifrei Bamidbar). The point: Jew-hatred is **not a German invention**. In every period Jews were a target because they were **strangers** ({זרים}), **different** ({שונים}) and **weak** ({חלשים}) – a minority without a state or army to protect it.`,
+    `**Where the word "antisemitism" comes from.** **Anti** = against; **Semite** = the "Semitic race", descendants of **Shem son of Noah**, which the Jews were said to represent. The word was coined in **1878** by **Wilhelm Marr**, a German journalist. Notice that the word itself is *racial* – it talks about a "Semitic race", not about a religion. That shows how modern antisemitism thought in terms of race.`,
+    `**Traditional Jew-hatred (ancient times and the Middle Ages) had two causes.** (1) **Religious** ({גורם דתי}): in the ancient world most people worshipped idols and only the Jews believed in one God – they were different. Later, in the Middle Ages, **Christians blamed the Jews for killing Jesus** and for refusing to accept Christianity. (2) **Economic** ({גורם כלכלי}): Christian rulers barred Jews from most professions (they couldn't own land or join guilds), so many Jews were pushed into **moneylending at interest** ({הלוואה בריבית}) – which the Church forbade Christians to do. Then people hated them for it: "the Jew sucks our blood and exploits us".`,
+    `**The key point: traditional hatred had a solution.** Because it was about **religion**, a Jew could **convert to Christianity** ({להתנצר}) – and then he was accepted into society and the hatred stopped. The booklet's table puts it harshly: the Jew "could choose to convert or to die". This "way out" is the main thing that disappears later.`
+  ],
+  remember: [
+    `3 types × 4 questions: causes, solution, expression, goal.`,
+    `"Antisemitism" = anti + Semite (Shem); Wilhelm Marr, 1878.`,
+    `Traditional: religious (one God; "killed Jesus") + economic (moneylending) → solution: conversion.`
+  ],
+  exam: [
+    `Booklet p.20 Q3: "על מה מבוססת שנאת ישראל המסורתית" → religious + economic; mention the solution (conversion).`
+  ]
+};
+
+LESSONS['c3-t2'] = {
+  story: [
+    `**Modern antisemitism (18th-19th centuries) – what changed?** Europe changed: religion lost its power and **science** became the authority. So hatred of Jews needed a new, "scientific" justification. That justification was **race theory** – **pseudo-science** ({פסבדו-מדעי} = pretending to be scientific). "Scientists" of the time claimed humanity is divided into races whose differences can be measured (skull shapes, etc.).`,
+    `**Why this is so dangerous:** if Jews are a *race*, then **conversion doesn't help** – you can change your religion but not your race. The booklet: "the Jew can't convert, because his race can't be changed!" Converts were not trusted; people said they only converted to get ahead.`,
+    `**Emancipation and envy.** {אמנציפציה} = equal civil rights for Jews (granted in Western Europe in the 18th-19th centuries). Jews hoped that once they were equal citizens, the hatred would disappear. It didn't – **it changed**. Jews integrated into society and many succeeded – in business, science, medicine, journalism. Success brought **envy** ({קנאה}): "they are taking over". So paradoxically, **the more the Jews integrated, the more they were seen as a threat**.`,
+    `**More sources:** modern antisemitism also drew on **socialism** (Jews portrayed as capitalist exploiters), **romanticism** and **nationalism** – in the age of nation-states, Jews were seen as a **separate, foreign minority** that didn't belong to the nation. And there was the conspiracy idea that Jews want to **take over the world**.`,
+    `**How it was expressed: verbal violence ({אלימות מילולית}).** No more pogroms and blood libels as in the Middle Ages. Instead: discrimination; blocking Jews from **government jobs and higher education**; antisemitic **books, articles, caricatures, newspapers**; and **antisemitic political parties** that demanded **cancelling emancipation**. Examples from the table (p.13-14): Wilhelm Marr's book **"The Victory of Judaism over Germandom"** ({נצחון היהדות על גרמניה}); the composer **Richard Wagner**'s essay **"Judaism in Music"** ({היהודים במוסיקה}) claiming Jews ruined German music; the **Christian Workers' Party**, which wanted to push Jews out of society.`,
+    `**The goal of modern antisemitism:** to remove Jews from the national environment (they were "foreigners") and to **cancel emancipation**. Note: the booklet stresses that despite all this, Jews still **enjoyed their emancipation rights** – it was words, not yet laws.`,
+    `**The four claims of modern antisemitism (p.14, end):** (א) the Jews are an inferior, unchangeable race that destroys culture; (ב) they threaten society and exploit it economically; (ג) they plan to take over the world; (ד) as spreaders of socialism they want to overthrow the government.`
+  ],
+  remember: [
+    `Modern = based on "science" (race theory) → conversion doesn't help.`,
+    `Emancipation → integration and success → envy → antisemitism.`,
+    `Expression: verbal violence (Marr, Wagner, antisemitic parties); goal: cancel emancipation.`
+  ],
+  exam: [
+    `Comparing traditional vs modern: causes (religion/economy vs race/emancipation), solution (conversion vs none), expression (physical vs verbal).`
+  ]
+};
+
+LESSONS['c3-t3'] = {
+  story: [
+    `**Nazi antisemitism (20th century) continued modern antisemitism.** What they share (p.12): (1) Jews are blamed for **every crisis and damage** in society, economic and social; (2) Jews are a **revolutionary, dangerous** element – and notice the contradiction: they were called **both capitalists and communists**; (3) Jews are to blame for **all of humanity's crises**.`,
+    `**What is unique (memorize the sentence):** **"המרכיב הייחודי באנטישמיות הנאצית הוא ההתבססות הקיצונית והמלאה על תורת הגזע"** – the unique element is its **extreme and complete reliance on race theory**. Modern antisemitism *used* race ideas; Nazism made race theory the **whole basis** of the state and acted on it to the end.`,
+    `**Causes of Nazi hatred (table, p.13).** (1) After WWI the Jews were blamed for all the state's problems – on one side as **capitalists** who want to control the world with economic power, on the other as **communists** who want revolutions everywhere. (2) **Race theory – the central motive.** The Nazi race ladder: **Aryans** (Western Europeans – English, Germans) = **culture creators** ({יוצרי תרבות}), fit to lead and rule the world; **Slavs** (Poland, Russia) = **culture bearers** ({נושאי תרבות}) – can't create culture, their role is to serve; **"inferior races"** like Black people and Roma (Gypsies) – no place in the pure society; and the **Semitic sub-race – the Jews** = **culture destroyers** ({משחיתי תרבות}), a dangerous enemy of all other races, which **must be destroyed, or it will destroy humanity**.`,
+    `**Darwin twisted.** The Nazis "developed" Darwin's theory of evolution: in nature there's a struggle between species and the strong survive – they claimed the same is true for human races. So the struggle between races is "natural and necessary for the world's progress", and it is a **duty to keep race purity and remove the Semitic race from humanity**.`,
+    `**Is there a solution? (row 2).** Traditional: yes – conversion. Modern: no – conversion doesn't change race; converts weren't believed. Nazi: **absolutely none** – race theory determined the Jew's fate completely, even if he or his parents converted.`,
+    `**How was it expressed? (row 3).** Traditional: **physical violence** – blood libels (accusing Jews of murdering Christians to use their blood for matzot or rituals), expulsions, pogroms, restrictions on dress and residence; the Jew had no civil or political rights. Modern: **verbal violence** (as above). Nazi: (1) isolating Jews and removing them from positions of influence **by law**; (2) antisemitic articles; (3) social isolation; (4) encouraging emigration; (5) **murder – the Holocaust**. You can see an escalation: the Nazis used *all* the earlier tools and added state laws and then murder.`,
+    `**The goal (row 4).** Traditional: make Jews convert, and remove them as economic competitors. Modern: remove them from the nation and cancel emancipation. Nazi: **destroy the "harmful race" – the Jew.** Each type's goal grows more extreme: convert him → push him out → destroy him.`
+  ],
+  remember: [
+    `Same as modern: Jews blamed for every crisis; "capitalists and communists".`,
+    `Unique: extreme, complete reliance on race theory.`,
+    `Ladder: creators (Aryans) / bearers (Slavs) / no place (Black, Roma) / destroyers (Jews).`,
+    `Solution: conversion → none → absolutely none. Goal: convert → expel → destroy.`
+  ],
+  exam: [
+    `Booklet p.20 Q2: two differences between Nazi, traditional and modern antisemitism → pick two rows of the table (e.g. causes + solution) and fill all three columns with "לעומת זאת".`
+  ]
+};
+
+/* ---------------- CHAPTER 4: German Jews 1933-1939 ---------------- */
+LESSONS['c4-t1'] = {
+  story: [
+    `**Who were the Jews of Germany before 1933? (p.15)** Remember this picture, because it explains why the Nazi policy was such a shock to them. **Numbers:** less than 1% of the population (**0.76%**), about **half a million** Jews, mostly in big cities – Berlin, Frankfurt, Hamburg. A tiny minority, yet the Nazis claimed they controlled Germany.`,
+    `**Streams ({זרמים}):** (1) **liberal, assimilated Jews** ({מתבוללים} – Jews who adopted German culture and kept little Jewish practice), who fought for equal rights and against antisemitism; (2) **Haredim** (Orthodox), whose slogan was **"תלמוד תורה עם דרך ארץ"** – Torah study together with general education and participation in society (Rabbi Hirsch's neo-Orthodoxy); (3) **Zionists**, connected to the Land of Israel but who didn't see aliyah as a must – for them Zionism meant Jewish nationalism and Jewish education.`,
+    `**Organization, economy, culture.** Most were organized in **independent communities** under German supervision. Economically, most were in **trade, especially textiles and clothing**, and belonged to the **petty bourgeoisie** – the middle class, property owners. Culturally they were **deeply influenced by German culture** and saw themselves as an **inseparable part of the German people** – many in free professions, newspapers, literature, theater. **Most fought for Germany in WWI.** So for them, being excluded was a betrayal by their own country.`,
+    `**Hitler's rise (1933).** He came to power using **democratic tools** – elections and propaganda. From then on the Jews' situation got worse. The Nazis had **three clear goals** toward the Jews: (1) **social isolation** ({בידוד חברתי}) – push Jews out of German society; (2) **economic isolation** ({בידוד כלכלי}) – push them out of the economy and take away their economic positions; (3) **removing the Jews from Germany** – making Germany **"Judenrein"** ({יודנריין} = "clean of Jews"). To do it, Hitler used **propaganda and education, legislation, and terror**. Note: at this stage the goal was to make Jews **leave**, not yet to murder them.`,
+    `**A distinction the booklet insists on:** the **Holocaust of the Jewish people = 1933-1945** (it starts with Hitler's rise), while **World War II = 1939-1945**. They overlap but are not the same thing.`,
+    `**The goals again (p.16),** in slightly different words: (א) isolate the Jews from German society and culture; (ב) encourage emigration – Judenrein; (ג) humiliate and degrade the Jewish people. Plus an extra goal: these actions were meant to **unite the German people against the Jews**, convince them of antisemitism, and get them to support anti-Jewish laws. In other words, the persecution of Jews was also a way to build the "people's community".`
+  ],
+  remember: [
+    `0.76%, ~500,000, big cities; liberals / Haredim / Zionists; trade (textiles), middle class; very German; fought in WWI.`,
+    `Goals: social isolation, economic isolation, Judenrein (+ humiliation, + uniting Germans).`,
+    `Tools: propaganda & education, legislation, terror. Holocaust 1933-1945 ≠ WWII 1939-1945.`
+  ],
+  exam: [
+    `Any question on 1933-1939 policy: always end with the goal – "to make the Jews leave Germany (Judenrein) and to humiliate and isolate them".`
+  ]
+};
+
+LESSONS['c4-t2'] = {
+  story: [
+    `**"The building stage" 1933-1935 (p.16 diagram)** has three areas: **economic** (the boycott), **legislative** (the civil service law, a ban on kosher slaughter, a ban on Jews keeping animals) and **cultural** (the book burning).`,
+    `**The boycott day ({יום החרם}), 1 April 1933** – only two months after Hitler took power. The public was called **not to buy in Jewish-owned shops**, to hurt the Jewish economy. **SA guards** stood at the doors of Jewish shops, which were marked with a Star of David, and stopped customers going in. It came with heavy antisemitic propaganda and some looting.`,
+    `**Its real purpose (booklet): a test.** It was a **test of German society's reaction**. Would ordinary Germans go along? The answer: **most of German society cooperated**, and many even **kept boycotting voluntarily** after it officially ended.`,
+    `**Results of the boycott:** (1) Abroad, **many countries announced a boycott of Germany**. The Nazis got scared and **stopped the boycott the same day**. But inside Germany citizens cooperated "in an exemplary way", which **encouraged Hitler to continue**. So: the world could make him retreat, while his own people encouraged him. (2) Hitler **banned Jews from taking money abroad** (so leaving Germany meant leaving everything). (3) **Regulations restricting professions** – Jews couldn't be lawyers, doctors and more.`,
+    `**The civil service decree ({הצו להחזרת הפקידות המקצועית על כנה}), 7 April 1933.** The name sounds harmless ("restoring the professional civil service") but under it **Jewish state employees were fired**: officials, teachers, university lecturers, judges, doctors, lawyers. Among them **Albert Einstein**, Nobel Prize winner in physics, fired from the Academy of Sciences and his property confiscated. **The booklet calls it the first antisemitic law in Nazi Germany since emancipation** – i.e. the first time since Jews got equal rights that a German law took rights away from them.`,
+    `**Aryanization ({אריזציה}).** From 1933 Jewish property began moving into "Aryan" hands. Jews were **forced to hand over businesses for a ridiculous price, sometimes for nothing**. After the Nuremberg Laws (1935) this increased, until **almost all the property of German Jews was robbed** and passed to Nazis.`,
+    `**The book burning ({שריפת הספרים}), May 1933.** Books by **Jewish writers and thinkers and by opponents of Nazism** were burned in central squares across Germany. The biggest was at **Opera Square in Berlin – about 20,000 books**. The booklet quotes **Heinrich Heine**, a great German poet who was a converted Jew, who wrote in **1820**: **"במקום שבו שורפים ספרים, ישרפו גם בני אדם"** – "where they burn books, they will also burn people." It's quoted because it came true. Later, performing music and plays by Jews was banned too.`
+  ],
+  remember: [
+    `1.4.1933 boycott = a test; Germans cooperated → encouraged Hitler; world boycott → stopped same day.`,
+    `7.4.1933 civil service decree = first antisemitic law since emancipation (Einstein).`,
+    `Aryanization from 1933, worse after 1935. May 1933 book burning, ~20,000 books, Heine.`
+  ],
+  exam: [
+    `"Present a step + its motive": boycott → test society's reaction and hurt Jewish economy.`
+  ]
+};
+
+LESSONS['c4-t3'] = {
+  story: [
+    `**The Nuremberg Laws ({חוקי נירנברג}), 1935** – two laws passed at the Nazi party rally in Nuremberg. Together they **took away Jews' citizenship and reduced their rights**.`,
+    `**Law 1: the Reich Citizenship Law ({חוק אזרחות הרייך}).** A German citizen is only someone of **"German blood"** (or related to it) and loyal to the Reich – only he has full political and civil rights. So **Jews stopped being citizens**. The booklet's key phrase: **"בכך לראשונה בוטלה האמנציפציה בגרמניה"** – for the first time, emancipation was cancelled. The law also defined the **Mischlinge** ({מישלינג} – "mixed" people): with **two Jewish grandparents** = Mischling of the first degree, treated as a Jew if registered in a Jewish community; with **one Jewish grandparent** = second degree, treated as German. Defining people by their *grandparents* shows it's about **blood**, not religion.`,
+    `**Law 2: the Law for the Protection of German Blood and German Honor ({החוק להגנת הדם הגרמני והכבוד הגרמני}).** **Marriage and relationships between Jews and Germans were banned**, and such marriages made abroad were cancelled. Jews could not employ German **household helpers under 45** (the Nazi fear: "racial mixing" in the home), and Jews could not fly the German flag. This is race purity written into law.`,
+    `**What did the laws mean? (booklet)** **For the regime:** **race theory was now defined in law** – the ideology *became* the law. This was the base for all later anti-Jewish policy, against **every** Jew, even converts. **For the Jews:** they were left **without political rights and without protection**, which increased the **legitimacy** of harming them (if the law says they're not citizens, attacking them seems "allowed"). Summary sentence: **"בפעם הראשונה ניתן מעמד חוקי לאפליה ולבידוד היהודים"** – for the first time, discrimination and isolation of Jews got **legal status**. That's why the Nuremberg Laws are called an escalation.`,
+    `**Social harm from 1933 on.** (א) **The ban on kosher slaughter ({איסור שחיטה כשרה})** – the booklet stresses it was **the only law passed against the Jewish religion** itself; its aim was to show the public how the Nazi party fights "Jewish cruelty" (as if kosher slaughter were cruel to animals). (ב) **Social isolation** – step by step Jews were banned from theaters, cafés and public parks; there were special street benches and separate train cars for Jews. The booklet notes **German society cooperated**: most were **indifferent** to the Jews' fate, some even helped the Nazis, and **only a few individuals helped Jews**.`,
+    `**1936-1937: a pause.** In 1936 Berlin hosted the **Olympic Games**. The Nazis didn't want to anger the world, so for about a year they **stopped the antisemitic propaganda in the streets** (the anti-Jewish signs were taken down). This shows Hitler cared about world opinion – before the war.`
+  ],
+  remember: [
+    `1935 Nuremberg: Citizenship Law (only "German blood" = citizens; emancipation cancelled; Mischlinge by grandparents) + Blood and Honor Law (no marriage/relations, no maids under 45, no flag).`,
+    `Meaning: ideology became law; Jews without rights/protection; first legal status for discrimination.`,
+    `Kosher slaughter ban = only law against the religion. 1936 Olympics = pause.`
+  ],
+  exam: [
+    `Booklet p.20 Q4 and Q9: present a Nuremberg clause and explain how it matches race theory / how it changed the Jews' status (from equal citizens to people without rights).`
+  ]
+};
+
+LESSONS['c4-t4'] = {
+  story: [
+    `**1938 – the turning-point year ({שנת המפנה}).** In 1938 Nazi policy became more extreme toward the Jews **and** toward other countries. Why then? The booklet gives **two causes**:`,
+    `**Cause 1 – foreign-policy successes.** Hitler saw Europe was weak. He **annexed Austria** (the Anschluss) and the **Sudetenland** (part of Czechoslovakia), against the Treaty of Versailles – and nobody stopped him. He was already planning war to conquer more land. A leader who sees that the world doesn't react becomes bolder at home too.`,
+    `**Cause 2 – the failure of the Évian Conference ({ועידת אוויאן}), 1938.** An international conference met in Évian, France, to find a solution for **Jewish refugees** from Germany. It turned out **no country wanted to take in Jews**. Hitler drew the conclusion: **the Jews are in my hands, I can do what I want with them, and no country will object.**`,
+    `**The 1938 decrees.** Social: **marking the Jews** – passports stamped with the letter **J** (Jude); Jews had to add the name **"Israel" (men) or "Sara" (women)** to their ID papers. Economic: **Aryanization got worse** – every independent Jewish business was banned; Jews' **bank accounts were blocked**.`,
+    `**The background to Kristallnacht – the Zbąszyń expulsion ({גירוש זבונשין}).** Suddenly, **18,000 Jews with Polish citizenship** living in Germany were expelled to the border town of Zbąszyń. **Poland refused to let them in**, so they were stuck between the two countries, crowded, in harsh conditions, suffering cold and hunger. Only after many months were they allowed into Poland.`,
+    `**The pretext ({העילה}) – Herschel Grynszpan.** Among the expelled was the Grynszpan family. They wrote to their son **Herschel**, a **17-year-old student living in France**, about their suffering. He decided to **take revenge**: he went to the German embassy in Paris and **shot a German diplomat** in protest. The Nazis used this as the **excuse** for a pogrom – but the booklet stresses that it was **initiated and planned in advance by propaganda minister Joseph Goebbels, with Hitler's support**. (A "pretext" = the official excuse, not the real reason.)`,
+    `**Kristallnacht ({ליל הבדולח}), the night of 9-10 November 1938.** Named after the **shattered glass** of Jewish shops and synagogues. The Nazis presented it as a **"spontaneous"** reaction of the people to the diplomat's murder, but it had been **planned weeks before**. What happened: **about 100 Jews murdered**, **hundreds of shops looted**, homes and **synagogues burned and destroyed**, and **about 30,000 Jews sent to concentration camps**.`,
+    `**After it.** A few days later came new decrees: Aryanization completed; Jews expelled from schools; their **insurance money taken** (so they couldn't even rebuild); Jews forced to pay a **fine of one billion marks** – the victims paid for the damage done to them; Jewish newspapers banned. All of this was meant to speed up emigration and make Germany Judenrein.`,
+    `**The goal of Kristallnacht:** to make the Jews **emigrate**, because the laws alone hadn't achieved it. The world condemned it but did nothing; the German people were silent or cooperated.`,
+    `**Why is it a turning point? (3 "firsts" – memorize):** (1) **for the first time physical harm to Jews**, not only regulations and laws; (2) **for the first time a nationwide pogrom organized and initiated by the regime**; (3) the **final expulsion of Jews from Germany's economic life** by taking their property.`
+  ],
+  remember: [
+    `1938 causes: foreign-policy success (Austria, Sudetenland) + Évian failure (no country wants Jews).`,
+    `Decrees: J in passport, Israel/Sara; Aryanization forced; accounts blocked.`,
+    `Zbąszyń (18,000) → Grynszpan (17, Paris) = pretext; planned by Goebbels.`,
+    `9-10 Nov: ~100 murdered, ~30,000 to camps, 1 billion marks fine.`,
+    `3 firsts: physical harm, nationwide regime pogrom, final economic expulsion.`
+  ],
+  exam: [
+    `Booklet p.20 Q6 (goal + pretext) and Q7 (how it shows the change) – use the 3 firsts.`
+  ]
+};
+
+LESSONS['c4-t5'] = {
+  story: [
+    `**This table (p.19) is the summary of the whole chapter.** The main idea to understand: **the persecution got worse gradually**, and Hitler **watched the reactions** of the Germans and of the world at each stage. When there was no real opposition, he escalated to the next stage. When there might be (the world boycott in April 1933, the Olympics in 1936), he paused.`,
+    `**1933-1934:** boycott, civil service decree, ban on kosher slaughter, pushing Jews out of cultural life, book burning. **Goals:** make Jews leave (Judenrein), economic harm, humiliation.`,
+    `**1935-1937:** the Nuremberg Laws and Aryanization – a **significant worsening**. The **1936 calm** for the Olympics (Hitler promised no racial discrimination at the games). **Goal:** make discrimination and race theory **legal**, and so isolate, humiliate and push Jews to emigrate.`,
+    `**1938:** the turning point – special marking only for Jews; forced Aryanization; every Jewish business banned; Jewish doctors lost their licenses; accounts blocked so Jews could withdraw only tiny sums; **thugs extorted money and property with threats**; Zbąszyń; and Kristallnacht – physical violence, **the peak**. **Goal:** pressure Jews to emigrate.`,
+    `**Booklet question 10 – was the Final Solution planned in advance?** The booklet gives an answer you should know: (1) race theory, written in **Mein Kampf** and spread by propaganda, showed the Jew as a culture destroyer with no place among the nations; (2) **Hitler's speeches** talked about destroying the Jewish race; (3) the **gradual escalation 1933-1938** shows a plan. (Chapter 7 gives the opposite answer – that it took shape only after Barbarossa. On the test, answer whichever side the question asks for.)`
+  ],
+  remember: [
+    `Gradual + testing reactions → escalation when no opposition.`,
+    `1933-34 boycott/law/books → 1935-37 Nuremberg, Aryanization, Olympic pause → 1938 marking, forced Aryanization, Zbąszyń, Kristallnacht (peak).`
+  ],
+  exam: [
+    `If asked to describe stages of policy, use exactly these three periods with an example and a goal each.`
+  ]
+};
+/* ---------------- CHAPTER 5: WWII ---------------- */
+LESSONS['c5-t1'] = {
+  story: [
+    `**Why WWII is in a Holocaust unit.** The war and the Holocaust are connected at every step: each stage of the war changed what the Nazis did to the Jews. So you must know the war's main events – but always ask "what did this mean for the Jews?"`,
+    `**The two sides.** **The Axis ({מדינות הציר})**: three aggressive states – **Germany, Italy and Japan** – bound by agreements. Even before the war they had taken over other countries using terror. **Axis satellites ({גרורות הציר})**: smaller states, mostly in Eastern Europe – **Romania, Hungary, Slovakia** and others – that joined and helped the Axis. **The Allies ({בעלות הברית})**: at first **Britain and France**. They were a united front, but they tried to **avoid war** – the **appeasement policy** ({מדיניות הפיוס}): giving Hitler what he wanted (Austria, the Sudetenland) hoping to prevent another world war. They didn't help the countries that needed protection. Other countries stayed **neutral** – until France fell and Britain was left alone.`,
+    `**The Ribbentrop-Molotov Pact ({הסכם ריבנטרופ-מולוטוב}), 23 August 1939.** A week before invading Poland, Hitler sent his foreign minister (**Ribbentrop**) to Moscow to sign a pact with the Soviet foreign minister (**Molotov**) – it's named after the two foreign ministers. **Content:** (1) **no attack for 10 years** – each promises not to attack the other or help anyone who does; (2) **split Poland**: the center and west to Germany, the east to Russia.`,
+    `**Germany's interest – why sign?** Hitler feared a **two-front war** ({מלחמה בשתי חזיתות}): Britain and France in the **west**, and the Soviet Union in the **east**. (That's what destroyed Germany in WWI.) The pact guaranteed quiet in the east so he could take Poland and then turn west.`,
+    `**Why was the pact "unexpected" by Nazi ideology? (booklet answer, 3 reasons)** (1) **Race theory**: the Russians are Slavs – an "inferior race". Why sign a pact with them? (2) **Living space**: Lebensraum was supposed to be in Eastern Europe, **including Russia** – the very country he signed with. (3) **Anti-communism**: Nazism opposed the **communism** ruling the USSR, which the Nazis called a **"Jewish ideology"**. So the pact was pure tactics; that's why Hitler broke it in 1941.`
+  ],
+  remember: [
+    `Axis: Germany, Italy, Japan (+ satellites Romania, Hungary, Slovakia). Allies: Britain, France (appeasement).`,
+    `23.8.1939: no attack 10 years + split Poland. Interest: avoid two fronts.`,
+    `Unexpected: Slavs inferior, living space includes Russia, communism = "Jewish".`
+  ],
+  exam: [
+    `Booklet p.28 Q3 and p.32 Q7 – present the pact, explain why unexpected / how it opened the war.`
+  ]
+};
+
+LESSONS['c5-t2'] = {
+  story: [
+    `**1 September 1939 – Germany invades Poland. WWII begins.** The booklet frames it as Germany **putting living space into practice**. Britain and France had a **defense agreement with Poland**, so they had to **declare war** on Germany – but in practice **they did almost nothing** to help Poland.`,
+    `**Blitzkrieg ({מלחמת בזק}, "lightning war").** A concentrated military effort: a powerful attack combining **air force and armor (tanks)** to **shock and surprise** the enemy, **with no regard for civilians**. Result: western Poland fell in **3 weeks**, and Poland surrendered in under a month. Meanwhile the USSR took eastern Poland, as promised in the pact. Thanks to the pact, Germany took Poland **without Soviet opposition**.`,
+    `**1940 – Western Europe.** In one year, almost without effort, by surprise and Blitzkrieg, Germany conquered **Denmark, Norway, Holland and Belgium**. Conquering Belgium **sealed France's fate**.`,
+    `**Why France fell.** France relied on the **Maginot Line** ({קו מז'ינו}) – a **fortified wall** along its border with Germany. But the Germans **went around it through Belgium**, so it didn't protect France at all. Also, France **wasn't properly prepared** for war – it preferred to believe in peace and ignore Hitler's intentions. Britain sent soldiers but couldn't help; it only managed **Operation Dunkirk** ({מבצע דנקירק}) – rescuing **350,000** British and French soldiers who had no chance against the German army. The Germans reached **Paris**.`,
+    `**Vichy.** France's new leader, **Marshal Pétain** (a WWI hero), signed an **armistice**: north and west France went to Germany; in the south a **protectorate** state was set up with its capital at **Vichy** – the **Vichy government** ({ממשלת וישי}, "French-Nazi"), which **cooperated fully with Germany until the end**. (Remember Vichy – it ruled Morocco and Algeria too, which matters in the North Africa topic.)`,
+    `**De Gaulle.** French general **Charles de Gaulle** escaped to Britain and called on every French soldier to join him and keep fighting, saying Vichy didn't represent the French nation. About **300,000** soldiers joined him.`,
+    `**Summary: within about a year, Germany ruled almost all of central and western Europe – except Britain**, the only one that held out. (For the Jews: millions more came under Nazi rule – Western European Jews would later be deported "to work in the East".)`
+  ],
+  remember: [
+    `1.9.1939 Poland: Blitzkrieg (air + armor, surprise, no regard for civilians), 3 weeks.`,
+    `1940: Denmark, Norway, Holland, Belgium → France (Maginot bypassed through Belgium; Dunkirk 350,000; Pétain; Vichy; de Gaulle).`,
+    `Only Britain held out.`
+  ],
+  exam: [
+    `Booklet p.27 Q2: two German achievements to summer 1941 + a different cause for each (Blitzkrieg; the pact; Britain/France hesitating; disregard for civilians; France unprepared).`
+  ]
+};
+
+LESSONS['c5-t3'] = {
+  story: [
+    `**June 1941 – Operation Barbarossa ({מבצע ברברוסה}).** Germany invaded the Soviet Union, **breaking the Ribbentrop-Molotov Pact** signed less than two years earlier. The booklet calls it **a turning point** in the war: it became a regional war of Europe **and Asia**.`,
+    `**Why did Hitler break the pact? (3 reasons/goals)** (1) **A feeling of superiority**: after the Blitzkrieg successes in central and western Europe, Germany felt it was stronger than the Soviet **Red Army**. (2) **Living space + race theory**: the USSR's huge territory would be living space for the Aryan race, and by race theory the peoples of Eastern Europe should serve the Aryans. (3) **Destroying the enemy – communism/Bolshevism**, which the Nazis saw as **the ideology of the Jews**.`,
+    `**The meaning for the Jews – the most important sentence:** **"כאן החל לראשונה רצח המוני וישיר של יהודים ("הפתרון הסופי"), בעיקר על ידי ירי בבורות."** Here, for the first time, mass and direct murder of Jews began – mainly by shooting at pits. (Chapter 7 explains this in detail.)`,
+    `**Why Blitzkrieg failed in Russia.** Germany used the same method – surprise, initiative, fast decisive action. But **it didn't work in the USSR**: the Soviets held on through **6 hard months** and didn't surrender, even though they lost huge areas and **over 10 million soldiers**. The country was too big and its people kept fighting. In **1942 the Germans reached Stalingrad** but couldn't take all of it – they were pushed back again and again. **"From here they began to fail."**`
+  ],
+  remember: [
+    `June 1941 Barbarossa = turning point; Hitler breaks the pact.`,
+    `3 reasons: superiority, living space + race, destroy "Jewish" communism.`,
+    `Start of mass direct murder (shooting pits). Blitzkrieg failed; Stalingrad 1942 – start of failure.`
+  ],
+  exam: [
+    `Very common: "why did the Final Solution start with the invasion of the USSR?" → use these reasons + chapter 7.`
+  ]
+};
+
+LESSONS['c5-t4'] = {
+  story: [
+    `**The USA joins (end of 1941).** At first the USA kept **neutrality and isolation**, while **selling weapons, equipment and raw materials to Britain**. In 1941 the USA and Britain signed the **Atlantic Charter** ({האמנה האטלנטית}) – a declaration for peace and against aggression. But the booklet stresses: **at first it was only a declaration** – the USA didn't intend to fight.`,
+    `**The direct cause: Pearl Harbor ({פרל הרבור}).** The USA and Japan share an ocean – the **Pacific**. Japan wanted control of the Pacific and to neutralize American power, so it launched a **surprise attack on the US navy at Pearl Harbor, Hawaii**, in **December 1941**. Dozens of ships and hundreds of planes were hit. The USA and Britain declared war on Japan – and because of the Axis alliance, **Germany and Italy declared war on the USA**. That's how a European war became a **world war**.`,
+    `**Early 1942 – the Allies were weaker.** Now Britain wasn't alone: the Allies were **Britain, the USA and the USSR**. But in **mid-1942 the Axis was at its peak**: Germany ruled most of Europe, Japan large parts of East Asia; millions of civilians from conquered countries were forced into slave labor. **Why were the Allies weaker? (2 reasons)** (1) The **USA wasn't armed yet** and needed about a **year to train soldiers**; (2) the **USSR was partly occupied** and had lost huge numbers of soldiers, planes and tanks.`,
+    `**The turning point 1942-1945 – marked "לא לבגרות" (not for the Bagrut).** Briefly, so the story makes sense: the USA and USSR armed quickly; the Americans stopped Japan in the Pacific; the British stopped the Germans in North Africa at **El Alamein** (which also saved the Land of Israel from conquest); in 1943 the Germans surrendered at **Stalingrad** and the USSR advanced west; in 1944 the Red Army entered Poland, and the Allies landed in **Normandy**.`,
+    `**Germany's surrender (1945) – 2 causes.** (1) The Allies (USA, USSR, Britain) advanced from **two directions – west and east** – into Germany; at the end of April 1945 the **Red Army entered Berlin**. (2) **Hitler killed himself in his bunker**, and a few days later Germany surrendered. **9 May 1945 – the war in Europe ended** (booklet date).`,
+    `**Japan and the end of the war.** Japan kept fighting. The Americans believed only a ground invasion would force Japan to surrender, which would cost many lives, so they used **atomic bombs**: first **Hiroshima**, and three days later **Nagasaki**. With the radiation, about **200,000** people died over the following months. **In August 1945 Japan surrendered and WWII ended.** Afterward the **United Nations** ({האו"ם}) was founded to keep world peace.`
+  ],
+  remember: [
+    `USA: neutral, sold weapons; Atlantic Charter = declaration only; Pearl Harbor Dec 1941 → world war.`,
+    `Early 1942 Allies weaker: USA not armed, USSR partly occupied.`,
+    `1945: two fronts → Red Army in Berlin, Hitler's suicide → 9 May 1945. Japan: Hiroshima, Nagasaki → Aug 1945. Then the UN.`
+  ],
+  exam: [
+    `Booklet p.27 Q1: who are the Allies and how did they change (USA joins – Pearl Harbor; USSR joins – Barbarossa; France leaves – Vichy).`
+  ]
+};
+
+/* ---------------- CHAPTER 6: Polish Jews 1939-1941 ---------------- */
+LESSONS['c6-t1'] = {
+  story: [
+    `**Polish Jewry – the biggest in Europe.** When the war began about **3.3 million Jews** lived in Poland. Under the Ribbentrop-Molotov Pact Poland was split: the **east** to the USSR, the **center and west** to Germany. In the German part remained about **2.2 million Jews**. Compare: in Germany there were only ~500,000. Suddenly the Nazis ruled over four times as many Jews.`,
+    `**The General Government ({הגנרל גוברנמן}).** The Germans split their part of Poland in two. The west was annexed to Germany itself. In **central Poland** they set up the **General Government** – a military-rule zone that **German civilians were forbidden to enter** (only the army). They moved **all the Jews of Poland there** and **set up all the ghettos there**. (Why there? Chapter 6.3: they didn't want ghettos on "German soil".) The Jews were taken by surprise; some tried to **flee east** to the Soviet zone.`,
+    `**The five steps 1939-1941 (summary box):** (1) **abuse and humiliation**; (2) **forced labor and labor camps**; (3) **Heydrich's Schnellbrief** – concentrating Jews in cities and setting up Judenrats; (4) **concentrating Jews in ghettos and closing them**; (5) **confiscating Jewish property**.`,
+    `**Why was the treatment in Poland so much harsher than in Germany? (3 reasons – a classic question)** (1) **No fear of public opinion**: in wartime the Germans no longer feared world opinion, nor German public opinion, because it was happening in Poland, far from the German media. (Compare: in 1933 they stopped the boycott because of world reaction, and paused for the 1936 Olympics.) (2) **The war atmosphere** made soldiers more aggressive, and the aggression was turned on the Jews. (3) **The look of Polish Jews**: many were religious or traditional – beards, peyot, traditional clothes – and looked **exactly like the Jews in Nazi propaganda**, which stirred hatred and disgust. It was the **first time** Nazi soldiers met the traditional Jewish look (German Jews looked like other Germans).`,
+    `**The booklet's own answer (p.32 Q9)** adds the **numbers**: three million Jews in Poland compared with a few hundred thousand in Germany.`
+  ],
+  remember: [
+    `3.3 million in Poland; 2.2 million in the German part.`,
+    `General Government = central Poland, military zone; all Jews and all ghettos there.`,
+    `Harsher because: no fear of opinion, war atmosphere, traditional look (+ numbers).`
+  ],
+  exam: [
+    `Booklet p.32 Q2, Q3, Q9 – all ask this "why harsher" idea in different words.`
+  ]
+};
+
+LESSONS['c6-t2'] = {
+  story: [
+    `**Step (א): abuse and humiliation ({התעללות והשפלה}).** With the conquest came brutal violence: **beards and peyot cut off cruelly**, **synagogues set on fire**, Jews **murdered in the streets**, rabbis **forced to march in humiliating parades**, plus humiliating propaganda. Notice the target: anything that looked Jewish – the attack was on Jewish identity itself.`,
+    `**Step (ב): forced labor and labor camps ({עבודות כפייה, מחנות עבודה}).** The history: concentration-labor camps began in **1933** for political opponents in Germany (Dachau). In **1938, after Kristallnacht**, Jews were sent to forced labor in Dachau. After conquering Poland (**1939**), **hundreds of labor camps** were set up, where Jews were exploited as **cheap labor** – **no wages**, just a **meager food ration**. Jews were **kidnapped** off the streets for work, regardless of **age or physical fitness**, to work in German factories or at jobs like cleaning streets and paving roads. The kidnappings left families **scattered and without a father** to provide income and protection – which is why the women's role in the ghetto became so important (6.4).`,
+    `**Step (ג): the Schnellbrief ({אגרת הבזק}), end of 1939.** Besides the "spontaneous" violence, there was an **official policy change**. Even before the conquest of Poland was complete, **Reinhard Heydrich**, head of the Security Service, sent official, urgent instructions to the commanders of the **Einsatzgruppen** in the occupied areas. ({איינזצגרופן} = "operational units" – special units "trained to deal with the Jews"; they entered an area after the fighting units had conquered it. In 1941 they would carry out the shooting pits.)`,
+    `**What the Schnellbrief ordered (4 points):** (1) **concentrate** the Jews of the towns and of western Poland in the **big cities near railway lines**, in the General Government; (2) set up a **Judenrat** – a Jewish **council of elders** – to manage the ghettos in its name and **carry out German orders**; (3) **ban Jews from public transport**; (4) **mark the Jews** – a white armband with a Star of David in the General Government, and in western Poland (later in other countries) a **yellow patch**.`,
+    `**Why "near railway lines"?** Officially it was about control. But looking back, it is exactly what made the later **deportations to the death camps** fast and easy. That's why historians see the Schnellbrief as an early step toward the Final Solution – a classic question compares it to Wannsee (chapter 7).`
+  ],
+  remember: [
+    `Abuse: beards/peyot, synagogues burned, street murders, humiliated rabbis.`,
+    `Forced labor: hundreds of camps, no pay, kidnapped regardless of age → families without fathers.`,
+    `Schnellbrief (Heydrich → Einsatzgruppen): concentrate near railways, Judenrat, no transport, marking.`
+  ],
+  exam: [
+    `Booklet p.32 Q1: Schnellbrief (concentration) vs Wannsee (extermination) – the development.`
+  ]
+};
+
+LESSONS['c6-t3'] = {
+  story: [
+    `**What is a ghetto?** {גטו} = a neighborhood or street where Jews are **closed in and separated** from the rest of the city. The booklet says it's a **"fluid" concept** – each ghetto was different. Usually it was set up in the **poorest part of the city**, without proper conditions. Some ghettos were **closed by a wall**; others had openings, so Jews could go out to work and come back at night. The biggest was the **Warsaw ghetto**, with about **half a million Jews** – far more than it could hold.`,
+    `**Why ghettos? The Germans' 5 goals (memorize – very common):** (1) **concentrate** the Jews near railway lines; (2) **isolation and extermination**: cram many Jews into a small place so diseases will spread and bring a **slow, "natural" extermination** – death from **typhus** – **without effort** by the Germans; (3) **control and supervision** – the Germans can control everything the Jews do; (4) **exploit the Jews' labor for profit**; (5) **deception** – give the Jews an **illusion of autonomy** ({אשליה של אוטונומיה} = self-rule), because the Judenrat seemed to run the ghetto. The booklet adds a separate goal on p.31 – **economic exploitation** (6.4).`,
+    `**Where?** On the map (booklet p.98) the ghettos are mainly **in Poland – about a thousand ghettos** – and almost none in Germany. Why? The Germans **didn't want to "defile" German soil with Jews**, so they put the ghettos as far away as possible, mainly in **central Poland, in the General Government**.`,
+    `**Hardships in the ghetto (3):** (1) **hunger and poverty** – the Germans controlled the food so the Jews would die a slow death; (2) **crowding and terrible sanitation** – too many people in too small a space → severe diseases, and **no medicine**; (3) **no heating** – Polish winters are freezing. All of this came from the **total dependence** the Germans created; the isolation was complete. The result: **one fifth** of the population of the Warsaw and Łódź ghettos died. So the ghettos were already a form of murder, even before the death camps.`
+  ],
+  remember: [
+    `Ghetto = closed Jewish area, poorest neighborhood; Warsaw ~½ million.`,
+    `5 goals: concentration near railways, slow extermination, control, labor, illusion of autonomy.`,
+    `~1,000 ghettos, mainly in the General Government (not on German soil).`,
+    `Hunger, crowding/disease, no heating → ⅕ of Warsaw and Łódź died.`
+  ],
+  exam: [
+    `Booklet p.32 Q4 (hardships), Q6 (economic + social interest of the Germans in ghettos).`
+  ]
+};
+
+LESSONS['c6-t4'] = {
+  story: [
+    `**The women ({הנשים בגטו}).** The historian of the Warsaw ghetto, **Emanuel Ringelblum** (who also ran the secret "Oneg Shabbat" archive), wrote that the future historian will have to **dedicate a page to the Jewish woman in the war** – thanks to her **courage and endurance**, thousands of families got through the terror. Why was her role so big? Because in most families the **father was gone** – usually taken to forced labor (6.2). So the mother had to: (1) **do hard work for many hours**; (2) **take care of the children**; (3) **provide for the family**. The booklet's summary: she carried the housework, the children, the income and the food **alone, with no help from anyone**.`,
+    `**The children ({הילדים}).** Because of the terrible hunger, food had to be brought in. Leaving the ghetto was forbidden, and anyone caught outside could be killed. So **children did the smuggling**: their **small, agile bodies** could get through holes in the wall or under the fence to the "Aryan side" to get food and save their families. **Many children were killed near the walls**, and still the others kept going.`,
+    `**Another goal of the ghettos – exploitation and economic harm ({ניצול ופגיעה כלכלית}).** Concentrating Jews in ghettos made it **easy to take their property**. Details: from the start of the war the Germans **didn't let Poles buy** Jewish businesses, so Jews had to simply **abandon** them and lost everything; Jews' **bank accounts were frozen** and they could keep only a few **zloty** (Polish money); they could take only a **little luggage** into the ghetto, in a hurry; most property was **looted by Germans and Poles**; **Aryanization** – Jewish factories passed into Aryan hands; **art collections, antiques and rare items** were confiscated; and **Poles took over the Jews' homes**.`
+  ],
+  remember: [
+    `Ringelblum: "a page for the Jewish woman". Women: hard work, children, livelihood – alone.`,
+    `Children smuggled food through the walls; many killed.`,
+    `Economic exploitation: abandoned businesses, frozen accounts, little luggage, looting, Aryanization, art, homes.`
+  ],
+  exam: [
+    `Booklet p.32 Q5: two hardships of women + one of children.`
+  ]
+};
+/* ---------------- CHAPTER 7: The Final Solution ---------------- */
+LESSONS['c7-t1'] = {
+  story: [
+    `**What is "the Final Solution"?** {הפתרון הסופי} was the Nazis' code name for the "solution to the Jewish question" – the plan to **murder all the Jews**. Until 1941 the policy was isolation and concentration (Germany: pushing Jews out; Poland: ghettos). From **June 1941** it became **direct mass murder**. The booklet's box lists the stages: Barbarossa and the pits → the Einsatzgruppen → death camps → Wannsee → aktions and deportations → extermination and selections → liquidating camps and death marches → North Africa.`,
+    `**Why did the mass murder start with the invasion of the USSR? (3 reasons – very common question)** (1) **Ideological struggle** ({מאבק אידיאולוגי}): communism and Nazism were opposite, hostile ideologies. Communism was based on the writings of **Karl Marx, who was Jewish**, so the Nazis saw communism as Jewish – the war against communism was a war against the Jews. (2) **Many Jews + living space**: the Nazis wanted to empty huge Soviet territories for Aryan settlers, and with the conquest **about 2 million more Jews** fell into their hands; they looked for a "solution" other than the ghettos they had used in Poland. (3) **The Nazis' feeling**: they felt **invincible** and believed they could do anything to the Jews – so the invasion was especially barbaric and cruel.`,
+    `**The Commissar Order ({פקודת הקומיסרים}), June 1941.** A week **before** the invasion, German forces got an order: **every active member of the communist party is to be killed without trial**. ("Commissar" = a communist political officer.) Since in the Nazis' eyes **Jew = communist**, this order **allowed them to kill Jews** too. It's the legal-looking "permission" for mass murder.`,
+    `**The Einsatzgruppen ({איינזצגרופן} – "operational units").** To carry out the order, **four special SS units** were formed. Their job: **organized, systematic, intentional mass murder** of "ideological enemies" – and **especially the Jews**. **Local people** – Lithuanians, Ukrainians – also carried out pogroms, encouraged by the Germans, and collaborators were allowed to **loot the victims' property**.`,
+    `**How the murder was done (the "shooting pits", {בורות ירי}).** It was organized and orderly – that's what makes it so horrifying. When an area was conquered, an **order was posted**: Jews must report "for transfer to a labor camp", and anyone who didn't come would be killed. The Jews were led **outside the town**, ordered to **dig a pit** and **undress**, then **shot** so they fell into the pit. About **1.5 million Jews** were murdered this way (e.g. Ponar near Vilna, Babi Yar near Kiev).`,
+    `**Why the Nazis changed method – the 4 disadvantages (memorize):** (1) **expensive** – a bullet or more per person wasted ammunition needed for the war; (2) **slow** – shooting one by one; (3) **hard to hide** – the shots were heard far away; (4) **psychological** – a "dirty" method: the killers saw their victims die in front of them and didn't always cope – they **drank a lot, went wild, and some didn't return to the army after home leave**. Notice the Nazis' "problem" was the effect on the *murderers*, not pity for the victims. **So they moved to the next method** – gas.`
+  ],
+  remember: [
+    `3 reasons: Jewish communism (Marx), many Jews + living space, feeling invincible.`,
+    `Commissar Order (June 1941): kill communists without trial → Jew = communist.`,
+    `4 Einsatzgruppen; locals helped; ~1.5 million in shooting pits.`,
+    `Disadvantages: expensive, slow, hard to hide, psychological.`
+  ],
+  exam: [
+    `Booklet p.38 Q1 (the method, its problems, the "improvement" = gas), p.40 Q9-10 (Einsatzgruppen role; reason).`
+  ]
+};
+
+LESSONS['c7-t2'] = {
+  story: [
+    `**Chełmno ({חלמנו}) – the first death camp, December 1941.** The Nazis switched to **gas in special camps**. At Chełmno in Poland they used **gas vans** ({משאיות גז}): ordinary trucks filled with Jews, with the **exhaust pipe turned inside**. The truck drove while the Jews suffocated, then went to the burial place. With **3 vans they murdered 300,000 Jews**. But this was **still relatively slow** – there wasn't much room in a van. (The slides add: only ~70 people per van, and breakdowns.)`,
+    `**A death camp ({מחנה השמדה}) vs a concentration camp ({מחנה ריכוז}).** Make sure you know the difference: a concentration/labor camp (like Dachau) was for **imprisonment and forced labor** – many died, but killing wasn't the purpose. A death camp was a **factory for murder** – most people were killed within hours of arriving.`,
+    `**The Wannsee Conference ({ועידת ואנזה}), 20 January 1942.** About a month and a half after Chełmno opened, representatives of **all the Nazi government ministries** met at a villa in **Wannsee, Berlin**. Important: they were from the **operational level** ({הדרג המבצע} – the people who carry things out), **not the decision level** ({הדרג המחליט}). The chairman was **Reinhard Heydrich**, head of the SS Security Service, because the SS had the central role. The booklet adds that **Himmler**, commander of the SS, was "the commander of the extermination" (it doesn't say he was in the room – he wasn't). It was decided that the **SS would have the central role**.`,
+    `**The most misunderstood point:** Wannsee **did not decide whether to murder the Jews** – **that was already decided before**. It dealt with a **systematic plan** and **coordination** between all arms of the government. **Two goals:** (א) **to coordinate** ({לתאם}) how all the different bodies of the Nazi state would act regarding the Final Solution (railways, police, foreign ministry, etc.); (ב) **to make it efficient** ({לייעל}) – with **gas chambers**. That's exactly why only operational people attended.`,
+    `**Total.** At Wannsee they decided on a **total** Final Solution – **all Jews of Europe, Asia and North Africa** – and presented a list of **11 million Jews** to be murdered (the protocol was written by **Adolf Eichmann**).`,
+    `**The source question the booklet flags as important (source p.109):** "How can you see from the list that the Nazis planned to kill **all** the Jews?" Answer: (1) the list includes **countries not yet conquered** (England 330,000, neutral Sweden, Switzerland, Spain...) and (2) **countries with very few Jews** (e.g. Estonia is listed as "judenfrei" – already "clean of Jews"). If you plan to murder the Jews of countries you don't even rule, and you count tiny communities, your aim is **every single Jew**.`
+  ],
+  remember: [
+    `Chełmno, Dec 1941: 3 gas vans, 300,000; still slow.`,
+    `Wannsee 20.1.1942, Berlin; operational level; Heydrich chaired (Himmler = commander of extermination, not present).`,
+    `Already decided before; goals: coordinate + make efficient (gas chambers); total – 11 million.`,
+    `Source tip: unconquered countries + countries with few Jews → aim = every Jew.`
+  ],
+  exam: [
+    `Booklet p.39 Q5 – why Wannsee was a turning point: first coordination, first total extermination, first systematic gas-chamber extermination.`
+  ]
+};
+
+LESSONS['c7-t3'] = {
+  story: [
+    `**(א) Building the death camps – gas chambers.** After Wannsee, **Operation Reinhard** ({מבצע ריינהרד}) began – named after **Reinhard Heydrich**, who was killed by the **Czech underground** in 1942. In spring and summer 1942 it set up **three death camps: Bełżec, Sobibor and Treblinka**, with **gas chambers** ({תאי גזים}) for the mass murder of the Jews of the **General Government**.`,
+    `**Auschwitz-Birkenau.** In **June 1942**, next to the Auschwitz I camp, the **largest** death camp was set up: **Auschwitz-Birkenau**. There they used **Zyklon B** gas, **more efficient** than the gas used before (engine exhaust). The most people were murdered there – **over a million and a quarter Jews**. Another death camp: **Majdanek**. In total: **6 death camps, all in Poland** – Chełmno, Bełżec, Sobibor, Treblinka, Auschwitz-Birkenau, Majdanek. Most victims were Jews, but **Roma (Gypsies)** from all over Europe were also murdered there.`,
+    `**(ב) Aktions and deportations ({אקציות, שילוחים}).** The Germans built a **deportation machine**: find the Jews, bring them to **gathering points**, send them **by train to Poland**, and "handle" them – meaning take over their property. At the head was **Adolf Eichmann** ({אדולף אייכמן}).`,
+    `**East vs. West – an important difference.** **Eastern Europe:** the Jews were already in ghettos and were taken in an **aktion** ({אקציה} = "operation"): a **violent, sudden** roundup and deportation. **Western Europe:** deportations "to the East" began; there the Germans **didn't want to arouse suspicion**, so Jews received **orders to report for work or for "resettlement in the East"**. Either way, aktions tore families apart randomly, and the Jews were sent in **sealed freight cars**, crushed together, without air, bread or water. When the train arrived, **many were already dead**.`,
+    `**Two kinds of camps.** Some were **only for murder** – like **Treblinka**, where the whole transport went to its death immediately. Others, like **Auschwitz**, were **both labor and extermination camps**.`,
+    `**The murder process.** The Germans told the Jews to undress "**for a shower**". Men and women were shaved and run naked into the gas chambers. The chambers were sealed and the gas poured in. Within about **half an hour** all were dead, in agony. Then other prisoners were forced to search the bodies for valuables and **pull out gold teeth**; the bodies went to the **crematoria** and the smoke rose to the sky. The whole process took **about one to two hours**. The victims' property went to **Germany's economy and to funding the Final Solution** – the victims paid for their own murder.`,
+    `**Selection ({סלקציה} = sorting).** In camps like Auschwitz, as people got off the train, **Josef Mengele** (an SS doctor) decided with **a wave of his stick** who goes to death and who to life. The **old, the sick, mothers of small children and children** were sent to death. The separation of families was cruel; some families **chose to go together to the end**.`,
+    `**"Extermination through work" ({השמדה באמצעות עבודה}).** The few sent "to life" were kept alive **temporarily** to help the German war machine. They worked under humiliation, torture, hunger and beatings until they were **replaced** by stronger workers from a new transport. They got a prisoner number – **only in Auschwitz was it tattooed on the left arm** – and from then on they were just labor until they collapsed.`
+  ],
+  remember: [
+    `Reinhard (spring-summer 1942): Bełżec, Sobibor, Treblinka. Auschwitz-Birkenau (June 1942): Zyklon B, 1.25 million+. Majdanek. 6 camps in Poland.`,
+    `Eichmann ran deportations. East = aktion; West = "work/resettlement" orders.`,
+    `Treblinka = murder only; Auschwitz = labor + murder. "Shower", ~½ hour, 1-2 hours total.`,
+    `Selection by Mengele; extermination through work; tattoo only in Auschwitz.`
+  ],
+  exam: [
+    `Definitions are often asked (p.40 מושגים): אקציה, סלקציה, מבצע ריינהרד, ועידת ואנזה, פקודת הקומיסרים.`
+  ]
+};
+
+LESSONS['c7-t4'] = {
+  story: [
+    `**Liquidating the ghettos ({חיסול הגטאות}), 1942-1943.** The deportations to the death camps **emptied the ghettos one by one**. The Germans used a cruel trick: they created a **feeling of calm** so Jews would believe they would live; then, when there was "room" in a death camp, they marked a ghetto for liquidation and **within a few days emptied it completely**. Some ghettos lasted longer because they were **useful** to the Germans: **Łódź** ran many factories for the German war effort, so it survived almost to the end and was **the last ghetto liquidated – August 1944**. Some ghettos were turned into labor camps with only "essential" workers left. By the end, **no trace of the ghettos** remained; a few survivors were scattered in labor and death camps.`,
+    `**The death marches ({צעדות המוות}), summer 1944 – May 1945 – "the last stage of the Final Solution".** As the Allies (the USA and the USSR) advanced and beat the Germans, the Germans began to **liquidate and evacuate the death camps to hide the evidence**, and took the prisoners with them **from Poland to camps inside Germany**.`,
+    `**Why are they "a stage of the Final Solution"?** In **November 1944 the gas chambers stopped working** – but the **murder continued through the marches**, even though the Germans knew they were losing. Prisoners were marched for **weeks**, thousands of kilometers, **without food, water or proper clothes**, in winter. **Anyone who fell was shot by the road.** Out of about **700,000 prisoners** still alive in all the camps, **more than a third died** on these marches – **200,000-250,000 Jews**.`,
+    `**The Germans' 3 reasons/goals (booklet):** (1) a **last chance to kill Jews – and cheaply**; (2) **moving the prisoners to Germany to hide the evidence** of the horrors in the camps; (3) using Jewish prisoners as a **bargaining chip** in surrender negotiations with the Allies, and to **exchange them for captured German soldiers**.`,
+    `**The stages of the Final Solution (booklet chain, p.37) – learn it in order:** Poland/ghettos (end 1939) → Barbarossa (June 1941) → shooting pits (June 1941) → gas vans, Chełmno (end 1941) → Wannsee (January 1942) → Operation Reinhard, 3 camps (March 1942) → death camps Auschwitz-Birkenau and Majdanek (June 1942) → death marches (December 1944 to the end of the war). The pattern: each method was replaced by a "more efficient" one.`,
+    `**The parallel timeline (p.39): war → Jews.** 1939 invasion of Poland → ghettos; 1941 Barbarossa → shooting pits; 1942 Wannsee → death camps; 1943 Soviet victory at Stalingrad → the Germans start retreating; 1944 Nazi losses and the Allied advance → camps evacuated, death marches. This is how to answer "explain how the war influenced the fate of the Jews".`
+  ],
+  remember: [
+    `Ghettos liquidated 1942-1943 after false calm; Łódź last (Aug 1944).`,
+    `Death marches: summer 1944 – May 1945; gas stopped Nov 1944; >⅓ of ~700,000 died (200-250k Jews).`,
+    `Goals: last cheap killing, hide evidence, bargaining chip.`,
+    `Stages chain and the parallel war timeline.`
+  ],
+  exam: [
+    `Booklet p.38 Q2 (death marches) and Q4 (timeline: event → effect on the Jews).`
+  ]
+};
+
+LESSONS['c7-t5'] = {
+  story: [
+    `**Why North African Jews suffered at all.** The countries of North Africa were **satellites or protectorates** of European states that were conquered by, or cooperated with, the Nazis. **Morocco, Tunisia and Algeria** were under French rule – the **Vichy government** (French-Nazi, from chapter 5). Libya was under **Italy**.`,
+    `**Country by country (learn at least two):** **Morocco** – anti-Jewish regulations that made Jews **lose their jobs**. **Algeria** – under Vichy; the Jews' **French citizenship was revoked**; humiliating antisemitic laws; Jews had to wear a **badge of shame**; **limits on entering schools**. **Libya** (Italy) – racist laws; in **1942 forced-labor camps** where Jews died of exhaustion and disease; about **400 Jews deported to Bergen-Belsen and Innsbruck** in Germany, where they died of hunger and disease. **Tunisia** – **the only one under direct German occupation (1942-1943)**: racist discriminatory laws, Jewish property confiscated, forced-labor camps.`,
+    `**The key fact:** in all of North Africa **no practical steps of the Final Solution were taken**, and Jews were **not sent to death camps**. Why? (1) **Geography**: North Africa was far from the war in Europe and **cut off from the railway network** leading to the death camps; the **sea route was dangerous** for the Germans because **the British controlled the sea** and might stop them. (2) **Order of priorities**: the Germans focused **first on the Jews of Europe** (easier in terms of transport) and **planned to continue to North Africa and then the whole world** later – they simply didn't get to it before they were defeated (the Allies freed North Africa in 1942-1943).`,
+    `**Compare with Eastern Europe (booklet answer, p.39).** **Differences:** (א) North Africa – **no systematic extermination**, few Jews sent to death camps; Eastern Europe – **systematic extermination aimed at everyone**. (ב) Most of North Africa – **no direct German rule**; Eastern Europe – **direct German rule**. **Similarities:** both had (א) **decrees and laws against Jews**, (ב) sometimes **marking of Jews**, (ג) **concentration of Jews** in one place, (ד) **forced-labor camps**.`
+  ],
+  remember: [
+    `Morocco: lost jobs. Algeria: citizenship revoked, badge, school limits. Libya (Italy): 1942 labor camps, ~400 to Bergen-Belsen/Innsbruck. Tunisia: only direct German occupation 1942-43.`,
+    `No Final Solution: far + no railway + British at sea; Germans started with Europe and ran out of time.`,
+    `Differ: systematic extermination, direct rule. Similar: laws, marking, concentration, labor camps.`
+  ],
+  exam: [
+    `Booklet p.38 Q3 and p.39 Q7 – two countries + two reasons; one difference + one similarity.`
+  ]
+};
+
+/* ---------------- CHAPTER 8: Kiddush HaChaim ---------------- */
+LESSONS['c8-t1'] = {
+  story: [
+    `**The starting point.** The Germans' goal was to **exterminate** the Jews – but also to **crush their spirit and humiliate them**. They denied basic living conditions, broke up families and degraded Jewish identity. So the Jews' response was a fight on two fronts: for **life itself** (trying to survive the war) and for **the meaning of life and צלם אנוש** ({צלם אנוש} = "the image of man" – human dignity, staying human).`,
+    `**Kiddush Hashem in history ({קידוש ה'}).** "Sanctifying God's name". Throughout history, when Jew-haters wanted to kill Jews, the Jews were often given a choice: **break God's commandments (e.g. convert) or die**. And the Jews chose **to die for Kiddush Hashem** – martyrdom.`,
+    `**Why the Holocaust was different.** In the Holocaust the Jew **wasn't asked to convert** – converting wouldn't save him. The Germans' goal was to **destroy the Jews themselves**, not only Judaism. So there was no "choice" to make with one's death; instead the Jews wanted **to sanctify life** – to keep living at any price (within morality, see below).`,
+    `**The halachic question.** Jewish law distinguishes: in a **"time of shmad"** ({שעת השמד} – a period when Jews are persecuted *for keeping mitzvot*), a Jew must give his life even for a small mitzva. But normally, **saving a life – {פיקוח נפש} – overrides almost all mitzvot**. So rabbis asked: **is the Holocaust a time of shmad?** If yes, Jews must die rather than break mitzvot; if not, they may break mitzvot to survive.`,
+    `**The ruling: Rabbi Nissenbaum (Warsaw ghetto) and most poskim** ({פוסקים} = halachic decisors): the Holocaust is **not** a time of shmad – the opposite. For the first time the enemy persecutes the Jew **not for keeping the Torah, but because he wants to destroy the Jewish body**. Therefore the Jew must **guard his life and do everything to survive**. His famous words: **"This is an hour of Kiddush HaChaim and not of Kiddush Hashem by death. In the past the enemies demanded the soul, and the Jew sacrificed his body. Now the oppressor demands the body, and the Jew must defend it: guard his life."** (Booklet p.41 writes "הרב חיים ניסנבוים"; his name was **Yitzhak**.)`,
+    `**The two meanings of Kiddush HaChaim (memorize – asked constantly):** (1) **Sanctifying life itself** ({קידוש עצם החיים}) – in Yiddish **"iberlebn"** (איבערלייבן = to survive): fighting for and protecting life as much as possible, saving your own life and others'. Examples: **smuggling food**, **hiding** in non-Jews' homes and **monasteries**, **posing as non-Jews** (false papers), **fleeing to the forests**. (2) **Sanctifying the way of life** ({קידוש דרך החיים}) – keeping **צלם אנוש**: continuing to be a human, moral person with values; keeping human dignity; **helping others**; a life with **meaning**, including religious meaning by keeping Torah and mitzvot – all inside an inhuman reality. Examples: **orphanages and soup kitchens**, keeping a **Jewish way of life**.`,
+    `**What Kiddush HaChaim is NOT.** It does **not** mean survival at any price. It **does not allow saving yourself at someone else's expense**, nor sins that are forbidden in every situation. The ghetto created **daily moral dilemmas** that could decide life or death, and a person had to stay true to his conscience. The booklet's examples: **May you steal food from neighbors when you're starving? May you hide a family member's death to keep receiving his food ration, even if it hurts others' rations?** Kiddush HaChaim means facing these choices *morally*.`,
+    `**The booklet's map of coping (p.42)** – three branches: **leadership** (Judenrats, rabbis – chapter 9), **Kiddush HaChaim** (education, culture, aid and welfare, keeping Torah and mitzvot – responsa – topics 8.2-8.3), and **resistance** (escape and hiding, partisans, revolts – 9.4).`
+  ],
+  remember: [
+    `Nazis wanted to destroy the body AND crush the spirit → fight for life + צלם אנוש.`,
+    `History: Kiddush Hashem = die rather than transgress. Holocaust: no conversion option → sanctify life.`,
+    `Not a "time of shmad" (Nissenbaum + most poskim) → פיקוח נפש.`,
+    `Two meanings: life itself (iberlebn – smuggling, hiding, fleeing) + way of life (צלם אנוש – helping, orphanages, Jewish life).`,
+    `Not at any price: never at another's expense.`
+  ],
+  exam: [
+    `Booklet p.44 Q2, p.51 Q4-Q5. Always quote Nissenbaum, give the two meanings, and explain the "newness": the enemy wants the body, not the soul.`
+  ]
+};
+
+LESSONS['c8-t2'] = {
+  story: [
+    `**"Jewish standing" ({עמידה יהודית}).** This is the term for **unarmed resistance** – staying human and giving life meaning as a way of standing up to the Nazis. Kiddush HaChaim wasn't only about staying alive, but about a **life with meaning**, spirit and culture, even in the daily struggle to survive.`,
+    `**(א) Aid and welfare ({עזרה וסעד}).** Examples: **hospitals, orphanages, soup kitchens ({בתי תמחוי})** and the **chevra kadisha** (burial society). The Jews proved that even then **they cared for each other**. The aid demanded self-sacrifice from the givers, who exposed themselves to disease and gave their last strength. **Three kinds of aid (memorize):** (1) **organized aid from outside the ghetto** – e.g. **the Joint** (the American Jewish aid organization), which brought some equipment and food while it could (until the USA entered the war); (2) **organized aid from inside the ghetto** – e.g. **{היס"א}** (the Jewish organization for mutual social aid / Jewish Self-Help), **house committees** ({ועדי בתים}) in Warsaw that helped hundreds of families living in each building, and **public kitchens** that gave out a bowl of soup and a slice of bread; (3) **personal acts of humanity and compassion** between individual Jews – giving your **last piece of bread to a friend dying of hunger**, caring for a sick person, sometimes at the risk of your own life.`,
+    `**What was the value of aid, if it didn't save them?** The booklet is honest: all this help **couldn't solve** the ghetto's problems and **didn't save** the Jews from death. So what was it worth? The booklet's answer is a quote: **"אם אתה מפסיק לתת, אתה מפסיק לחיות – אתה סתם קיים"** – "If you stop giving, you stop living – you merely exist." Giving kept people **human** – that's Kiddush HaChaim of the way of life.`,
+    `**(ב) Education ({חינוך בגטו}).** The Holocaust took the children's childhood and forced them to grow up fast and take responsibility for their families. In the ghettos of the **General Government, studying in schools was forbidden** – and precisely there Jews kept educating their children. Despite the danger of breaking Nazi orders, **underground** schools were set up; children came **hungry and frozen** to learn. There were **elementary and high schools, vocational courses, Torah study frameworks and youth movements**. Why risk death for school? Because learning means believing in a **future**.`,
+    `**(ג) Culture ({תרבות בגטו}).** Even in the hardest days the Jews kept a rich cultural life: **newspapers, songs, plays and performances, choirs, a public library**. Many artists had no skills to survive ghetto life, so **Judenrat members started cultural activities and paid the artists**. Culture helped in **two ways**: (1) it helped **the artists survive** and gave them encouragement and meaning; (2) it helped **all the ghetto's Jews keep their צלם אנוש** – Kiddush HaChaim. **The example: the Vilna ghetto** had a **theater that put on over 100 shows a year** and a **library used by a quarter of the ghetto's population**.`,
+    `**Jewish spirit.** There was an effort to keep Jewish culture: **Hebrew lessons**, plays about events in **Jewish history**, celebrating **Jewish holidays** – another way to fight the Germans, who wanted to crush the Jewish spirit.`,
+    `**The culture dilemma.** Was it right to hold plays and concerts **where people were dying of hunger in the street**? Some said **"you don't hold a concert in a cemetery"**. On the other hand, culture **encouraged people, gave hope and meaning** to their hard lives. The booklet's conclusion: **in the eyes of the ghetto Jews it was a kind of victory and Jewish resistance.**`
+  ],
+  remember: [
+    `Aid – 3 kinds: outside (Joint), inside (היס"א, house committees, kitchens), personal kindness. "If you stop giving..."`,
+    `Education banned in the General Government → underground schools, courses, Torah, youth movements.`,
+    `Culture – 2 ways it helped; Vilna theater 100+ shows/year, library ¼ of ghetto; the "concert in a cemetery" dilemma.`
+  ],
+  exam: [
+    `Booklet p.51 Q5: is Kiddush HaChaim resistance? → yes: Nazis wanted to crush the spirit; examples: underground schools, Vilna theater, keeping mitzvot.`
+  ]
+};
+
+LESSONS['c8-t3'] = {
+  story: [
+    `**Religious life ({חיי הדת}).** As part of their war on the Jews, the Germans also restricted religion: in many places they banned **public prayer, brit mila and Jewish holidays**. Precisely because of that, keeping a Jewish way of life became a way to **fight the German enemy**. Many kept mitzvot despite every ban and despite the risk to their lives.`,
+    `**Responsa ({שו"ת} = שאלות ותשובות, questions and answers).** Just as before the Holocaust, Jews asked rabbis halachic questions and got answers. The harsh reality raised **terrible new questions** – and the very fact that people asked shows their huge **self-sacrifice**: they wanted to keep the mitzvot even there.`,
+    `**Why ruling was so hard for the rabbis (3 reasons – memorize):** (1) **no books of halacha** in the ghetto – they had to rule from memory; (2) **no one to consult** – most rabbis were sent first to their death (the Germans targeted leaders), and some managed to flee; (3) **an answer was needed fast**, and they didn't always know what to say. For the **first time** they had to rule on **matters of life and death** ({דיני נפשות}) in a reality they had never known.`,
+    `**The booklet's example of a responsum.** The question was sent to **Rabbi Ephraim Oshry in Kovno** and to **Rabbi Aharonson**, who was deported to the **Konin** camp: **may Jewish forced laborers eat non-kosher food (treif soup)?** The problem: there was no immediate danger, but there was a risk the body would **weaken** and only after some days reach a life-threatening state. In halacha this is called **"פיקוח נפש שלאחר זמן"** – a danger to life that comes later. **The answer: it is permitted to eat the treif soup because of פיקוח נפש** – even though there's no real danger at that moment, since they'd weaken and come into danger later. This shows Kiddush HaChaim in halacha: **life comes first**.`,
+    `**Kiddush Hashem still existed.** By halacha (as the great rabbis ruled) Jews in the Holocaust were **not obligated** to give their lives for keeping Torah and mitzvot. **Even so, some Jews preferred to die rather than cut off their peyot or give up praying with a minyan.** Know this as an example of Kiddush Hashem *during* the Holocaust.`,
+    `**More responsa: may one eat chametz on Pesach? May a boy put on tefillin before bar mitzva age, since it's unknown if he'll live to 13? The answer to both: yes, permitted.** (The teacher's slides add the tragic end of the tefillin story: the boy was taken in the Kovno ghetto children's aktion.)`,
+    `**The photo question (p.44-45).** Two photos: a **classroom in the Łódź ghetto** and a **children's public kitchen in the Warsaw ghetto**. How each relates to Kiddush HaChaim: the **classroom** = sanctifying the *way* of life – education, normal routine, hope for the future, done secretly against the Nazi ban; the **kitchen** = sanctifying *life itself* (keeping children alive) **and** the way of life (mutual help, צלם אנוש).`
+  ],
+  remember: [
+    `Bans on public prayer, brit mila, holidays → keeping mitzvot = fighting the enemy.`,
+    `Rabbis' difficulties: no books, no one to consult, need fast answers (first time דיני נפשות).`,
+    `Treif soup (Rabbi Oshry, Kovno): permitted – "פיקוח נפש שלאחר זמן".`,
+    `Some still chose Kiddush Hashem (peyot, minyan). Chametz on Pesach / early tefillin – permitted.`
+  ],
+  exam: [
+    `Booklet p.44 Q1 (two difficulties), Q2 (meaning + responsum example), Q3 (photos).`
+  ]
+};
+
+/* ---------------- CHAPTER 9: Leadership and resistance ---------------- */
+LESSONS['c9-t1'] = {
+  story: [
+    `**The leadership vacuum.** When the Nazis invaded Poland, **many community leaders fled**, thinking the Germans would harm leaders first. So many communities were left **without leaders** at the worst possible time.`,
+    `**What was the Judenrat ({יודנראט})?** "Judenrat" = "Jewish council"; in Hebrew {מועצת זקנים יהודית} – a council of Jewish elders. The order to set it up was in the **Schnellbrief** (1939). It was created **by German order**, but its members were often **chosen by the community**, so it became the **real leadership** of the ghetto – the people who actually ran it. **Its purpose (booklet): the machinery for carrying out German orders, and the link between the Jews and the authorities.**`,
+    `**Why did the Nazis want Judenrats? (booklet answer, p.51)** (1) To get help **carrying out their orders**, which **saved German manpower**; (2) to **avoid contact** with the Jews; (3) to give the Jews a **feeling that they run themselves** – "Jewish autonomy". (That's the "illusion of autonomy" from the ghetto goals.)`,
+    `**The two sets of roles (the booklet's worksheet).** **Toward the Nazis:** carry out their orders – supply workers for **forced labor**, collect property/taxes, enforce the **marking** (armband/patch), and later prepare **deportation lists**. **Toward the ghetto residents:** organize life – **food, housing, health, welfare, education and culture** (e.g. paying the artists). This double role is the heart of every dilemma.`,
+    `**Control by the Germans.** The Germans **frequently replaced** Judenrat heads who were "too independent" and appointed obedient ones. Judenrat heads could hardly consult or share information with other communities, so each acted by his own understanding – and the **lack of information and German deception** created great confusion.`,
+    `**The first dilemma: accept the appointment or not?** The very existence of the Judenrat contains a **huge tension**: on one side the need to **obey the Germans** and fill the official role; on the other, the wish to **protect the Jews** and their physical and spiritual life. Judenrats were appointed **before** the ghettos, when nobody knew what the Nazis would demand or what their real goals were. The Germans preferred leaders the Jews would accept (so people would obey), so sometimes the community chose – but when the choice didn't fit Nazi goals, the Nazis appointed whoever they wanted. **Motives for accepting:** some wanted to **help the community**; others wanted **honor, power and benefits**. Some **refused**, and some accepted out of a **sense of responsibility**.`,
+    `**First wave vs. second wave (a typical comparison).** **First wave** – heads appointed right after the conquest of Poland: they felt **more committed to the Jewish public**, which is why **more of them were removed** for not obeying. Examples: they helped community members, **refused economic decrees**, **warned of coming aktions**, **refused to hand Jews over** to the Nazis, and some **resigned** because they couldn't accept Nazi policy. **Second wave** – appointed after the first heads were removed: when the Germans wanted full cooperation, they **appointed arbitrarily** people unfit to lead – people who wanted **power and honor**, or who used the ghetto reality for **personal gain**. Many **cooperated** with Nazi orders; some still helped their communities, but **much less** than the first wave.`,
+    `**What was the same in both waves: their attitude to revolt.** Both waves **opposed rebellion and the undergrounds**. Why? Most Jews **couldn't believe the Germans were exterminating** the Jewish public; they believed they could **survive the war**, and feared a revolt would **ruin their chances**. So even Judenrat heads who were truly committed to the Jews believed revolt **did not serve the Jews' goals**.`,
+    `**Daily dilemmas until the deportations.** Judenrat heads struggled to find a place between cooperating and keeping the ghetto alive. Examples from the booklet: the Germans demanded forced laborers – **obey? send people who won't come back?** If so, **how to choose – equally, or by physical strength?** **Use money for the common good? Let the rich pay for their lives? Allow food smuggling into the ghetto?** There was **no single answer**, and Judenrat heads were **heavily criticized**.`
+  ],
+  remember: [
+    `Many leaders fled → vacuum. Judenrat = council of elders, by the Schnellbrief; real leadership; carries out orders + link to authorities.`,
+    `Why the Nazis wanted it: save manpower, avoid contact, illusion of autonomy.`,
+    `Roles: toward Nazis (labor, property, marking, lists) / toward residents (food, housing, health, welfare, culture).`,
+    `First dilemma: accept? Motives: help vs power. First wave more loyal; second wave arbitrary and cooperative. Both against revolt.`
+  ],
+  exam: [
+    `Booklet p.51 Q1 (why Judenrats – booklet answer), Q2 (choose a leader).`
+  ]
+};
+
+LESSONS['c9-t2'] = {
+  story: [
+    `**Adam Czerniaków ({אדם צ'רניאקוב}) – head of the Warsaw Judenrat.** Before the war he was **deputy head of the Warsaw Jewish community**. When the head of the community **fled**, the Germans forced Czerniaków to head the Judenrat and to appoint **24 more members**. (He was an engineer by profession, from the teacher's summary.)`,
+    `**The first period (1939-1941), before the deportations.** He tried to **ease the residents' lives**: he set up an **aid system** in the ghetto; he **allowed food smuggling** into the ghetto – which helped against the terrible hunger, even though it broke German rules; and he tried as much as possible to **prevent German interference** in the ghetto's affairs. This is an example of the "first wave" type: loyal to the Jews while forced to deal with the Nazis.`,
+    `**The deportations (1942).** When the deportations to the death camp (Treblinka) began, he was ordered to provide people for the transports – to prepare **lists**. **He refused to cooperate with the Nazis and give people for the transports, and so he decided to end his life.** (Booklet; read the source on p.151. The teacher's slides add that the Germans threatened to kill his wife if he refused, and that the man who replaced him obeyed every order.)`,
+    `**The hardest dilemma: the transports ({דילמת המשלוחים}), 1942.** The Judenrats were ordered to cooperate in organizing transports to the death camps. **At first they didn't know where the transports were going** – but even sending people to an unknown, far place was a hard dilemma. **Once the purpose became known, the dilemma became much worse.** Explaining it (the booklet asks you to): **one side** – the Judenrat's job is to carry out orders; if they refuse, the Germans will do it themselves even more cruelly, or replace them with obedient people; maybe by cooperating they can save some of the ghetto. **The other side** – preparing a list means **choosing who dies** and sending Jews to their death with your own hands. Czerniaków chose not to be part of it.`,
+    `**What value does his choice show?** Morality and **צלם אנוש** – he would not buy his life (or his wife's) at the price of sending Jews to death; and **responsibility** for his community. (This connects to the "לב לדעת" question in your teacher's slides.)`
+  ],
+  remember: [
+    `Deputy head → forced to head the Judenrat; appointed 24 members.`,
+    `1939-1941: aid system, allowed food smuggling, kept Germans out.`,
+    `1942: refused to give people for transports → took his own life.`,
+    `Transports dilemma: obey (maybe save some) vs. sending Jews to death.`
+  ],
+  exam: [
+    `Booklet p.51 Q3 – policy in the first period + his response in 1942; p.47 – explain the dilemma.`
+  ]
+};
+
+LESSONS['c9-t3'] = {
+  story: [
+    `**Rabbinic leadership ({הנהגה רבנית}).** Throughout history rabbis were a source of strength for the Jewish people – and so in the Holocaust. The booklet says many Jews followed the rabbis' guidance **sometimes even more than the Judenrat's**, and that sometimes **spiritual influence mattered more than physical needs**. When Poland was conquered, the Germans **seized the rabbis first**, seeing them as Jewish leaders. Even so, **many rabbis took responsibility and stayed with their communities**, though they could have fled. They **encouraged** the Jews and **ruled halacha** for them.`,
+    `**Who was the Piaseczno Rebbe ({האדמו"ר מפיאסצ'נה})?** Rabbi Kalonymus Kalman Shapira – the rabbi of the town of **Piaseczno** near Warsaw and head of a **Hasidic yeshiva in Warsaw**. ({אדמו"ר} = a title for a Hasidic rebbe.)`,
+    `**What he did in the Warsaw ghetto, facing persecution and doubt ({רדיפות ותהיות}):** He **left his home and moved to Warsaw to be near his students**, and **didn't flee even when he could**. The whole time he **encouraged his students**: he kept holding the **"tish"** (טיש – the Hasidic gathering around the rebbe's table, with songs and words of Torah) and gave **sermons that strengthened faith** ({דרשות אמוניות}). He knew that amid hunger and death it was hard to believe, and he spoke about it openly: these are **{ייסורי אמונה}** – "sufferings of faith". His ghetto sermons were **found after the Holocaust** and printed as the book **"אש קודש"** ("Holy Fire").`,
+    `**Practical leadership too.** He gave **advice** and answered **halachic questions** (shu"t); his home had **prayers**; he ran a **kosher kitchen for the many refugees**; and he helped Jews keep **Shabbat, holidays, brit mila, mikveh, baking matzot and Torah study**. So he cared for body *and* soul.`,
+    `**His ruling about children.** He was asked whether to **hide Jewish children in non-Jewish homes** to save them, even though there they would **break mitzvot** (and might grow up as non-Jews). **He ruled: you must save the children!** – life comes first, like Kiddush HaChaim. And his saying: **"תזכרו דבר אחד, הדבר הכי חשוב בחיים זה לעשות טובה ליהודי"** – "Remember one thing: the most important thing in life is to do good for a Jew."`
+  ],
+  remember: [
+    `Rabbis sometimes trusted more than the Judenrat; seized first; many stayed.`,
+    `Piaseczno Rebbe: moved to Warsaw to be with students; didn't flee; tish + faith sermons; "sufferings of faith"; "Esh Kodesh".`,
+    `Advice, shu"t, prayers, kosher kitchen, Shabbat/mila/mikveh/matzot.`,
+    `Ruling: hide children with non-Jews – save them. "Do good for a Jew".`
+  ],
+  exam: [
+    `Comparing leadership types: Judenrat (forced to obey) vs rabbis (no one had to obey them, but spiritual influence) vs youth movements (revolt).`
+  ]
+};
+
+LESSONS['c9-t4'] = {
+  story: [
+    `**A note first:** booklet pages **49-50** (where this section begins) were **not in your scans**, so the background here comes from your teacher's slides; page 51 is from the booklet.`,
+    `**Why so few revolts – and why Warsaw did.** Most Jews didn't believe they were being exterminated, hoped to survive, had no weapons, and feared collective punishment (see the Judenrat attitude, 9.1). In Warsaw that changed after **the Great Deportation – 23 July to 21 September 1942 – when about 300,000 Jews were sent to Treblinka**. The roughly **50,000** who remained understood what "deportation" meant and that the ghetto would soon be liquidated. There was nothing left to lose – so they organized.`,
+    `**The two undergrounds – learn the differences.** **{אי"ל}** (ŻOB, the Jewish Fighting Organization) – made up of the **youth movements**: Hashomer Hatzair, Akiva, Dror, and later the Bund; commander **Mordechai Anielewicz**; **short of weapons and military equipment**. **{אצ"י}** (ŻZW, the Jewish Military Union) – founded by the **Betar** movement, led by **Paweł Frenkel** (and Dawid Apfelbaum); **more professional**, with **more weapons and military experience/training** (the edge of booklet p.50 visible in your scan mentions it "managed to collect weapons" and had "military experience"). The two **cooperated only partly**. So the two differences: **who founded/led them** and **how well armed and trained** they were.`,
+    `**The uprising.** On **Passover eve (19 April 1943)** about **2,000 German soldiers** entered to liquidate the ghetto and met **hard armed resistance**. (The slides: fighters hit tanks and raised a blue-and-white flag.)`,
+    `**Booklet p.51 – how it ended.** The Germans had to **fight for every house** and bring many forces. They realized they had to change method, so they **set the ghetto houses on fire from a distance and pumped gas into the bunkers**, forcing the Jews out. **On 8 May the main bunker fell, and in it the commander, Mordechai Anielewicz.** The fighters kept fighting, and a week later, **on 16 May, the ghetto was liquidated**: **General Stroop** declared **"אין עוד רובע יהודי בוורשה"** – "There is no longer a Jewish quarter in Warsaw" – and as a sign of victory **blew up the Great Synagogue of Warsaw** (which was outside the ghetto).`,
+    `**Its significance.** **The revolt lasted a whole month; 16 Nazis were killed and many were wounded. It was the first revolt in all of occupied Europe!** – Jews with almost no weapons held off the German army longer than some countries had (Poland fell in under a month).`,
+    `**The difficulties of the organizations at the start (booklet answer, p.51 Q8):** (א) **deciding when to revolt** – too early would bring destruction on everyone, so they waited for the liquidation; (ב) **no contact with the outside world** and **no real help from the Polish undergrounds** (so it was very hard to get weapons); (ג) **some had no military training**; (ד) **part of the Jewish public feared** the revolt would hurt their chance to survive, and **didn't cooperate**.`,
+    `**Other armed resistance (from your slides, useful for "two types of resistance"):** **Abba Kovner's** proclamation in the Vilna ghetto (1 January 1942): "**Let us not go like sheep to the slaughter! Better to fall as free fighters than to live by the grace of murderers**"; **partisans** in the forests (over 20,000 Jews), including **Tuvia Bielski's family camp** (over 1,200 people); **camp revolts** in **Treblinka** and **Sobibor** (1943) and the **Sonderkommando revolt in Auschwitz** (1944).`,
+    `**Two types of resistance (for p.51 Q7):** **spiritual / unarmed** – Kiddush HaChaim, education, culture, keeping mitzvot (chapter 8); **armed** – ghetto revolts, partisans, camp revolts. If asked "why did Jews choose a certain way": unarmed – most were old people, women and children without weapons who hoped to survive, so keeping life and humanity was the way to fight; armed – after the deportations they knew the truth and chose to die with honor, not "like sheep".`
+  ],
+  remember: [
+    `Great Deportation 23.7-21.9.1942: ~300,000 to Treblinka; ~50,000 remain.`,
+    `אי"ל: youth movements, Anielewicz, few weapons. אצ"י: Betar, Frenkel, more weapons/training. Partial cooperation.`,
+    `19.4.1943 (Passover eve) → houses burned, gas in bunkers → 8 May Anielewicz falls → 16 May Stroop: "no more Jewish quarter", Great Synagogue blown up.`,
+    `A month; 16 Nazis killed; first revolt in occupied Europe.`,
+    `Difficulties: timing, no outside help, no training, public fear.`
+  ],
+  exam: [
+    `Booklet p.51 Q6 (difficulties + did they affect public opinion), Q7 (two types of resistance), Q8 (אצ"י vs אי"ל + two features + two difficulties).`
+  ]
+};
 
 /* =====================================================================
    APP ENGINE – you don't need to edit below this line.
@@ -2703,6 +3463,7 @@ const DATA = {
   function saveSoon() { clearTimeout(saveT); saveT = setTimeout(save, 400); }
 
   var DAYS = DATA.days;
+  if (typeof LESSONS !== 'undefined') DAYS.forEach(function (d) { d.topics.forEach(function (t) { if (LESSONS[t.id]) t.lesson = LESSONS[t.id]; }); });
   var STUDY = DAYS.filter(function (d) { return d.group === 'book'; });
   var EXTRA = DAYS.filter(function (d) { return d.group === 'extra'; });
   var NONREV = STUDY.concat(EXTRA);
@@ -2859,6 +3620,14 @@ const DATA = {
     return h;
   }
 
+  function lessonHTML(t) {
+    var L = t.lesson; if (!L) return '';
+    var h = '<div class="tiny muted" style="font-weight:700;letter-spacing:.05em;margin:18px 0 6px">EXPLAINED – THE FULL LESSON</div><div class="lesson">' +
+      L.story.map(function (p) { return '<p>' + fmt(p) + '</p>'; }).join('') + '</div>';
+    if (L.remember && L.remember.length) h += '<div class="remember"><b>Remember</b><ul>' + L.remember.map(function (r) { return '<li>' + fmt(r) + '</li>'; }).join('') + '</ul></div>';
+    if (L.exam && L.exam.length) h += '<div class="examtip"><b>How it\'s asked on the test</b><ul>' + L.exam.map(function (r) { return '<li>' + fmt(r) + '</li>'; }).join('') + '</ul></div>';
+    return h;
+  }
   function vTopic(id) {
     var o = TOPIC[id]; if (!o) return vNotFound();
     var t = o.t, d = o.day, on = !!S.learned[t.id];
@@ -2866,7 +3635,7 @@ const DATA = {
     var nq = d.bagrut.filter(function (q) { return q.topic === t.id; }).length;
     var h = '<p class="muted small" style="margin:0 2px 4px"><a href="#day--' + d.id + '">' + esc(d.label) + '</a> · Topic ' + (o.i + 1) + ' of ' + d.topics.length + '</p>' +
       '<h2 style="margin:0 2px 2px">' + esc(t.title) + '</h2>' + he('<p class="muted" style="margin:0 2px 12px;font-weight:600">' + esc(t.he) + '</p>');
-    h += '<div class="card"><div class="tiny muted" style="font-weight:700;letter-spacing:.05em;margin-bottom:6px">MAIN IDEA</div><div class="main-idea">' + fmt(t.main) + '</div>' +
+    h += '<div class="card"><div class="tiny muted" style="font-weight:700;letter-spacing:.05em;margin-bottom:6px">MAIN IDEA</div><div class="main-idea">' + fmt(t.main) + '</div>' + lessonHTML(t) + (t.lesson ? '</div><div class="card">' : '') +
       (t.items ? '<div class="tiny muted" style="font-weight:700;letter-spacing:.05em;margin:16px 0 6px">FROM THE BOOKLET' + (t.page ? ' · ' + esc(t.page) : '') + ' <span style="font-weight:400">(Hebrew, then English)</span></div>' +
         t.items.map(function (it) { return '<div class="pair"><div class="he-line rtl" dir="rtl" lang="he">' + fmt(it[0]) + '</div><div class="en-line">' + fmt(it[1]) + '</div></div>'; }).join('') : '') +
       (t.facts ? '<div class="tiny muted" style="font-weight:700;letter-spacing:.05em;margin:16px 0 0">KEY FACTS</div><ul class="facts">' + t.facts.map(function (f) { return '<li>' + fmt(f) + '</li>'; }).join('') + '</ul>' : '');
